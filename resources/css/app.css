@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Pacifico:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* Import tailwind core */
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+
+@tailwind utilities;
+
+@layer components {
+    .outline input:focus-within ~ label,
+    .outline input:not(:placeholder-shown) ~ label {
+        @apply transform scale-75 -translate-y-4 z-0 ml-3 px-1 py-0;
+    }
+
+    .btn-dark {
+        @apply text-sm text-center uppercase inline-block py-3 px-6 w-48 text-white transition duration-500 ease-in-out transform border border-neutral-dark bg-neutral-dark hover:bg-white hover:text-neutral-dark focus:outline-none focus:ring-2 ring-offset-current ring-offset-2;
+    }
+
+    .btn-dark-xl {
+        @apply text-base uppercase inline-block py-3 px-8 text-white transition duration-500 ease-in-out transform border border-neutral-dark bg-neutral-dark hover:bg-white hover:text-neutral-dark focus:outline-none focus:ring-2 ring-offset-current ring-offset-2;
+    }
+}

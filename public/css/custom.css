@@ -1,0 +1,162 @@
+:root {
+    --primary-light: #60bbfc;
+    --primary-dark: #158bc9;
+}
+
+#nav-toggle {
+    cursor: pointer;
+    z-index: 999;
+}
+
+.brand-logo::after,
+#nav-list-desktop a::after {
+    position: absolute;
+    bottom: -50%;
+    right: 0;
+    height: 4px;
+    width: 100%;
+    background-color: var(--primary-dark);
+    content: "";
+    display: block;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.25s cubic-bezier(0.79, 0.01, 0.22, 0.99) 0s,
+        transform-origin 0s step-end 0.25s,
+        -webkit-transform 0.25s cubic-bezier(0.79, 0.01, 0.22, 0.99) 0s,
+        -webkit-transform-origin 0s step-end 0.25s;
+}
+
+.brand-logo::after {
+    bottom: calc(-50% + 8px);
+}
+
+.brand-logo:hover::after,
+#nav-list-desktop a:hover::after {
+    transform: scaleX(1);
+}
+
+.nav-open #nav-list {
+    display: block;
+    display: flex;
+}
+
+.burger {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    font-size: 12px;
+    cursor: pointer;
+    -webkit-transition: 0.2s all;
+    -o-transition: 0.2s all;
+    transition: 0.2s all;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.burger .burger-lines:after {
+    left: 0;
+    top: -1em;
+}
+
+.burger .burger-lines:before {
+    left: 1em;
+    top: 1em;
+}
+
+.burger:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 150%;
+    width: 150%;
+    top: -25%;
+    left: -25%;
+}
+
+.burger .burger-lines {
+    top: 50%;
+    margin-top: -0.125em;
+}
+
+.burger .burger-lines,
+.burger .burger-lines:after,
+.burger .burger-lines:before {
+    pointer-events: none;
+    display: block;
+    content: "";
+    width: 100%;
+    border-radius: 0.25em;
+    background-color: #158bc9;
+    height: 0.25em;
+    position: absolute;
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+}
+
+.burger .burger-lines:after {
+    left: 0;
+    top: -1em;
+}
+.burger .burger-lines:before {
+    left: 1em;
+    top: 1em;
+}
+.burger.burger-slip .burger-lines:after,
+.burger.burger-slip .burger-lines:before {
+    width: 2em;
+}
+
+.burger.burger-slip .burger-lines,
+.burger.burger-slip .burger-lines:after,
+.burger.burger-slip .burger-lines:before {
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.burger.burger-slip.open .burger-lines {
+    -webkit-transform: translateX(-2em);
+    -ms-transform: translateX(-2em);
+    transform: translateX(-2em);
+    background-color: white;
+}
+
+.burger.burger-slip.open .burger-lines:before,
+.burger.burger-slip.open .burger-lines:after {
+    left: 0.5em;
+    top: 0px;
+}
+
+.burger.burger-slip.open .burger-lines:before {
+    -webkit-transform: translateX(2em) rotate(135deg);
+    -ms-transform: translateX(2em) rotate(135deg);
+    transform: translateX(2em) rotate(135deg);
+}
+
+.burger.burger-slip.open .burger-lines:after {
+    -webkit-transform: translateX(2em) rotate(-135deg);
+    -ms-transform: translateX(2em) rotate(-135deg);
+    transform: translateX(2em) rotate(-135deg);
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.rotate-inverse-z {
+    transform: rotateZ(180deg);
+    transition: all ease-out 0.2s;
+}
+
+#swiper-btn {
+    color: #158bc9;
+    height: 2rem;
+    width: 2rem;
+    font-size: 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+    #nav-toggle {
+        display: none;
+    }
+}
