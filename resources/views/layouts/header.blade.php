@@ -38,11 +38,11 @@
                     </ul>
                     <div class="mt-2 text-center">
                         <a class="text-xl text-primary-dark py-2 px-2 underline md:text-4xl"
-                            href="{{-- route('login') --}}">
+                            href="{{ route('login') }}">
                             Log In
                         </a>
                         <a class="text-xl text-primary-dark py-2 px-2 underline md:text-4xl"
-                            href="{{-- route('register') --}}">
+                            href="{{ route('register') }}">
                             Register
                         </a>
                     </div>
@@ -109,7 +109,7 @@
         <div class="flex items-center justify-between space-x-4" id="header-icons">
             <div class="hidden hover:text-primary-dark lg:flex lg:items-center lg:space-x-2">
                 @auth
-                    <form action="{{-- route('logout') --}}" method="post" class="m-0">
+                    <form action="{{ route('logout') }}" method="post" class="m-0">
                         @csrf
                         <button class="inline-block" type="submit">
                             Logout
@@ -117,10 +117,10 @@
                     </form>
                 @endauth
                 @guest
-                    <a class="inline-block" href="{{-- route('login') --}}">
+                    <a class="inline-block" href="{{ route('login') }}">
                         <span class="block">Log In</span>
                     </a>
-                    <a class="inline-block" href="{{-- route('register') --}}">
+                    <a class="inline-block" href="{{ route('register') }}">
                         <span class="block">Register</span>
                     </a>
                 @endguest

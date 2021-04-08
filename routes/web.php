@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -17,7 +18,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
     return view('site.home');
-});
+})->name("home");
 
 Route::get('/contact', function () {
     return view('site.contact');
@@ -26,7 +27,7 @@ Route::get('/contact', function () {
 // Login Page
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'post']);
-
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 // Register Page
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);

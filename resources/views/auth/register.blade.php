@@ -35,10 +35,9 @@
                         <div class="outline relative border-2 focus-within:border-primary-dark">
                             <input type="last_name" name="last_name" placeholder=" " id="last_name"
                                 class="block p-4 w-full text-lg appearance-none focus:outline-none bg-transparent @error('last_name') border border-error-default @enderror"
-                                value="{{ old('last_name') }}"" />
-                                                <label for=" last_name"
-                                class="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0">
-                            Last Name
+                                value="{{ old('last_name') }}" />
+                            <label for=" last_name" class="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0">
+                                Last Name
                             </label>
                         </div>
                         @error('last_name')
