@@ -14,24 +14,24 @@
                     <ul class="text-center space-y-2 md:space-y-4">
                         <li>
                             <a class="text-xl hover:underline hover:text-primary-dark md:text-4xl"
-                                {{-- href="{{ route('cameras') }}"> --}}>
+                                href="{{ route('cameras') }}">
                                 Cameras </a>
                         </li>
                         <li>
                             <a class="text-xl hover:underline hover:text-primary-dark md:text-4xl"
-                                href="{{-- route('lenses') --}}">
+                                href="{{ route('lenses') }}">
                                 Lenses
                             </a>
                         </li>
                         <li>
                             <a class="text-xl hover:underline hover:text-primary-dark md:text-4xl"
-                                href="{{-- route('gallery') --}}">
+                                href="{{ route('gallery') }}">
                                 Gallery
                             </a>
                         </li>
                         <li>
                             <a class="text-xl hover:underline hover:text-primary-dark md:text-4xl"
-                                href="{{-- route('contact') --}}">
+                                href="{{ route('contact') }}">
                                 Contact
                             </a>
                         </li>
@@ -83,22 +83,22 @@
                 <!-- Hover effect in custom file -->
                 <ul class="hidden lg:flex lg:items-center lg:justify-between lg:space-x-4" id="nav-list-desktop">
                     <li>
-                        <a class="relative block hover:text-primary-dark" href="{{-- route('cameras') --}}">
+                        <a class="relative block hover:text-primary-dark" href="{{ route('cameras') }}">
                             Cameras
                         </a>
                     </li>
                     <li>
-                        <a class="relative block hover:text-primary-dark" href="{{-- route('lenses') --}}">
+                        <a class="relative block hover:text-primary-dark" href="{{ route('lenses') }}">
                             Lenses
                         </a>
                     </li>
                     <li>
-                        <a class="relative block hover:text-primary-dark" href="{{-- route('gallery') --}}">
+                        <a class="relative block hover:text-primary-dark" href="{{ route('gallery') }}">
                             Gallery
                         </a>
                     </li>
                     <li>
-                        <a class="relative block hover:text-primary-dark" href="{{-- route('contact') --}}">
+                        <a class="relative block hover:text-primary-dark" href="{{ route('contact') }}">
                             Contact
                         </a>
                     </li>

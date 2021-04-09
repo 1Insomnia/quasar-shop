@@ -21,11 +21,15 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
     return view('site.home');
-})->name("home");
+})->name('home');
 
 Route::get('/contact', function () {
     return view('site.contact');
-});
+})->name('contact');
+
+Route::get('/gallery', function () {
+    return view('site.gallery');
+})->name('gallery');
 
 // Login Page
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -35,10 +39,13 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-// Cameras
+// Cameras and Lenses
 Route::get('/cameras', [CameraController::class, 'index'])->name('cameras');
-// Lenses
 Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
 
 // Products
 Route::resource('products', ProductController::class);
+
+Route::get('/admin', [AdminController::class])
+    ->middleware('is_admin')
+    ->name('admin');

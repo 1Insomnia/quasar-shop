@@ -5,16 +5,18 @@
 @section('content')
     <section class="text-neutral min-h-screen" id="product">
         <div class="container px-5 py-6 md:py-12 lg:py-24">
-            <article class="swiper-container overflow-x-hidden mb-10" style="max-height: 500px">
+            <article class="swiper-container overflow-x-hidden mb-10 h-screen-1/2"
+                style="min-height: 300px; max-height: 500px;">
                 <div class="swiper-wrapper">
-                    @forelse($product_images->productImages as $product_image)
+                    @forelse($product->productImages as $product_image)
                         <div class="swiper-slide">
-                            <img class="w-full h-full object-contain p-8" src="{{ asset($product_image->image_path) }}"
-                                alt="">
+                            <img class="object-contain object-center w-full h-full p-8"
+                                src="{{ asset($product_image->image_path) }}" alt="{{ $product->name }} photo">
                         </div>
                     @empty
                         <div class="swiper-slide">
-                            <img class="w-full h-full object-contain p-8" src="{{ asset($product->image_path) }}" alt="">
+                            <img class="object-contain object-center p-8 w-full h-full"
+                                src="{{ asset($product->image_path) }}" alt="">
                         </div>
                     @endforelse
                 </div>
@@ -43,12 +45,6 @@
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <ul class="hidden text-neutral-light pl-5 py-2 list-disc lg:py-4">
-                        {{-- Right trim the product->features string to pop the last dot --}}
-                        @foreach (explode('.', rtrim(($product->features), "." )) as $row)
-                        <li>{{ $row }}</li>
-                        @endforeach
-                    </ul>
                 </div>
                 <div class="mt-4 border-b border-gray-300" id="productDisplay">
                     <button
