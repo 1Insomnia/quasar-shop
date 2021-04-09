@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Site\LenseController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Site\CameraController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Site\CameraController;
+use App\Http\Controllers\Site\LenseController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ use App\Http\Controllers\Auth\RegisterController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('site.home');
@@ -46,6 +46,8 @@ Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
 // Products
 Route::resource('products', ProductController::class);
 
-Route::get('/admin', [AdminController::class])
-    ->middleware('is_admin')
-    ->name('admin');
+// Route::get([\App\Http\Controllers\Admin\ProductController::class, 'index'])
+
+Route::prefix('admin')->group(function () {
+    Route::get('/products',[\App\Http\Controllers\Admin\ProductController::class, 'index'])->middleware('is_admin');
+});

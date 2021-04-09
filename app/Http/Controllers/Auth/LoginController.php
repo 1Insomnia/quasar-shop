@@ -40,7 +40,7 @@ class LoginController extends Controller
         };
 
         if (auth()->user()->isAdmin()) {
-            return redirect()->route('home');
+            return redirect()->route('admin');
         } else {
             return redirect()->route('home');
         }
