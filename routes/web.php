@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Site\LenseController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Site\CameraController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -31,3 +34,11 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 // Register Page
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
+
+// Cameras
+Route::get('/cameras', [CameraController::class, 'index'])->name('cameras');
+// Lenses
+Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
+
+// Products
+Route::resource('products', ProductController::class);

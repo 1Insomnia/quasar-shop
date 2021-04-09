@@ -107,20 +107,20 @@
         </div>
         <!-- Header Icons -->
         <div class="flex items-center justify-between space-x-4" id="header-icons">
-            <div class="hidden hover:text-primary-dark lg:flex lg:items-center lg:space-x-2">
+            <div class="hidden lg:flex lg:items-center lg:space-x-2">
                 @auth
                     <form action="{{ route('logout') }}" method="post" class="m-0">
                         @csrf
-                        <button class="inline-block" type="submit">
+                        <button class="hover:text-primary-dark inline-block" type="submit">
                             Logout
                         </button>
                     </form>
                 @endauth
                 @guest
-                    <a class="inline-block" href="{{ route('login') }}">
+                    <a class="inline-block hover:text-primary-dark" href="{{ route('login') }}">
                         <span class="block">Log In</span>
                     </a>
-                    <a class="inline-block" href="{{ route('register') }}">
+                    <a class="inline-block hover:text-primary-dark" href="{{ route('register') }}">
                         <span class="block">Register</span>
                     </a>
                 @endguest
