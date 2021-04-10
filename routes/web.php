@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Site\CameraController;
 use App\Http\Controllers\Site\LenseController;
+use \App\Http\Controllers\Admin\ProductController as AdminProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,9 +49,11 @@ Route::resource('products', ProductController::class);
 
 // Route::get([\App\Http\Controllers\Admin\ProductController::class, 'index'])
 
-Route::prefix('admin')->group(function () {
-    Route::get(('/dashboard') , function () {
-        return view('admin.welcome-dashboard');
+Route::middleware(['is_admin'])->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get(('/dashboard') , function () {
+            return view('admin.index');
+        })->name('admin.index');
+        Route::resource('products',AdminProductController::class);
     });
-    Route::resource('/products',\App\Http\Controllers\Admin\ProductController::class)->middleware('is_admin');
 });
