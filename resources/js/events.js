@@ -9,7 +9,6 @@ export function navOpen() {
         e.preventDefault();
         header.classList.toggle("nav-open");
         burger.classList.toggle("open");
-        // burgerLines.classList.add('open');
     });
 }
 

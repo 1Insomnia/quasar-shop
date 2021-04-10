@@ -14,20 +14,23 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        Brand::create([
-            'name' => 'nikon',
-        ]);
+        $brands = [
+            [
+                'name' => 'canon'
+            ],
+            [
+                'name' => 'nikon'
+            ],
+            [
+                'name' => 'pentax'
+            ],
+            [
+                'name' => 'irix'
+            ],
+        ];
 
-        Brand::create([
-            'name' => 'canon',
-        ]);
-
-        Brand::create([
-            'name' => 'pentax',
-        ]);
-
-        Brand::create([
-            'name' => 'irix',
-        ]);
+        foreach ($brands as $brand) {
+            Brand::create($brand);
+        }
     }
 }

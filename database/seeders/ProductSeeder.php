@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
         $products = [
             [
                 'category_id' => 1,
-                'brand_id' => 2,
+                'brand_id' => 1,
                 'name' => 'CANON EOS 5D MARK IV',
                 'price' => 3000,
                 'image_path' => 'assets/img/cameras/CANON_EOS_5D_MARK_IV.jpg',
@@ -30,7 +30,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'category_id' => 1,
-                'brand_id' => 2,
+                'brand_id' => 1,
                 'name' => 'CANON EOS 77D',
                 'price' => 1700.00,
                 'image_path' => 'assets/img/cameras/CANON_EOS_77D.jpg',
@@ -40,7 +40,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'category_id' => 1,
-                'brand_id' => 2,
+                'brand_id' => 1,
                 'name' => 'CANON EOS 90D',
                 'price' => 1400.00,
                 'image_path' => 'assets/img/cameras/CANON_EOS_90D.jpg',
@@ -50,7 +50,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'category_id' => 1,
-                'brand_id' => 2,
+                'brand_id' => 1,
                 'name' => 'CANON EOS 4000D',
                 'price' => 1700,
                 'image_path' => 'assets/img/cameras/CANON_EOS_4000D.jpg',
@@ -60,7 +60,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'category_id' => 1,
-                'brand_id' => 1,
+                'brand_id' => 2,
                 'name' => 'NIKON D500',
                 'price' => 4000.00,
                 'image_path' => 'assets/img/cameras/NIKON_D500.jpg',
@@ -70,7 +70,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'category_id' => 1,
-                'brand_id' => 1,
+                'brand_id' => 2,
                 'name' => 'NIKON D750',
                 'price' => 3200.00,
                 'image_path' => 'assets/img/cameras/NIKON_D750.jpg',
@@ -80,7 +80,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'category_id' => 1,
-                'brand_id' => 1,
+                'brand_id' => 2,
                 'name' => 'NIKON D850',
                 'price' => 2000.00,
                 'image_path' => 'assets/img/cameras/NIKON_D850.jpg',
@@ -90,7 +90,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'category_id' => 1,
-                'brand_id' => 1,
+                'brand_id' => 2,
                 'name' => 'NIKON D7500',
                 'price' => 1200.00,
                 'image_path' => 'assets/img/cameras/NIKON_D7500.jpg',

@@ -14,14 +14,19 @@ class ProductCategorySeeder extends Seeder
      */
     public function run()
     {
-        ProductCategory::create([
-            'name' => 'cameras',
-            'status' => '1',
-        ]);
+        $product_categories = [
+            [
+                'name' => 'cameras',
+                'status' => '1',
+            ],
+            [
+                'name' => 'lenses',
+                'status' => '1',
+            ],
+        ];
 
-        ProductCategory::create([
-            'name' => 'lenses',
-            'status' => '1',
-        ]);
+        foreach ($product_categories as $product_category) {
+            ProductCategory::create($product_category);
+        }
     }
 }
