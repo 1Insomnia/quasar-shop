@@ -49,5 +49,8 @@ Route::resource('products', ProductController::class);
 // Route::get([\App\Http\Controllers\Admin\ProductController::class, 'index'])
 
 Route::prefix('admin')->group(function () {
-    Route::get('/products',[\App\Http\Controllers\Admin\ProductController::class, 'index'])->middleware('is_admin');
+    Route::get(('/dashboard') , function () {
+        return view('admin.welcome-dashboard');
+    });
+    Route::resource('/products',\App\Http\Controllers\Admin\ProductController::class)->middleware('is_admin');
 });
