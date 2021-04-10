@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $all_products = Product::all();
-        return view('admin.dashboard')->with(['all_products' => $all_products]);
+        return view('admin.products.index')->with(['all_products' => $all_products]);
     }
 
     /**
@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create');
     }
 
     /**

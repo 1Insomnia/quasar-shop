@@ -1,11 +1,4 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Dashboard</h1>
-@stop
-
+@extends("admin.layouts.master");
 @section('content')
     <h2 class="mb-4">Connected as <span class="text-primary">{{ auth()->user()->email }}</span></h2>
     <section>
@@ -16,6 +9,7 @@
                     <th>Product Price</th>
                     <th>Product Stock</th>
                     <th>Product Status</th>
+                    <th>Product Brand</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -41,6 +35,24 @@
                         @endif
                     </td>
                     <td>
+                        @switch($product->brand_id)
+                            @case(1)
+                            <span>Canon</span>
+                            @break
+                            @case(2)
+                            <span>Nikon</span>
+                            @break
+                            @case(3)
+                            <span>Pentax</span>
+                            @break
+                            @case(4)
+                            <span>Irix</span>
+                            @break
+                            @default
+
+                        @endswitch
+                    </td>
+                    <td>
                         <button type="button" class="btn btn-warning"><a href="">Edit</a></button>
                     </td>
                     <td>
@@ -50,13 +62,4 @@
             @endforeach
         </table>
     </section>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script>
-    </script>
 @stop
