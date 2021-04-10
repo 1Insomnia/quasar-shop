@@ -8,6 +8,10 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('is_admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -31,20 +35,21 @@ class ProductController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+        *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        dd($request->request);
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'name' => 'required|min:10|max:255',
             'price' => 'required|max:255',
             'stock' => 'required|max:255',
             'brand' => 'required|max:255',
             'status' => 'required|max:255',
         ]);
+
+        return redirect()->route("admin.products.create");
     }
 
     /**

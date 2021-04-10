@@ -1,4 +1,4 @@
-@extends("admin.layouts.master");
+@extends("admin.layouts.master")
 @section('content')
     <h2 class="mb-4">Connected as <span class="text-primary">{{ auth()->user()->email }}</span></h2>
     <section class="my-4">
@@ -58,7 +58,7 @@
                         @endswitch
                     </td>
                     <td>
-                        <button type="button" class="btn btn-outline-warning"><a href="/store">Edit</a></button>
+                        <button type="button" class="btn btn-outline-warning"><a href="">Edit</a></button>
                     </td>
                     <td>
                         <button type="button" class="btn btn-outline-danger"><a href="">Delete</a></button>
