@@ -12,7 +12,7 @@ php artisan db:seed
 php artisan serve
 ```
 
--   The app will listen on localhost:8000
+- The app will listen on localhost:8000
 
 ## Front End Dependencies
 
@@ -21,3 +21,15 @@ php artisan serve
   - Animation On Scroll
   - SwiperJS
 
+## TODOS 
+- Admin: 
+  - Products :
+      - [ ] : Add image upload functionality for store method
+      - [ ] : Add show method
+      - [ ] : Add destroy
+  - Brands: 
+    - [ ] : Create Controller
+    - [ ] : Create Views
+  - Categories: 
+    - [ ] : Create Controller
+    - [ ] : Create Views

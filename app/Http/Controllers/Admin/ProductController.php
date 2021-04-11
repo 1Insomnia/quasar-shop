@@ -14,7 +14,6 @@ class ProductController extends Controller
     }
     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -33,23 +32,40 @@ class ProductController extends Controller
         return view('admin.products.create');
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
-        *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|min:10|max:255',
+        $rules = [
+            'name' => 'required|max:255',
             'price' => 'required|max:255',
             'stock' => 'required|max:255',
+            'category' => 'required|max:255',
             'brand' => 'required|max:255',
             'status' => 'required|max:255',
-        ]);
+            'description' => 'required|max:255',
+            'image_path' => 'required|max:255',
+        ];
 
-        return redirect()->route("admin.products.create");
+        if($this->validate($request, $rules)) {
+            Product::create([
+                'name' => $request->name,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'category_id' => $request->category,
+                'brand_id' => $request->brand,
+                'status' => $request->status,
+                'description' => $request->description,
+                'image_path' => $request->image_path,
+                // 'updated_at' => now(),
+                // 'created_at' => now(),
+            ]);
+            return redirect()->route('admin.products.create')->with('success', 'Product Added');
+        };
     }
 
     /**
