@@ -36,6 +36,7 @@ Route::get('/gallery', function () {
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'post']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
 // Register Page
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
@@ -44,16 +45,13 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/cameras', [CameraController::class, 'index'])->name('cameras');
 Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
 
-// Products
+// Product Details Page
 Route::resource('products', ProductController::class);
 
-// Route::get([\App\Http\Controllers\Admin\ProductController::class, 'index'])
-
-Route::middleware(['is_admin'])->group(function () {
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get(('/dashboard') , function () {
-            return view('admin.index');
-        })->name('admin.index');
-        Route::resource('products',AdminProductController::class);
-    });
+// Admin
+Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function () {
+    Route::get(('dashboard'), function () {
+        return view('admin.index');
+    })->name('dashboard');
+    Route::resource('products', AdminProductController::class);
 });

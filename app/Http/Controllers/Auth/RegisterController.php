@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Routing\Route;
 
 class RegisterController extends Controller
 {
     public function __construct()
     {
+        // Register Controller is reseved for guest users
         $this->middleware(['guest']);
     }
 
@@ -23,14 +25,13 @@ class RegisterController extends Controller
     }
 
     /**
-     * post
-     * Handle Post Request
-     * @return void
+     * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        // Validation
-        $this->validate($request, [
+        $rules = [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'required|email|max:255',
@@ -40,7 +41,9 @@ class RegisterController extends Controller
                 // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
                 'confirmed',
             ],
-        ]);
+        ];
+        // Validation
+        $this->validate($request, $rules);
 
         User::create([
             'first_name' => $request->first_name,
@@ -50,7 +53,6 @@ class RegisterController extends Controller
             'role' => User::DEFAULT_ROLE,
         ]);
 
-        auth()->attempt($request->only('email', 'password'));
-        return redirect()->route("home");
+        if (auth()->attempt($request->only('email', 'password'))) return redirect()->route("home");
     }
 }

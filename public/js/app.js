@@ -1854,7 +1854,8 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "carousel": () => (/* binding */ carousel),
-/* harmony export */   "animateOnScroll": () => (/* binding */ animateOnScroll)
+/* harmony export */   "animateOnScroll": () => (/* binding */ animateOnScroll),
+/* harmony export */   "navMobileFade": () => (/* binding */ navMobileFade)
 /* harmony export */ });
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/core/core-class.js");
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/navigation/navigation.js");
@@ -1931,6 +1932,12 @@ function animateOnScroll() {
   });
 }
 
+function navMobileFade() {
+  var navMobileList = document.querySelector('#nav-mobile-list');
+  var navMobileLinks = document.querySelectorAll('#nav-mobile-list a');
+  console.log(navMobileLinks);
+}
+
 
 
 /***/ }),
@@ -1955,6 +1962,7 @@ function main() {
   (0,_animations__WEBPACK_IMPORTED_MODULE_0__.carousel)();
   (0,_animations__WEBPACK_IMPORTED_MODULE_0__.animateOnScroll)();
   (0,_events__WEBPACK_IMPORTED_MODULE_1__.productDataToggle)();
+  (0,_animations__WEBPACK_IMPORTED_MODULE_0__.navMobileFade)();
 }
 
 window.onload = main;
@@ -2008,12 +2016,17 @@ function navOpen() {
   // Nav button action
   var navToggle = document.querySelector("#nav-toggle");
   var header = document.querySelector("#header");
-  var burger = document.querySelector(".burger"); // Nav button action
+  var burger = document.querySelector(".burger");
+  var navMobileList = document.querySelector('#nav-mobile-list');
+  var navMobileLinks = document.querySelectorAll('#nav-mobile-list a'); // Nav button action
 
   navToggle.addEventListener("click", function (e) {
     e.preventDefault();
     header.classList.toggle("nav-open");
-    burger.classList.toggle("open"); // burgerLines.classList.add('open');
+    burger.classList.toggle("open");
+    navMobileLinks.forEach(function (link, index) {
+      return link.style.animationDelay = "".concat(index / navMobileLinks.length + .3, "s");
+    });
   });
 }
 function productDataToggle() {

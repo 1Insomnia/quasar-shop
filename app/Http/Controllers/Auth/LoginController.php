@@ -24,23 +24,23 @@ class LoginController extends Controller
      */
     public function post(Request $request)
     {
-        // Form validation
-        $this->validate($request, [
+        $rules = [
             'email' => 'required|email',
             'password' => [
                 'required',
                 'min:6',
-//                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             ]
-        ]);
+        ];
+        // Form validation
+        $this->validate($request, $rules);
 
         if (!auth()->attempt($request->only('email', 'password'))) {
-//            return back to the last page with flash message to session
             return back()->with('status', 'Invalid login details');
         };
 
         if (auth()->user()->isAdmin()) {
-            return redirect("admin/dashboard");
+            return redirect()->route('admin.dashboard');
         } else {
             return redirect()->route('home');
         }

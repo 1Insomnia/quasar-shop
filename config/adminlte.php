@@ -229,18 +229,6 @@ return [
             'search' => true,
             'topnav' => true,
         ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        // [
-        //     'text'        => 'pages',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'far fa-fw fa-file',
-        //     'label'       => 4,
-        //     'label_color' => 'success',
-        // ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -257,10 +245,6 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'admin - home',
-                    'url'  => 'admin/dashboard',
-                ],
-                [
                     'text' => 'products',
                     'url'  => 'admin/products',
                 ],
@@ -271,10 +255,6 @@ return [
                 [
                     'text' => 'brands',
                     'url'  => 'admin/brands',
-                ],
-                [
-                    'text' => 'settings',
-                    'url'  => 'admin/settings',
                 ],
             ],
         ],
