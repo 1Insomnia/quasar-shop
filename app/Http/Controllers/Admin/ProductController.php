@@ -19,7 +19,15 @@ class ProductController extends Controller
     public function index()
     {
         $all_products = Product::all();
-        return view('admin.products.index')->with(['all_products' => $all_products]);
+        $count_products = $all_products->count();
+        $avg_price = Product::avg('price');
+
+        return view('admin.products.index')
+            ->with([
+                'all_products' => $all_products,
+                'count_products' => $count_products,
+                'avg_price' => $avg_price,
+            ]);
     }
 
     /**
@@ -64,7 +72,7 @@ class ProductController extends Controller
                 // 'updated_at' => now(),
                 // 'created_at' => now(),
             ]);
-            return redirect()->route('admin.products.create')->with('success', 'Product Added');
+            return redirect()->route('admin.products.create')->with('message', 'Product Added');
         };
     }
 
@@ -110,6 +118,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect()->route('admin.products.index')->with('message', 'Product' . $product->name .' Deleted');
     }
 }

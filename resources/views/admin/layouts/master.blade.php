@@ -4,7 +4,7 @@
 
 @section('content_header')
     {{-- TODO: breadcrumbs --}}
-    <h1 class="text-center">Dashboard</h1>
+    <h1 class="">Dashboard</h1>
 @stop
 
 @section('content')

@@ -2,9 +2,11 @@
 @section('content')
     <h2 class="mb-4">Connected as <span class="text-primary">{{ auth()->user()->email }}</span></h2>
     <section class="my-4">
-        <button type="button" class="btn btn-outline-success">
-            <a href="{{ route('admin.products.create') }}">Add Product</a>
-        </button>
+        <a href="{{ route('admin.products.create') }}">
+            <button type="button" class="btn btn-success btn-lg">
+                Add Product
+            </button>
+        </a>
     </section>
     <section>
         <table class="table table-bordered">
@@ -42,26 +44,33 @@
                     <td>
                         @switch($product->brand_id)
                             @case(1)
-                            <span>Canon</span>
+                                <span>Canon</span>
                             @break
                             @case(2)
-                            <span>Nikon</span>
+                                <span>Nikon</span>
                             @break
                             @case(3)
-                            <span>Pentax</span>
+                                <span>Pentax</span>
                             @break
                             @case(4)
-                            <span>Irix</span>
+                                <span>Irix</span>
                             @break
                             @default
 
                         @endswitch
                     </td>
                     <td>
-                        <button type="button" class="btn btn-outline-warning"><a href="">Edit</a></button>
+                        <a href="{{ route('admin.products.edit', $product->id) }}">
+                            <button type="button" class="btn btn-block btn-warning">
+                                Edit
+                            </button>
+                        </a>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-outline-danger"><a href="">Delete</a></button>
+                        <form method="POST" action="{{ route('admin.products.destroy', $product->id) }}">
+                            @csrf
+                            <input class="btn btn-block btn-danger" type="submit" name="_method" value="delete" />
+                        </form>
                     </td>
                 </tr>
             @endforeach

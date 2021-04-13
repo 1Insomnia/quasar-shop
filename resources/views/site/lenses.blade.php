@@ -2,9 +2,8 @@
 
 @section('title', 'Lenses')
 
-
 @section('content')
-    <section class="">
+    <section>
         <div class="container px-5 py-12 flex flex-col items-center md:flex-row lg:py-24">
             <div
                 class="mb-12 pl-8 flex flex-col items-center text-center md:items-start md:text-left md:mb-0 md:w-1/2 lg:flex-grow">
@@ -21,8 +20,7 @@
             </div>
         </div>
     </section>
-
-    <section class="" id="products_lenses">
+    <section id="products_lenses">
         <div class="container px-5 py-12 md:py-24 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3">
             @foreach ($lenses as $lens)
                 <article
