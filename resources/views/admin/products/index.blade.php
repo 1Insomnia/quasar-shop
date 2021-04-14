@@ -9,6 +9,14 @@
         </a>
     </section>
     <section>
+        {{-- Feedback --}}
+        <div class="text-success py-3">
+            @if (session('message'))
+                {{ session('message') }}
+            @endif
+        </div>
+    </section>
+    <section>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -34,9 +42,7 @@
                     </td>
                     <td>
                         @if ($product->status === 1)
-                            <span>
-                                Available
-                            </span>
+                            Available
                         @else
                             Unavailable
                         @endif
@@ -68,8 +74,9 @@
                     </td>
                     <td>
                         <form method="POST" action="{{ route('admin.products.destroy', $product->id) }}">
+                            @method('DELETE')
                             @csrf
-                            <input class="btn btn-block btn-danger" type="submit" name="_method" value="delete" />
+                            <button type="submit" class="btn btn-danger btn-block">Delete</button>
                         </form>
                     </td>
                 </tr>

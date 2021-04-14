@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
-class ProductController extends Controller
+    class ProductController extends Controller
 {
     public function __construct()
     {
@@ -19,14 +19,10 @@ class ProductController extends Controller
     public function index()
     {
         $all_products = Product::all();
-        $count_products = $all_products->count();
-        $avg_price = Product::avg('price');
 
         return view('admin.products.index')
             ->with([
                 'all_products' => $all_products,
-                'count_products' => $count_products,
-                'avg_price' => $avg_price,
             ]);
     }
 
@@ -51,15 +47,21 @@ class ProductController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'price' => 'required|max:255',
-            'stock' => 'required|max:255',
+            'stock' => 'required|integer|max:255',
             'category' => 'required|max:255',
             'brand' => 'required|max:255',
             'status' => 'required|max:255',
             'description' => 'required|max:255',
-            'image_path' => 'required|max:255',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,svg|max:10240',
         ];
 
         if($this->validate($request, $rules)) {
+
+            $image_name = $request->image_path->getClientOriginalName();
+            $image_full_name = time() . '_' . $image_name . '.'.$request->image_path->extension();
+            $request->image->move(asset('assets/img/cameras/'), $image_name);
+            dd($image_full_name);
+
             Product::create([
                 'name' => $request->name,
                 'price' => $request->price,
@@ -69,8 +71,6 @@ class ProductController extends Controller
                 'status' => $request->status,
                 'description' => $request->description,
                 'image_path' => $request->image_path,
-                // 'updated_at' => now(),
-                // 'created_at' => now(),
             ]);
             return redirect()->route('admin.products.create')->with('message', 'Product Added');
         };

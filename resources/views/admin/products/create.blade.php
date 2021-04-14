@@ -11,7 +11,7 @@
                     </h3>
                 @endif
             </div>
-            <form action="{{ route('admin.products.store') }}" method="post">
+            <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -54,8 +54,8 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="image_path" class="form-label">image_path</label>
-                        <input type="text" class="form-control" name="image_path" id="image_path">
+                        <label for="image" class="form-label">image_path</label>
+                        <input type="file" class="form-control-file" name="image_path" id="image_path">
                         @error('image_path')
                             <div class="text-warning mt-2" role="alert">
                                 {{ $message }}*
