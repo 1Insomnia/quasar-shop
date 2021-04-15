@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
-    class ProductController extends Controller
+class ProductController extends Controller
 {
+    private $cameras_folder = "assets/img/cameras/";
+    private $lenses_lenses = "assets/img/lenses/";
+
     public function __construct()
     {
         $this->middleware('is_admin');
     }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response
@@ -22,7 +26,7 @@ use App\Models\Product;
 
         return view('admin.products.index')
             ->with([
-                'all_products' => $all_products,
+                'all_products' => $all_products
             ]);
     }
 
@@ -46,21 +50,30 @@ use App\Models\Product;
     {
         $rules = [
             'name' => 'required|max:255',
-            'price' => 'required|max:255',
-            'stock' => 'required|integer|max:255',
-            'category' => 'required|max:255',
-            'brand' => 'required|max:255',
-            'status' => 'required|max:255',
+            'price' => 'required',
+            'stock' => 'required',
+            'category' => 'required',
+            'brand' => 'required',
+            'status' => 'required',
             'description' => 'required|max:255',
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,svg|max:10240',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:10240'
         ];
 
-        if($this->validate($request, $rules)) {
+        if ($this->validate($request, $rules)) {
 
-            $image_name = $request->image_path->getClientOriginalName();
-            $image_full_name = time() . '_' . $image_name . '.'.$request->image_path->extension();
-            $request->image->move(asset('assets/img/cameras/'), $image_name);
-            dd($image_full_name);
+            // Check if cameras or lenses and assign according path
+            if ($request->category = 1) {
+                $image_folder = $this->cameras_folder;
+            } else {
+                $image_folder = $this->lenses_folder;
+            }
+
+            // // Get Image Name
+            $image_name = time() . $request->image->getClientOriginalName();
+            // // Add timestamp
+            $image_full_path = $image_folder . $image_name;
+            // Move image to the according folder
+            $request->image->move(public_path($image_folder), $image_name);
 
             Product::create([
                 'name' => $request->name,
@@ -70,7 +83,7 @@ use App\Models\Product;
                 'brand_id' => $request->brand,
                 'status' => $request->status,
                 'description' => $request->description,
-                'image_path' => $request->image_path,
+                'image_path' => $image_full_path
             ]);
             return redirect()->route('admin.products.create')->with('message', 'Product Added');
         };
@@ -121,6 +134,6 @@ use App\Models\Product;
         $product = Product::find($id);
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('message', 'Product' . $product->name .' Deleted');
+        return redirect()->route('admin.products.index')->with('message', 'Product' . $product->name . ' Deleted');
     }
 }
