@@ -1,13 +1,19 @@
 <?php
 
+// Site Controllers
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Site\CameraController;
 use App\Http\Controllers\Site\LenseController;
+
+// Import Admin Controllers
 use \App\Http\Controllers\Admin\ProductController as AdminProductController;
 use \App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
+use \App\Http\Controllers\Admin\BrandController as AdminBrandController;
+
+// Import Route
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,4 +62,5 @@ Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function (
     })->name('dashboard');
     Route::resource('products', AdminProductController::class);
     Route::resource('categories', AdminProductCategoryController::class);
+    Route::resource('brands', AdminBrandController::class);
 });

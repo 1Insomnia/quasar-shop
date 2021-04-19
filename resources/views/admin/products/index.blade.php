@@ -1,3 +1,5 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 @extends("admin.layouts.master")
 @section('content')
     <h2 class="mb-4">Connected as <span class="text-primary">{{ auth()->user()->email }}</span></h2>
@@ -7,7 +9,6 @@
                 Add Product
             </button>
         </a>
-    </section>
     <section>
         <div>
             <h3 class="text-success py-3">
@@ -63,8 +64,6 @@
                             @case(4)
                             <span>Irix</span>
                             @break
-                            @default
-
                         @endswitch
                     </td>
                     <td>

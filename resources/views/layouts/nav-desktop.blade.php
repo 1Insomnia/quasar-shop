@@ -21,4 +21,11 @@
             Contact
         </a>
     </li>
+    @if (auth()->user()->isAdmin())
+        <li>
+            <a class="relative block font-bold hover:text-primary-dark" href="{{ route('admin.dashboard') }}">
+                Admin
+            </a>
+        </li>
+    @endif
 </ul>

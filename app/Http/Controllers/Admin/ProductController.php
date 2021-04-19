@@ -100,7 +100,8 @@ class ProductController extends Controller
     public function show(int $id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         $product = Product::findOrFail($id);
-        return view('admin.products.show')->with(['product' => $product]);
+        return view('admin.products.show')
+            ->with(['product' => $product]);
     }
 
     /**
