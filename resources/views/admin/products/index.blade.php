@@ -9,61 +9,70 @@
         </a>
     </section>
     <section>
-        {{-- Feedback --}}
-        <div class="text-success py-3">
-            @if (session('message'))
-                {{ session('message') }}
-            @endif
+        <div>
+            <h3 class="text-success py-3">
+                @if (session('message'))
+                    {{ session('message') }}
+                @endif
+            </h3>
         </div>
     </section>
     <section>
         <table class="table table-bordered">
             <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Product Price</th>
-                    <th>Product Stock</th>
-                    <th>Product Status</th>
-                    <th>Product Brand</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Product Stock</th>
+                <th>Product Status</th>
+                <th>Product Brand</th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
             </thead>
-            @foreach ($all_products as $product)
+            @foreach ($products as $product)
                 <tr>
                     <td>
                         {{ $product->name }}
                     </td>
                     <td>
-                        $ {{ $product->price }}
+                        $ {{ number_format($product->price) }}
                     </td>
                     <td>
                         {{ $product->stock }}
                     </td>
                     <td>
                         @if ($product->status === 1)
-                            Available
+                            <span class="text-success"> Available </span>
                         @else
-                            Unavailable
+                            <span class="text-danger">Unavailable</span>
                         @endif
                     </td>
                     <td>
                         @switch($product->brand_id)
                             @case(1)
-                                <span>Canon</span>
+                            <span>Canon</span>
                             @break
                             @case(2)
-                                <span>Nikon</span>
+                            <span>Nikon</span>
                             @break
                             @case(3)
-                                <span>Pentax</span>
+                            <span>Pentax</span>
                             @break
                             @case(4)
-                                <span>Irix</span>
+                            <span>Irix</span>
                             @break
                             @default
 
                         @endswitch
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.products.show', $product->id) }}">
+                            <button type="button" class="btn btn-block btn-primary">
+                                Details
+                            </button>
+                        </a>
                     </td>
                     <td>
                         <a href="{{ route('admin.products.edit', $product->id) }}">
@@ -83,4 +92,5 @@
             @endforeach
         </table>
     </section>
+    {{ $products->links() }}
 @stop

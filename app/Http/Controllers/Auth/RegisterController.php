@@ -53,6 +53,8 @@ class RegisterController extends Controller
             'role' => User::DEFAULT_ROLE,
         ]);
 
-        if (auth()->attempt($request->only('email', 'password'))) return redirect()->route("home");
+        if (auth()->attempt($request->only('email', 'password'))) {
+            return redirect()->route("home");
+        }
     }
 }
