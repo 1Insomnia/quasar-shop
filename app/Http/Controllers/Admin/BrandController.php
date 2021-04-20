@@ -33,18 +33,34 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Illuminate\Validation\ValidationException
      */
+
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required|max:255',
+            'status' => 'required|boolean',
+        ];
+
+        if ($this->validate($request, $rules)) {
+            Brand::create([
+                'name' => $request->name,
+                'status' => $request->status,
+            ]);
+        }
+        return redirect()->route('admin.brands.index')->with('message', "brand {$request->name} added");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
@@ -55,22 +71,25 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(int $id)
     {
-        //
+        $brand = Brand::find($id);
+        return view('admin.brands.edit')->with(['brand' => $brand]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         //
     }
@@ -78,11 +97,15 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $brand = Brand::find($id);
+        $brand->delete();
+
+        return back()->with('message', "Brand {$brand->name} Deleted");
     }
 }

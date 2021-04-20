@@ -3,20 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use App\Models\ProductImage;
 
-class ProductCategoryController extends Controller
+class ProductImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $categories = ProductCategory::all();
-        return view('admin.categories.index')->with(['categories' => $categories]);
+        $product_images = ProductImage::all();
     }
 
     /**
@@ -46,7 +45,7 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
         //
     }
@@ -57,10 +56,9 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id)
+    public function edit($id)
     {
-        $category = ProductCategory::find($id);
-        return view('admin.categories.edit')->with(['category' => $category]);
+        //
     }
 
     /**
@@ -70,7 +68,7 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,7 +79,7 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy($id)
     {
         //
     }

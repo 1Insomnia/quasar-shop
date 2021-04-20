@@ -20,8 +20,13 @@ class LoginController extends Controller
     /**
      * post
      * Handle Post Request
-     * @return void
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
+
     public function post(Request $request)
     {
         $rules = [

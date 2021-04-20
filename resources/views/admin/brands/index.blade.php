@@ -38,14 +38,14 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('admin.categories.edit', $brand->id) }}">
+                        <a href="{{ route('admin.brands.edit', $brand->id) }}">
                             <button type="button" class="btn btn-block btn-warning">
                                 Edit
                             </button>
                         </a>
                     </td>
                     <td>
-                        <form method="POST" action="{{ route('admin.categories.destroy', $brand->id) }}">
+                        <form method="POST" action="{{ route('admin.brands.destroy', $brand->id) }}">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-block">Delete</button>

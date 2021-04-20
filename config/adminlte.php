@@ -246,6 +246,10 @@ return [
                     'text' => 'brands',
                     'url'  => 'admin/brands',
                 ],
+                [
+                    'text' => 'product images',
+                    'url'  => 'admin/product_images',
+                ],
             ],
         ],
         ['header' => 'Main Site Nav'],

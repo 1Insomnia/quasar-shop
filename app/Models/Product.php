@@ -20,12 +20,12 @@ class Product extends Model
         'image_path',
     ];
 
-    public function productImages()
+    public function brand()
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->belongsTo(Brand::class);
     }
 
-    public function categoryProducts()
+    public function category()
     {
         return $this->belongsTo(ProductCategory::class);
     }

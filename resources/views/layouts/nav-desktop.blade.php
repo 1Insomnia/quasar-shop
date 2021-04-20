@@ -21,11 +21,13 @@
             Contact
         </a>
     </li>
-    @if (auth()->user()->isAdmin())
+    @auth
+        @unless(auth()->user()->isAdmin() === "admin")
         <li>
             <a class="relative block font-bold hover:text-primary-dark" href="{{ route('admin.dashboard') }}">
                 Admin
             </a>
         </li>
-    @endif
+        @endunless
+    @endauth
 </ul>

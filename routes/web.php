@@ -12,6 +12,7 @@ use App\Http\Controllers\Site\LenseController;
 use \App\Http\Controllers\Admin\ProductController as AdminProductController;
 use \App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
 use \App\Http\Controllers\Admin\BrandController as AdminBrandController;
+use \App\Http\Controllers\Admin\ProductImageController as AdminProductImageController;
 
 // Import Route
 use Illuminate\Support\Facades\Route;
@@ -63,4 +64,5 @@ Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function (
     Route::resource('products', AdminProductController::class);
     Route::resource('categories', AdminProductCategoryController::class);
     Route::resource('brands', AdminBrandController::class);
+    Route::resource('product_images', AdminProductImageController::class);
 });

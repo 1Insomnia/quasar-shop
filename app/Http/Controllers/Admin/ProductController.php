@@ -38,7 +38,14 @@ class ProductController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.products.create');
+        $products = Product::all();
+        $categories = \App\Models\ProductCategory::all();
+        $brands = \App\Models\Brand::all();
+        return view('admin.products.create')->with([
+            "products" => $products,
+            "categories" => $categories,
+            "brands" => $brands,
+            ]);
     }
 
     /*
@@ -114,7 +121,13 @@ class ProductController extends Controller
     public function edit(int $id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         $product = Product::findOrFail($id);
-        return view('admin.products.edit')->with(['product' => $product]);
+        $categories = \App\Models\ProductCategory::all();
+        $brands = \App\Models\Brand::all();
+        return view('admin.products.edit')->with([
+            'product' => $product,
+            "categories" => $categories,
+            "brands" => $brands,
+            ]);
     }
 
     /**
