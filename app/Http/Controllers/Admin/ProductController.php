@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {
     private string $cameras_folder = "assets/img/cameras/";
     private string $lenses_folder = "assets/img/lenses/";
+    private $productRepository;
 
-    public function __construct()
+    public function __construct(ProductRepository $productRepository)
     {
         $this->middleware('is_admin');
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -22,9 +25,9 @@ class ProductController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
 
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index()
     {
-        $products = Product::simplePaginate(10);
+        $products = $this->productRepository->paginate(10);
         return view('admin.products.index')
             ->with([
                 'products' => $products
@@ -36,7 +39,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function create()
     {
         $products = Product::all();
         $categories = \App\Models\ProductCategory::all();
@@ -94,7 +97,7 @@ class ProductController extends Controller
                 'image_path' => $image_full_path
             ]);
         };
-        return redirect()->route('admin.products.create')->with('message', "Product {$request->name} Added");
+        return redirect()->route('admin.products.index')->with('message', "Product {$request->name} Added");
     }
 
     /**
@@ -202,6 +205,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('message', 'Product' . $product->name . ' Deleted');
+        return redirect()->route('admin.products.index')->with('message', "Product : {$product->name} Deleted");
     }
 }

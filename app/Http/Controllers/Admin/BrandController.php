@@ -53,7 +53,7 @@ class BrandController extends Controller
                 'status' => $request->status,
             ]);
         }
-        return redirect()->route('admin.brands.index')->with('message', "brand {$request->name} added");
+        return redirect()->route('admin.brands.index')->with('message', "Brand {$request->name} added");
     }
 
     /**
