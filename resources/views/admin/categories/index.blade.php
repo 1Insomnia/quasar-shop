@@ -3,6 +3,7 @@
     <section class="my-4">
         <a href="{{ route('admin.categories.create') }}">
             <button type="button" class="btn btn-success btn-lg">
+                <i class="fas fa-plus pr-2"></i>
                 Add Category
             </button>
         </a>
@@ -40,6 +41,7 @@
                         <td>
                             <a href="{{ route('admin.categories.show', $category->id) }}">
                                 <button type="button" class="btn btn-block btn-primary">
+                                    <i class="fas fa-info-circle pr-2"></i>
                                     Details
                                 </button>
                             </a>
@@ -47,15 +49,17 @@
                         <td>
                             <a href="{{ route('admin.categories.edit', $category->id) }}">
                                 <button type="button" class="btn btn-block btn-warning">
-                                    Edit &plus;
+                                    <i class="fas fa-edit pr-2"></i>
+                                    Edit
                                 </button>
                             </a>
                         </td>
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
                                     data-target="#exampleModal"
-                                    data-id="{{ $category->id }}" id="btnDelete">
-                                Delete &cross;
+                                    data-id="{{ $category->id }}" data-name={{ $category->name }} id="btnDelete">
+                                <i class="fas fa-trash-alt pr-2"></i>
+                                Delete
                             </button>
                         </td>
                     </tr>
@@ -75,7 +79,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    If you want to delete this category click delete.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -90,10 +93,15 @@
     </div>
     <script>
         const btnDelete = document.querySelectorAll("#btnDelete");
-        const formDelete = document.querySelector("#formDelete");
 
         btnDelete.forEach(value => value.addEventListener("click", (e) => {
             const id = e.target.dataset.id;
+            const categoryName = e.target.dataset.name;
+            const formDelete = document.querySelector("#formDelete");
+            const modalBody = document.querySelector('.modal-body');
+
+            modalBody.innerHTML = `If you want to delete category : <span class="text-danger">${categoryName}</span> click delete`;
+
             formDelete.action = `categories/${id}`;
         }));
     </script>

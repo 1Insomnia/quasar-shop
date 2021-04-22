@@ -56,13 +56,10 @@ class ProductCategoryController extends Controller
         ];
 
         if ($this->validate($request, $rules)) {
-            ProductCategory::create([
-                'name' => $request->name,
-                'status' => $request->status,
-            ]);
+            ProductCategory::create($request->all());
         }
 
-        return redirect()->route('admin.categories.index')->with('message', "Category {$request->name} added");
+        return redirect()->route('admin.categories.index')->with('message', "Category : {$request->name} added");
     }
 
     /**
@@ -87,7 +84,7 @@ class ProductCategoryController extends Controller
      */
     public function edit(int $id)
     {
-        $category = ProductCategory::find($id);
+        $category = ProductCategory::findOrFail($id);
         return view('admin.categories.edit')->with(['category' => $category]);
     }
 
@@ -97,11 +94,26 @@ class ProductCategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param int                      $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, int $id)
     {
-        //
+        $category = ProductCategory::findOrFail($id);
+
+        $rules = [
+            'name' => 'required|max:255',
+            'status' => 'required|boolean',
+        ];
+
+        if ($this->validate($request, $rules)) {
+            $category->update([
+                'name' => $request->name,
+                'status' => $request->status,
+            ]);
+        }
+
+        return redirect()->route('admin.categories.index')->with('message', "Category : {$request->name} updated.");
     }
 
     /**

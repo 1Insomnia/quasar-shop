@@ -97,7 +97,7 @@ class ProductController extends Controller
                 'image_path' => $image_full_path
             ]);
         };
-        return redirect()->route('admin.products.index')->with('message', "Product {$request->name} Added");
+        return redirect()->route('admin.products.index')->with('message', "Product : {$request->name} added");
     }
 
     /**
@@ -190,7 +190,7 @@ class ProductController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.products.index')->with('message', 'Product' . $request->name . ' Update');
+        return redirect()->route('admin.products.index')->with('message', "Product : {$request->name} updated");
     }
 
     /**
