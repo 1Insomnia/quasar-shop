@@ -222,67 +222,73 @@ return [
         ['header' => 'Admin'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text'    => 'Manage Shop',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'Dashboard',
+            'url' => 'admin/dashboard',
+            'icon' => 'fas fa-tachometer-alt',
+        ],
+        [
+            'text' => 'Manage Shop',
+            'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
                     'text' => 'products',
-                    'url'  => 'admin/products',
+                    'url' => 'admin/products',
                 ],
                 [
                     'text' => 'categories',
-                    'url'  => 'admin/categories',
+                    'url' => 'admin/categories',
                 ],
                 [
                     'text' => 'brands',
-                    'url'  => 'admin/brands',
+                    'url' => 'admin/brands',
                 ],
                 [
                     'text' => 'product images',
-                    'url'  => 'admin/product_images',
+                    'url' => 'admin/product_images',
                 ],
             ],
         ],
         ['header' => 'Main Site Nav'],
         [
-            'text'    => 'Main Site',
+            'text' => 'Main Site',
+            'icon' => 'fas fa-link',
             'submenu' => [
                 [
                     'text' => 'Homepage',
-                    'url'  => '/',
+                    'url' => '/',
                 ],
                 [
                     'text' => 'Cameras',
-                    'url'  => 'cameras',
+                    'url' => 'cameras',
                 ],
                 [
                     'text' => 'Lenses',
-                    'url'  => 'lenses',
+                    'url' => 'lenses',
                 ],
                 [
                     'text' => 'Gallery',
-                    'url'  => 'gallery',
+                    'url' => 'gallery',
                 ],
                 [
                     'text' => 'Contacts',
-                    'url'  => 'contacts',
+                    'url' => 'contacts',
                 ],
                 [
                     'text' => 'Login',
-                    'url'  => 'login',
+                    'url' => 'login',
                 ],
                 [
                     'text' => 'Register',
-                    'url'  => 'register',
+                    'url' => 'register',
                 ],
             ],
         ],

@@ -1,22 +1,16 @@
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
 @extends("admin.layouts.master")
 @section('content')
-    <section class="my-4">
-        <a href="{{ route('admin.products.create') }}">
-            <button type="button" class="btn btn-success btn-lg">
-                Add Product
-            </button>
-        </a>
-        <div>
-            <div>
-                <h3 class="text-success py-3">
-                    @if (session('message'))
-                        {{ session('message') }}
-                    @endif
-                </h3>
-            </div>
+    <section>
+        <x-admin-title-block title="Products"></x-admin-title-block>
+        <div class="mb-4">
+            <a href="{{ route('admin.products.create') }}">
+                <button type="button" class="btn btn-success btn-lg">
+                    <i class="fas fa-plus-square pr-2"></i>
+                    Add Product
+                </button>
+            </a>
         </div>
+        <x-admin-big-feed-back></x-admin-big-feed-back>
         <div>
             <table class="table table-bordered">
                 <thead>
@@ -59,6 +53,7 @@
                         <td>
                             <a href="{{ route('admin.products.show', $product->id) }}">
                                 <button type="button" class="btn btn-block btn-primary">
+                                    <i class="fas fa-info-circle pr-2"></i>
                                     Details
                                 </button>
                             </a>
@@ -66,6 +61,7 @@
                         <td>
                             <a href="{{ route('admin.products.edit', $product->id) }}">
                                 <button type="button" class="btn btn-block btn-warning">
+                                    <i class="fas fa-edit pr-2"></i>
                                     Edit
                                 </button>
                             </a>
@@ -74,6 +70,7 @@
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
                                     data-target="#exampleModal"
                                     data-id="{{ $product->id }}" id="btnDelete">
+                                <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
                         </td>

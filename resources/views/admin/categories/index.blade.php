@@ -1,20 +1,16 @@
 @extends("admin.layouts.master")
 @section('content')
-    <section class="my-4">
-        <a href="{{ route('admin.categories.create') }}">
-            <button type="button" class="btn btn-success btn-lg">
-                <i class="fas fa-plus pr-2"></i>
-                Add Category
-            </button>
-        </a>
-        {{-- Feedback --}}
-        <div class="text-success py-3">
-            <h2>
-                @if (session('message'))
-                    {{ session('message') }}
-                @endif
-            </h2>
+    <section>
+        <x-admin-title-block title="Category"></x-admin-title-block>
+        <div class="mb-4">
+            <a href="{{ route('admin.categories.create') }}">
+                <button type="button" class="btn btn-success btn-lg">
+                    <i class="fas fa-plus-square pr-2"></i>
+                    Add Category
+                </button>
+            </a>
         </div>
+        <x-admin-big-feed-back></x-admin-big-feed-back>
         <div>
             <table class="table table-bordered">
                 <thead>
@@ -104,5 +100,7 @@
 
             formDelete.action = `categories/${id}`;
         }));
+
+        const successModal = document.querySelector("#success-modal");
     </script>
 @stop

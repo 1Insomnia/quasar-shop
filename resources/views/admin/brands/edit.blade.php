@@ -18,7 +18,7 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label">Brand Name :</label>
                         <input type="text" class="form-control" name="name" id="name" value="{{ $brand->name }}">
                         @error('name')
                             <div class="text-warning mt-2" role="alert">
@@ -27,7 +27,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="status" class="form-label">Status</label>
+                        <label for="status" class="form-label">Brand Status :</label>
                         <select class="custom-select" name="status" id="status">
                             <option value="1" @if ($brand->status === 1) selected @endif>Available</option>
                             <option value="0" @if ($brand->status === 0) selected @endif>Unavailable</option>
@@ -38,7 +38,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer bg-white pl-0">
                         <button class="btn btn-primary btn-lg" type="submit">
                             Edit Brand
                         </button>

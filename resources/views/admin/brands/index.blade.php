@@ -1,67 +1,67 @@
 @extends("admin.layouts.master")
 @section('content')
-    <section class="my-4">
-        <a href="{{ route('admin.brands.create') }}">
-            <button type="button" class="btn btn-success btn-lg">
-                Add Brand
-            </button>
-        </a>
-    </section>
     <section>
-        {{-- Feedback --}}
-        <div class="text-success py-3">
-            @if (session('message'))
-                {{ session('message') }}
-            @endif
+        <x-admin-title-block title="Brands"></x-admin-title-block>
+        <div class="mb-4">
+            <a href="{{ route('admin.brands.create') }}">
+                <button type="button" class="btn btn-success btn-lg">
+                    <i class="fas fa-plus-square pr-2"></i>
+                    Add Brand
+                </button>
+            </a>
         </div>
-    </section>
-    <section>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Brand Name</th>
-                <th>Brand Status</th>
-                <th>Detail</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            @foreach ($brands as $brand)
+        <x-admin-big-feed-back></x-admin-big-feed-back>
+        <div>
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td>
-                        {{ $brand->name }}
-                    </td>
-                    <td>
-                        @if ($brand->status === 1)
-                            <span class="text-success">Available</span>
-                        @else
-                            <span class="text-danger">Unavailable</span>
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.brands.show', $brand->id) }}">
-                            <button type="button" class="btn btn-block btn-primary">
-                                Detail
-                            </button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.brands.edit', $brand->id) }}">
-                            <button type="button" class="btn btn-block btn-warning">
-                                Edit
-                            </button>
-                        </a>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                                data-target="#exampleModal"
-                                data-id="{{ $brand->id }}" id="btnDelete">
-                            Delete &cross;
-                        </button>
-                    </td>
+                    <th>Brand Name</th>
+                    <th>Brand Status</th>
+                    <th>Detail</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
-            @endforeach
-        </table>
+                </thead>
+                @foreach ($brands as $brand)
+                    <tr>
+                        <td>
+                            {{ $brand->name }}
+                        </td>
+                        <td>
+                            @if ($brand->status === 1)
+                                <span class="text-success">Available</span>
+                            @else
+                                <span class="text-danger">Unavailable</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.brands.show', $brand->id) }}">
+                                <button type="button" class="btn btn-block btn-primary">
+                                    <i class="fas fa-info-circle pr-2"></i>
+                                    Detail
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.brands.edit', $brand->id) }}">
+                                <button type="button" class="btn btn-block btn-warning">
+                                    <i class="fas fa-edit pr-2"></i>
+                                    Edit
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
+                                    data-target="#exampleModal"
+                                    data-id="{{ $brand->id }}" id="btnDelete">
+                                <i class="fas fa-trash-alt pr-2"></i>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
     </section>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

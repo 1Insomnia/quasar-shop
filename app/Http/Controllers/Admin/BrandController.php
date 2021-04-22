@@ -16,7 +16,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::all();
+        $brands = Brand::orderBy('id', 'desc')->get();
         return view('admin.brands.index')->with(["brands" => $brands]);
     }
 
@@ -48,12 +48,9 @@ class BrandController extends Controller
         ];
 
         if ($this->validate($request, $rules)) {
-            Brand::create([
-                'name' => $request->name,
-                'status' => $request->status,
-            ]);
+            Brand::create($request->all());
         }
-        return redirect()->route('admin.brands.index')->with('message', "Brand {$request->name} added");
+        return redirect()->route('admin.brands.index')->with('message', "Brand : {$request->name} added.");
     }
 
     /**
@@ -61,11 +58,12 @@ class BrandController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(int $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        return view('admin.brands.show')->with(['brand' => $brand]);
     }
 
     /**
@@ -73,11 +71,11 @@ class BrandController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(int $id)
     {
-        $brand = Brand::find($id);
+        $brand = Brand::findOrFail($id);
         return view('admin.brands.edit')->with(['brand' => $brand]);
     }
 
@@ -87,11 +85,22 @@ class BrandController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param int                      $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, int $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+
+        $rules = [
+            'name' => 'required|max:255',
+            'status' => 'required|boolean',
+        ];
+
+        if ($this->validate($request, $rules)) {
+            $brand->update($request->all());
+        }
+        return redirect()->route('admin.brands.index')->with('message', "Brand : {$brand->name} updated.");
     }
 
     /**
@@ -106,6 +115,6 @@ class BrandController extends Controller
         $brand = Brand::find($id);
         $brand->delete();
 
-        return back()->with('message', "Brand {$brand->name} Deleted");
+        return back()->with('message', "Brand : {$brand->name} deleted.");
     }
 }
