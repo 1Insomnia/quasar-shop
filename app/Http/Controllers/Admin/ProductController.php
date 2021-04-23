@@ -169,7 +169,7 @@ class ProductController extends Controller
                 }
 
                 // // Get Image Name
-                $image_name = time() . $request->image->getClientOriginalName();
+                $image_name = time() . "_" . $request->image->getClientOriginalName();
                 // // Add timestamp
                 $image_full_path = $image_folder . $image_name;
                 // Move image to the according folder

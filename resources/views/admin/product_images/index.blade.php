@@ -57,7 +57,7 @@
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
                                     data-target="#exampleModal"
                                     data-id="{{ $product_image->id }}"
-                                    data-name={{ $product_image->name }} id="btnDelete">
+                                    id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
@@ -68,4 +68,41 @@
         </div>
         {{ $product_images->links() }}
     </section>
+        <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">This action is irreversible !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    If you want to delete this image, click on the delete button.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form method="POST" action="" id="formDelete">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-block">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const btnDelete = document.querySelectorAll("#btnDelete");
+
+        btnDelete.forEach(value => value.addEventListener("click", (e) => {
+            const id = e.target.dataset.id;
+            const formDelete = document.querySelector("#formDelete");
+
+            formDelete.action = `product_images/${id}`;
+        }));
+
+        const successModal = document.querySelector("#success-modal");
+    </script>
 @endsection

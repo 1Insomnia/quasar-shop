@@ -8,7 +8,7 @@
             <div class="card-header">
                 <h2 class="card-title">Add Product Image</h2>
             </div>
-            <form action="{{ route('admin.brands.store') }}" method="post">
+            <form action="{{ route('admin.product_images.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -18,7 +18,7 @@
                                 <option value="{{ $product->id }}"> {{ $product->name }}</option>
                             @endforeach
                         </select>
-                        @error('status')
+                        @error('product_id')
                         <div class="text-warning mt-2" role="alert">
                             {{ $message }}*
                         </div>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="card-footer bg-white pl-0">
                         <button class="btn btn-primary btn-lg" type="submit">
-                            Add Brand
+                            Add Product Image
                         </button>
                     </div>
                 </div>
