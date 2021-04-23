@@ -87,8 +87,12 @@ class ProductImageController extends Controller
      */
     public function edit(int $id)
     {
+        $products = Product::all();
         $product_image = ProductImage::findOrFail($id);
-        return view('admin.product_images.edit')->with(['product_image' => $product_image]);
+        return view('admin.product_images.edit')->with([
+            'product_image' => $product_image,
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -102,7 +106,31 @@ class ProductImageController extends Controller
     public function update(Request $request, int $id)
     {
         $product_image = ProductImage::findOrFail($id);
-        return redirect()->route('admin.product_images.index')->with('message', "Product Image : {$product_image->name} updated");
+
+        $rules = [
+            'product_id' => 'required|integer',
+            'image' => 'image|mimes:jpeg,png,jpg,svg|max:10240',
+        ];
+
+        if ($this->validate($request, $rules)) {
+            if (!empty($request->image)) {
+                // Rename image and add timestamp
+                $image_name = time() . "_" . $request->image->getClientOriginalName();
+                // Move image to assets/img/product/ directory
+                $request->image->move(public_path($this->product_image_directory), $image_name);
+                // Create img path
+                $image_full_path = $this->product_image_directory . $image_name;
+            } else {
+                $image_full_path = $product_image->image_path;
+            }
+
+            $product_image->update([
+                'product_id' => $request->product_id,
+                'image_path' => $image_full_path,
+            ]);
+        }
+
+        return redirect()->route('admin.product_images.index')->with('message', "Product Image of product {$request->name} updated");
     }
 
     /**

@@ -21,7 +21,6 @@
                     <th>Product Name</th>
                     <th>Product Image Path</th>
                     <th>Detail</th>
-                    <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
@@ -46,7 +45,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('admin.categories.edit', $product_image->id) }}">
+                            <a href="{{ route('admin.product_images.edit', $product_image->id) }}">
                                 <button type="button" class="btn btn-block btn-warning">
                                     <i class="fas fa-edit pr-2"></i>
                                     Edit
