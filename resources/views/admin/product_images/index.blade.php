@@ -21,6 +21,7 @@
                     <th>Product Name</th>
                     <th>Product Image Path</th>
                     <th>Detail</th>
+                    <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 </thead>

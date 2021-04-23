@@ -4,12 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ProductImage;
-use App\Models\Product;
+use App\Repositories\ProductImageRepository;
+use App\Repositories\ProductRepository;
+use App\Traits\ImageUpload;
+
 
 class ProductImageController extends Controller
 {
     private string $product_image_directory = "assets/img/product/";
+    private ProductImageRepository $productImageRepository;
+    private \Illuminate\Database\Eloquent\Collection|array $products;
+    use ImageUpload;
+
+
+    public function __construct(ProductImageRepository $productImageRepository, ProductRepository $productRepository)
+    {
+        $this->productImageRepository = $productImageRepository;
+        $this->productRepository = $productRepository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -18,7 +30,7 @@ class ProductImageController extends Controller
      */
     public function index()
     {
-        $product_images = ProductImage::orderBy('id', 'desc')->simplePaginate(5);
+        $product_images = $this->productImageRepository->paginate(5);
         return view('admin.product_images.index')->with(['product_images' => $product_images]);
     }
 
@@ -29,7 +41,7 @@ class ProductImageController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
+        $products = $this->productRepository->all();
         return view('admin.product_images.create')->with(['products' => $products]);
     }
 
@@ -49,14 +61,11 @@ class ProductImageController extends Controller
         ];
 
         if ($this->validate($request, $rules)) {
-            // Rename image and add timestamp
-            $image_name = time() . "_" . $request->image->getClientOriginalName();
-            // Move image to assets/img/product/ directory
-            $request->image->move(public_path($this->product_image_directory), $image_name);
-            // Create img path
-            $image_full_path = $this->product_image_directory . $image_name;
 
-            ProductImage::create([
+            $this->upload($request, $this->product_image_directory);
+            $image_full_path = $this->getImageFullPath();
+
+            $this->productImageRepository->create([
                 'product_id' => $request->product_id,
                 'image_path' => $image_full_path,
             ]);
@@ -74,7 +83,7 @@ class ProductImageController extends Controller
      */
     public function show(int $id)
     {
-        $product_image = ProductImage::findOrFail($id);
+        $product_image = $this->productImageRepository->findById($id);
         return view('admin.product_images.show')->with(['product_image' => $product_image]);
     }
 
@@ -87,8 +96,8 @@ class ProductImageController extends Controller
      */
     public function edit(int $id)
     {
-        $products = Product::all();
-        $product_image = ProductImage::findOrFail($id);
+        $products = $this->productRepository->all();
+        $product_image = $this->productImageRepository->findById($id);
         return view('admin.product_images.edit')->with([
             'product_image' => $product_image,
             'products' => $products,
@@ -102,24 +111,22 @@ class ProductImageController extends Controller
      * @param int                      $id
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, int $id)
     {
-        $product_image = ProductImage::findOrFail($id);
+        $product_image = $this->productImageRepository->findById($id);
 
         $rules = [
             'product_id' => 'required|integer',
             'image' => 'image|mimes:jpeg,png,jpg,svg|max:10240',
         ];
 
+        // TODO : need a trait or a helper function to deal with code repetitivity
         if ($this->validate($request, $rules)) {
             if (!empty($request->image)) {
-                // Rename image and add timestamp
-                $image_name = time() . "_" . $request->image->getClientOriginalName();
-                // Move image to assets/img/product/ directory
-                $request->image->move(public_path($this->product_image_directory), $image_name);
-                // Create img path
-                $image_full_path = $this->product_image_directory . $image_name;
+                $this->upload($request, $this->product_image_directory);
+                $image_full_path = $this->getImageFullPath();
             } else {
                 $image_full_path = $product_image->image_path;
             }
@@ -142,8 +149,8 @@ class ProductImageController extends Controller
      */
     public function destroy(int $id)
     {
-        $product_image = ProductImage::findOrFail($id);
+        $product_image = $this->productImageRepository->findById($id);
         $product_image->delete();
-        return redirect()->route('admin.product_images.index')->with('messsage', "Product Image : {$product_image->name} deleted.");
+        return redirect()->route('admin.product_images.index')->with('messsage', "Product Image : {$product_image->product->name} deleted.");
     }
 }

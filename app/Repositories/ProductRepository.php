@@ -5,6 +5,11 @@ use App\Models\Product;
 
 class ProductRepository {
 
+    public function all()
+    {
+        return Product::all();
+    }
+
     public function paginate(int $chunk)
     {
         // Return all products ordered by id
