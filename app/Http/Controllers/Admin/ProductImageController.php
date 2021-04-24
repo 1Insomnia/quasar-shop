@@ -71,7 +71,7 @@ class ProductImageController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.product_images.index')->with('message', "Product Image : {$request->name} added.");
+        return redirect()->route('admin.product_images.index')->with('message', "Product Image added.");
     }
 
     /**
@@ -122,7 +122,6 @@ class ProductImageController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,svg|max:10240',
         ];
 
-        // TODO : need a trait or a helper function to deal with code repetitivity
         if ($this->validate($request, $rules)) {
             if (!empty($request->image)) {
                 $this->upload($request, $this->product_image_directory);
@@ -137,7 +136,7 @@ class ProductImageController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.product_images.index')->with('message', "Product Image of product {$request->name} updated");
+        return redirect()->route('admin.product_images.index')->with('message', "Product Image of {$product_image->product->name} updated");
     }
 
     /**
@@ -151,6 +150,6 @@ class ProductImageController extends Controller
     {
         $product_image = $this->productImageRepository->findById($id);
         $product_image->delete();
-        return redirect()->route('admin.product_images.index')->with('messsage', "Product Image : {$product_image->product->name} deleted.");
+        return redirect()->route('admin.product_images.index')->with('message', "Product Image of {$product_image->product->name} deleted.");
     }
 }
