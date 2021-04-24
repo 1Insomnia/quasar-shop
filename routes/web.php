@@ -13,6 +13,7 @@ use \App\Http\Controllers\Admin\ProductController as AdminProductController;
 use \App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
 use \App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use \App\Http\Controllers\Admin\ProductImageController as AdminProductImageController;
+use \App\Http\Controllers\Admin\GalleryPostController as AdminGalleryPostController;
 
 // Import Route
 use Illuminate\Support\Facades\Route;
@@ -65,4 +66,5 @@ Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function (
     Route::resource('categories', AdminProductCategoryController::class);
     Route::resource('brands', AdminBrandController::class);
     Route::resource('product_images', AdminProductImageController::class);
+    Route::resource('gallery_posts', AdminGalleryPostController::class);
 });

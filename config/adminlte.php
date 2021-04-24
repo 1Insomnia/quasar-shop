@@ -255,6 +255,10 @@ return [
                     'text' => 'product images',
                     'url' => 'admin/product_images',
                 ],
+                [
+                    'text' => 'gallery posts',
+                    'url' => 'admin/gallery_posts',
+                ],
             ],
         ],
         ['header' => 'Main Site Nav'],

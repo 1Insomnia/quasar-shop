@@ -11,9 +11,9 @@
             </div>
         </div>
         <div class="py-12 lg:flex lg:flex-row-reverse lg:items-center lg:px-8 lg:py-24">
-            <img class="w-full object-center object-cover lg:w-4/5" src="assets/img/gallery/1.jpg" id="test">
-            <div class="text-white container px-4 lg:h-full lg:w-1/5 lg:p-4 xl:p-12">
-                <h3 class=" text-lg font-medium pt-4 md:text-xl md:pt-6 lg:text-2xl">The Green Lady</h3>
+            <img class="w-full object-center object-cover lg:w-3/4 p-12" src="{{asset("assets/img/gallery/1.jpg")}}" id="test" alt="">
+            <div class="text-white container px-4 lg:h-full lg:w-1/4 lg:p-12">
+                <h3 class="text-lg font-medium pt-4 md:text-xl md:pt-6 lg:text-2xl">The Green Lady</h3>
                 <div class="text-xs mt-4 font-light pb-4 md:text-sm md:mt-6 md:pb-6 lg:text-base lg:mt-8">
                     <p class="leading-relaxed">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus ipsam
                         architecto ab impedit, libero
