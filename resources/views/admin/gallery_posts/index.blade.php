@@ -78,8 +78,9 @@
                 @endforeach
             </table>
         </div>
-        </section>
-        <!-- Modal -->
+        {{ $gallery_posts->links() }}
+    </section>
+    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -91,7 +92,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    If you want to delete this image, click on the delete button.
+                    If you want to delete this gallery post, click on the delete button.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -111,7 +112,7 @@
             const id = e.target.dataset.id;
             const formDelete = document.querySelector("#formDelete");
 
-            formDelete.action = `product_images/${id}`;
+            formDelete.action = `gallery_posts/${id}`;
         }));
 
         const successModal = document.querySelector("#success-modal");

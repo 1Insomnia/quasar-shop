@@ -28,4 +28,23 @@ class GalleryPostRepository
     {
         return $this->model->all();
     }
+
+    public function paginate(int $chunk)
+    {
+        return $this->model->orderBy('id', 'desc')->simplePaginate($chunk);
+    }
+
+    public function findById(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    public function store(array $array){
+        $this->model->create($array);
+    }
+
+    public function destroy(int $id)
+    {
+        $this->findById($id)->delete();
+    }
 }
