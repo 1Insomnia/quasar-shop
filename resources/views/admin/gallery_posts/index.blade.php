@@ -17,11 +17,12 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
+                    <th>Gallery Post Image Preview</th>
                     <th>Gallery Post Title</th>
                     <th>Gallery Post Description</th>
                     <th>Gallery Post Gear</th>
-                    <th>Gallery Post Location</th>
                     <th>Gallery Post Author</th>
+                    <th>Gallery Post Location</th>
                     <th>Detail</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -30,17 +31,26 @@
                 @foreach ($gallery_posts as $gallery_post)
                     <tr>
                         <td>
-                            <img class="img-fluid img-thumbnail" src="{{ asset($product_image->image_path) }}" alt=""
+                            <img class="img-fluid img-thumbnail" src="{{ asset($gallery_post->image_path) }}" alt=""
                                  style="height: 200px; width: 200px; object-fit: cover;">
                         </td>
                         <td>
-                            Product Name : {{ $product_image->product->name }}
+                            {{ $gallery_post->title }}
+                        </td>
+                        <td style="max-width: 60ch;">
+                            {{ $gallery_post->description }}
                         </td>
                         <td>
-                            {{ $product_image->image_path }}
+                            {{ $gallery_post->product->name }}
                         </td>
                         <td>
-                            <a href="{{ route('admin.product_images.show', $product_image->id) }}">
+                            {{ $gallery_post->author }}
+                        </td>
+                        <td>
+                            {{ $gallery_post->location }}
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.gallery_posts.show', $gallery_post->id) }}">
                                 <button type="button" class="btn btn-block btn-primary">
                                     <i class="fas fa-info-circle pr-2"></i>
                                     Details
@@ -48,7 +58,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('admin.product_images.edit', $product_image->id) }}">
+                            <a href="{{ route('admin.gallery_posts.edit', $gallery_post->id) }}">
                                 <button type="button" class="btn btn-block btn-warning">
                                     <i class="fas fa-edit pr-2"></i>
                                     Edit
@@ -58,7 +68,7 @@
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
                                     data-target="#exampleModal"
-                                    data-id="{{ $product_image->id }}"
+                                    data-id="{{ $gallery_post->id }}"
                                     id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
@@ -68,8 +78,7 @@
                 @endforeach
             </table>
         </div>
-        {{ $product_images->links() }}
-    </section>
+        </section>
         <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

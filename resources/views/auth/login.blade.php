@@ -44,6 +44,10 @@
                                 Password
                             </label>
                         </div>
+                        <div class="mt-4">
+                            <label for="remember" id="remember">Remember me ?</label>
+                            <input type="checkbox" name="remember" id="remember">
+                        </div>
                         @error('password')
                             <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
                                 {{ $message }}*
