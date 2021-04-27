@@ -13,11 +13,18 @@ class GalleryPostController extends Controller
     use ImageUpload;
 
     private GalleryPostRepository $gallerPostRepository;
-    /**
-     * @var \App\Repositories\ProductRepository
-     */
     private ProductRepository $productRepository;
+
     private string $product_image_directory = "assets/img/gallery/";
+
+    private array $rules = [
+        'product_id' => 'required|integer',
+        'title' => 'required|max:255',
+        'description' => 'required',
+        'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:10240',
+        'author' => 'required|max:255',
+        'location' => 'required|max:255',
+    ];
 
     public function __construct(GalleryPostRepository $galleryPostRepository, ProductRepository $productRepository)
     {
@@ -61,23 +68,14 @@ class GalleryPostController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'product_id' => 'required|integer',
-            'title' => 'required|max:255',
-            'description' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:10240',
-            'author' => 'required|max:255',
-            'location' => 'required|max:255',
-        ];
-
-        $this->validate($request, $rules);
+        $this->validate($request, $this->rules);
 
         $this->upload($request, $this->product_image_directory);
         $image_full_path = $this->getImageFullPath();
 
         $this->galleryPostRepository->store([
-            'product_id' => $request->product_id,
             'title' => $request->title,
+            'product_id' => $request->product_id,
             'description' => $request->description,
             'author' => $request->author,
             'location' => $request->location,
@@ -127,10 +125,33 @@ class GalleryPostController extends Controller
      * @param int                      $id
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, int $id)
     {
-        return redirect()->route('admin.gallery_posts.index')->with('message', "Post Updated");
+        $gallery_post = $this->galleryPostRepository->findById($id);
+
+        $this->rules['image'] = 'image|mimes:jpeg,png,jpg,svg|max:10240';
+
+        $this->validate($request, $this->rules);
+
+        if (!empty($request->image)) {
+            $this->upload($request, $this->product_image_directory);
+            $image_full_path = $this->getImageFullPath();
+        } else {
+            $image_full_path = $gallery_post->image_path;
+        }
+
+        $this->galleryPostRepository->update([
+            'product_id' => $request->product_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'author' => $request->author,
+            'location' => $request->location,
+            'image_path' => $image_full_path,
+        ]);
+
+        return redirect()->route('admin.gallery_posts.index')->with('message', "Post : {$gallery_post->title} Updated");
     }
 
     /**

@@ -17,12 +17,12 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Gallery Post Image Preview</th>
-                    <th>Gallery Post Title</th>
-                    <th>Gallery Post Description</th>
-                    <th>Gallery Post Gear</th>
-                    <th>Gallery Post Author</th>
-                    <th>Gallery Post Location</th>
+                    <th>Image Preview</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Gear</th>
+                    <th>Author</th>
+                    <th>Location</th>
                     <th>Detail</th>
                     <th>Edit</th>
                     <th>Delete</th>

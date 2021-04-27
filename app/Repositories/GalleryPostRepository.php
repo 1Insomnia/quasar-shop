@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\GalleryPost;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * Class GalleryPostRepository
@@ -12,20 +11,15 @@ use JetBrains\PhpStorm\Pure;
  */
 class GalleryPostRepository
 {
-    private GalleryPost $model;
-
-    /**
-     * GalleryPostRepository constructor.
-     */
-    #[Pure] public function __construct()
+    public function __construct(GalleryPost $model)
     {
-        $this->model = new GalleryPost();
+        $this->model = $model;
     }
 
     /**
      * @return \App\Models\GalleryPost[]|\Illuminate\Database\Eloquent\Collection
      */
-    protected function all()
+    public function all()
     {
         return $this->model->all();
     }
@@ -66,8 +60,7 @@ class GalleryPostRepository
     /**
      * @param int $id
      */
-    public
-    function destroy(int $id)
+    public function destroy(int $id)
     {
         $this->findById($id)->delete();
     }

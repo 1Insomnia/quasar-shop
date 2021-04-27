@@ -2,15 +2,16 @@
 
 @section('content')
     <div class="mt-5 text-center">
-        <h1>Add a new <span class="text-info">gallery post</span></h1>
+        <h1>Edit <span class="text-info">gallery post</span></h1>
     </div>
     <div class="container mt-5" style="max-width: 790px;">
         <div class="card card-primary">
             <div class="card-header">
-                <h2 class="card-title">Add Gallery Post</h2>
+                <h2 class="card-title">Edit Gallery Post</h2>
             </div>
-            <form action="{{ route('admin.gallery_posts.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.gallery_posts.update', $gallery_post->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('PATCH')
                 <div class="card-body">
                     <div class="form-group">
                         <label for="title" class="form-label">Gallery Post Title :</label>
@@ -80,7 +81,7 @@
                     </div>
                     <div class="card-footer bg-white pl-0 ">
                         <button class="btn btn-primary btn-lg" type="submit">
-                            Add Gallery Post
+                            Edit Gallery Post
                         </button>
                     </div>
                 </div>
