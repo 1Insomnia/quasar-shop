@@ -18,8 +18,7 @@
                     <form action="{{ route('logout') }}" method="post" class="m-0">
                         @csrf
                         <button class="px-4 py-2 border border-transparent hover:text-primary-dark hover:border-primary-dark
-                        inline-block"
-                                type="submit">
+                            inline-block" type="submit">
                             Logout
                         </button>
                     </form>

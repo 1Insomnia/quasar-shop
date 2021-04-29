@@ -5,7 +5,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Site\CameraController;
+use App\Http\Controllers\Site\GalleryPostController;
 use App\Http\Controllers\Site\LenseController;
+use App\Http\Controllers\Site\ProductController;
 
 // Import Admin Controllers
 use \App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -13,6 +15,8 @@ use \App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategor
 use \App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use \App\Http\Controllers\Admin\ProductImageController as AdminProductImageController;
 use \App\Http\Controllers\Admin\GalleryPostController as AdminGalleryPostController;
+use \App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use \App\Http\Controllers\Admin\ChangePassword as AdminChangePasswordController;
 
 // Import Route
 use Illuminate\Support\Facades\Route;
@@ -36,9 +40,7 @@ Route::get('/contact', function () {
     return view('site.contact');
 })->name('contact');
 
-Route::get('/gallery', function () {
-    return view('site.gallery');
-})->name('gallery');
+Route::get('/gallery', GalleryPostController::class)->name('gallery');
 
 // Login Page
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -66,4 +68,8 @@ Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function (
     Route::resource('brands', AdminBrandController::class);
     Route::resource('product_images', AdminProductImageController::class);
     Route::resource('gallery_posts', AdminGalleryPostController::class);
+    Route::resource('profile', AdminProfileController::class);
+    Route::resource('password', AdminChangePasswordController::class)->only([
+        'index', 'update'
+    ]);
 });

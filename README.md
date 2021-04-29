@@ -22,14 +22,7 @@ php artisan serve
   - SwiperJS
 
 ## TODOS 
-- Admin: 
-  - Products :
-      - [ ] : Add image upload functionality for store method
-      - [ ] : Add show method
-      - [ ] : Add destroy
-  - Brands: 
-    - [ ] : Create Controller
-    - [ ] : Create Views
-  - Categories: 
-    - [ ] : Create Controller
-    - [ ] : Create Views
+
+- Admin 
+  - [ ] : refactor AdminProductController
+    ( add ImageUpload trait, use repository)

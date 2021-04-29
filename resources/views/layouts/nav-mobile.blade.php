@@ -31,6 +31,13 @@
                 Contact
             </a>
         </li>
+        <li>
+            <a class="@if (request()->is('contact')) line-through @endif
+                text-4xl text-primary-dark hover:underline md:text-6xl"
+                href="{{ route('contact') }}">
+                Account
+            </a>
+        </li>
     </ul>
     @guest
         <div class="mt-2 text-center">

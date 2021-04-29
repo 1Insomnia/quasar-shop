@@ -15,4 +15,9 @@ class ProductRepository {
         // Return all products ordered by id
         return Product::orderBy('id', 'desc')->simplePaginate($chunk);
     }
+
+    public function find(int $id)
+    {
+        return Product::findOrFail($id);
+    }
 }

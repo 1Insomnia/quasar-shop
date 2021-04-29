@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Repositories\ProductImageRepository;
-use App\Repositories\ProductRepository;
 use App\Traits\ImageUpload;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Repositories\ProductRepository;
+use App\Repositories\ProductImageRepository;
 
 
 class ProductImageController extends Controller
@@ -149,7 +149,9 @@ class ProductImageController extends Controller
     public function destroy(int $id)
     {
         $product_image = $this->productImageRepository->findById($id);
+        $this->deleteImage($product_image->image_path);
         $product_image->delete();
+
         return redirect()->route('admin.product_images.index')->with('message', "Product Image of {$product_image->product->name} deleted.");
     }
 }
