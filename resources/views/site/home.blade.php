@@ -12,9 +12,9 @@
                     Quasar Optic
                 </h1>
                 <p class="text-sm mt-4 lg:mt-8 md:text-xl xl:text-3xl">
-                    <a href="cameras" class="underline hover:opacity-80">Cameras</a>
+                    <a href="{{ route('cameras') }}" class="underline hover:opacity-80">Cameras</a>
                     and
-                    <a href="lenses" class="underline hover:opacity-80">Lenses</a>
+                    <a href="{{ route('lenses') }}" class="underline hover:opacity-80">Lenses</a>
                     for Astrophotographers
                 </p>
                 <p class="text-sm mt-2 lg:mt-4 md:text-xl">
@@ -27,7 +27,7 @@
     <!-- Cameras Section -->
     <section id="home-cameras">
         <div class="container px-5 py-24 lg:flex lg:items-center lg:justify-between lg:py-32">
-            <img class="lg:w-1/2" src="assets/img/home/camera.jpg" alt="camera picture" />
+            <img class="lg:w-1/2" src="{{ asset(" assets/img/home/camera.jpg") }}" alt="camera picture" />
             <div class="flex flex-col items-center justify-center lg:w-1/2">
                 <h2 class="mt-8 font-bold text-3xl md:text-4xl lg:text-6xl">
                     Cameras
@@ -37,17 +37,17 @@
                     sensor and dynamic range.
                 </p>
                 <div class="mt-2 flex items-center space-x-6 md:mt-6">
-                    <img class="w-16" src="assets/img/brands/Nikon.png" alt="Nikon Brand Logo" />
-                    <img class="w-16" src="assets/img/brands/Canon.png" alt="Canon Brand Logo" />
+                    <img class="w-16" src="{{ asset("assets/img/brands/Nikon.png") }}" alt="Nikon Brand Logo" />
+                    <img class="w-16" src="{{ asset("assets/img/brands/Canon.png") }}" alt="Canon Brand Logo" />
                 </div>
-                <a class="mt-6 btn-dark-xl" href="cameras">Our Selection</a>
+                <a class="mt-6 btn-dark-xl" href="{{ route('cameras') }}">Our Selection</a>
             </div>
         </div>
     </section>
     <!-- Lenses Section -->
     <section id="home-lenses">
         <div class="container px-5 py-24 lg:flex lg:flex-row-reverse lg:items-center lg:justify-between lg:py-32">
-            <img class="lg:w-1/2" src="assets/img/home/lens.png" alt="lense picture" />
+            <img class="lg:w-1/2" src="{{ asset("assets/img/home/lens.png") }}" alt="lense picture" />
             <div class="flex flex-col items-center justify-center lg:w-1/2">
                 <h2 class="mt-8 font-bold text-3xl md:text-4xl lg:text-6xl">
                     Lenses
@@ -57,9 +57,9 @@
                     vignetting.
                 </p>
                 <div class="mt-2 flex items-center space-x-6 md:mt-6">
-                    <img class="w-16" style="filter: invert(1)" src="assets/img/brands/Irix.png" alt="Irix Brand Logo" />
+                    <img class="w-16" style="filter: invert(1)" src="{{ asset("assets/img/brands/Irix.png") }}" alt="Irix Brand Logo" />
                 </div>
-                <a class="mt-6 btn-dark-xl" href="lenses">Our Selection</a>
+                <a class="mt-6 btn-dark-xl" href="{{ route('lenses') }}">Our Selection</a>
             </div>
         </div>
     </section>

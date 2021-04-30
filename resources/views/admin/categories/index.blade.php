@@ -87,6 +87,8 @@
             </div>
         </div>
     </div>
+@stop
+@section('js')
     <script>
         const btnDelete = document.querySelectorAll("#btnDelete");
 

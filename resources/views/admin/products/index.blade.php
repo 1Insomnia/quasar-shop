@@ -103,6 +103,9 @@
             </div>
         </div>
     </div>
+    {{ $products->links() }}
+@stop
+@section('js')
     <script>
         const btnDelete = document.querySelectorAll("#btnDelete");
         const formDelete = document.querySelector("#formDelete");
@@ -112,5 +115,4 @@
             formDelete.action = `products/${id}`;
         }));
     </script>
-    {{ $products->links() }}
 @stop

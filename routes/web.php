@@ -1,9 +1,12 @@
 <?php
 
-// Site Controllers
+// Auth Controller
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+
+// Site Controllers
+use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\CameraController;
 use App\Http\Controllers\Site\GalleryPostController;
 use App\Http\Controllers\Site\LenseController;
@@ -57,6 +60,9 @@ Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
 
 // Product Details Page
 Route::resource('products', ProductController::class);
+
+// Cart Controller
+Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'store', 'update', 'destroy']);
 
 // Admin
 Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function () {

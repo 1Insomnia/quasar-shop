@@ -68,7 +68,7 @@
         </div>
         {{ $product_images->links() }}
     </section>
-        <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -93,6 +93,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
     <script>
         const btnDelete = document.querySelectorAll("#btnDelete");
 
@@ -105,4 +107,4 @@
 
         const successModal = document.querySelector("#success-modal");
     </script>
-@endsection
+@stop
