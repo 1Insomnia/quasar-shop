@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-@stop
+@endsection
 @section('js')
     <script>
         const btnDelete = document.querySelectorAll("#btnDelete");
@@ -98,4 +98,4 @@
             formDelete.action = `brands/${id}`;
         }));
     </script>
-@stop
+@endsection

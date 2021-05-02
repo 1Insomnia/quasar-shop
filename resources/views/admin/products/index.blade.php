@@ -104,7 +104,7 @@
         </div>
     </div>
     {{ $products->links() }}
-@stop
+@endsection
 @section('js')
     <script>
         const btnDelete = document.querySelectorAll("#btnDelete");
@@ -115,4 +115,4 @@
             formDelete.action = `products/${id}`;
         }));
     </script>
-@stop
+@endsection

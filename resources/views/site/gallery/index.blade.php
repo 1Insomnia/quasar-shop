@@ -40,4 +40,4 @@
             </article>
         @endforeach
     </section>
-@stop
+@endsection

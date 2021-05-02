@@ -77,7 +77,7 @@
                     <hr class="pb-6 mt-6">
                     <div class="my-4 mt-6 -mx-2 lg:flex">
                         <div class="lg:px-2 lg:w-full">
-                            <div class="p-4 bg-gray-100 rounded-full">
+                            <div class="p-4 bg-gray-100">
                                 <h1 class="ml-2 font-bold uppercase">Order Details</h1>
                             </div>
                             <div class="p-4">

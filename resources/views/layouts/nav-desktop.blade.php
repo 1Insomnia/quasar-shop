@@ -21,4 +21,11 @@
             Contact
         </a>
     </li>
+    @auth('is_admin')
+        <li>
+            <a class="relative block hover:text-primary-dark" href="{{ route('admin.dashboard') }}">
+                Admin
+            </a>
+        </li>
+    @endauth
 </ul>

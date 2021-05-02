@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-@stop
+@endsection
 
 @section('content')
     <section>
@@ -31,13 +31,13 @@
             </div>
         </div>
     </section>
-@stop
+@endsection
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+@endsection
 
 @section('js')
     <script>
     </script>
-@stop
+@endsection

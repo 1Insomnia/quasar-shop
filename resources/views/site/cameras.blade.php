@@ -83,7 +83,7 @@
             </div>
         </div>
     </div>
-@stop
+@endsection
 @push('javascript')
     <script defer>
         const orderNow = document.querySelectorAll("#orderNow");

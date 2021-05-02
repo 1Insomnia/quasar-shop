@@ -4,12 +4,12 @@
 
 @section('content_header')
 
-@stop
+@endsection
 
 @section('content')
-@stop
+@endsection
 
 @section('js')
     <script>
     </script>
-@stop
+@endsection

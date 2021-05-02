@@ -107,4 +107,4 @@
 
         const successModal = document.querySelector("#success-modal");
     </script>
-@stop
+@endsection

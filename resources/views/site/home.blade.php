@@ -27,7 +27,7 @@
     <!-- Cameras Section -->
     <section id="home-cameras">
         <div class="container px-5 py-24 lg:flex lg:items-center lg:justify-between lg:py-32">
-            <img class="lg:w-1/2" src="{{ asset(" assets/img/home/camera.jpg") }}" alt="camera picture" />
+            <img class="lg:w-1/2" src="{{ asset("assets/img/home/camera.jpg") }}" alt="camera picture" />
             <div class="flex flex-col items-center justify-center lg:w-1/2">
                 <h2 class="mt-8 font-bold text-3xl md:text-4xl lg:text-6xl">
                     Cameras
@@ -57,7 +57,7 @@
                     vignetting.
                 </p>
                 <div class="mt-2 flex items-center space-x-6 md:mt-6">
-                    <img class="w-16" style="filter: invert(1)" src="{{ asset("assets/img/brands/Irix.png") }}" alt="Irix Brand Logo" />
+                    <img class="w-16" style="filter: invert(1);" src="{{ asset("assets/img/brands/Irix.png") }}" alt="Irix Brand Logo" />
                 </div>
                 <a class="mt-6 btn-dark-xl" href="{{ route('lenses') }}">Our Selection</a>
             </div>
@@ -87,4 +87,4 @@
             </div>
         </div>
     </section>
-@stop
+@endsection

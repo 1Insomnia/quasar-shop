@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-@stop
+@endsection
 @section('js')
     <script>
         const btnDelete = document.querySelectorAll("#btnDelete");
@@ -105,4 +105,4 @@
 
         const successModal = document.querySelector("#success-modal");
     </script>
-@stop
+@endsection

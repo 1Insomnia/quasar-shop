@@ -11,6 +11,8 @@ use App\Http\Controllers\Site\CameraController;
 use App\Http\Controllers\Site\GalleryPostController;
 use App\Http\Controllers\Site\LenseController;
 use App\Http\Controllers\Site\ProductController;
+use App\Http\Controllers\Site\CheckoutController;
+use App\Http\Controllers\Site\UserController;
 
 // Import Admin Controllers
 use \App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -50,19 +52,22 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'post']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-// Register Page
+// Register Controller
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-// Cameras and Lenses
+// Cameras Controller
 Route::get('/cameras', [CameraController::class, 'index'])->name('cameras');
+// Lenses Controller
 Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
-
 // Product Details Page
 Route::resource('products', ProductController::class);
-
 // Cart Controller
 Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'store', 'update', 'destroy']);
+// Checkout Controller
+Route::resource('checkout', CheckoutController::class)->middleware('auth');
+// User Controller
+Route::resource('profile', UserController::class)->middleware('auth');
 
 // Admin
 Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function () {
