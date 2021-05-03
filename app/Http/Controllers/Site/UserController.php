@@ -3,10 +3,22 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    /**
+     * @var \App\Repositories\UserRepository
+     */
+    private UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+
+        $this->userRepository = $userRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,11 +54,13 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        $user = $this->userRepository->find($id);
+        return view('site.user.show')->with(['user' => $user]);
     }
 
     /**

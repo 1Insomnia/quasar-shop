@@ -123,12 +123,13 @@
 
         function dispatchContinue() {
             modalCheckout.classList.add('hidden');
-            location.reload();
+            // location.reload();
         }
 
         function dispatchCheckout() {
             modalCheckout.classList.add('hidden');
-            location = "cart";
+            window.location = "cart";
         }
+
     </script>
 @endpush

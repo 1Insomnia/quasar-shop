@@ -25,7 +25,7 @@
             @foreach ($lenses as $lens)
                 <article
                     class="p-8 transform duration-500 ease-in-out hover:scale-105 lg:hover:shadow-xl hover:z-30 transition">
-                    <img class="mb-4" src="{{ $lens->image_path }}">
+                    <img class="mb-4" src="{{ $lens->image_path }}" alt="Lenses">
                     <div>
                         <h3 class="text-xl font-semibold mb-2">
                             {{ $lens->name }}

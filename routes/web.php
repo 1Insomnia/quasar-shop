@@ -63,7 +63,7 @@ Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
 // Product Details Page
 Route::resource('products', ProductController::class);
 // Cart Controller
-Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'store', 'update', 'destroy']);
+Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'show', 'store', 'update', 'destroy']);
 // Checkout Controller
 Route::resource('checkout', CheckoutController::class)->middleware('auth');
 // User Controller
