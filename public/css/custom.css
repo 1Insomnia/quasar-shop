@@ -8,6 +8,7 @@
     z-index: 999;
 }
 
+#tabLinks::after,
 #header-icons div a span::after,
 .brand-logo::after,
 #nav-list-desktop a::after {
@@ -31,6 +32,12 @@
     bottom: calc(-50% + 8px);
 }
 
+#tabLinks::after {
+    bottom: -6px;
+}
+
+#tabLinks:hover::after,
+#tabLinks:focus::after,
 #header-icons div a:hover span::after,
 .brand-logo:hover::after,
 #nav-list-desktop a:hover::after {
@@ -47,7 +54,7 @@
 
 .nav-open #nav-mobile-list a {
     animation: navLinkFade 0.5s ease forwards;
-  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-fill-color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: var(--primary-dark);
 }
