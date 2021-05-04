@@ -32,6 +32,7 @@
                     </a>
                 @endguest
             </div>
+            @auth
             <a class="relative hidden lg:block hover:text-primary-dark lg:flex lg:items-center lg:justify-between"
                href="{{ route('profile.show', auth()->user()->id) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="block h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -49,6 +50,7 @@
                 </svg>
                 <x-card-quantity></x-card-quantity>
             </a>
+            @endauth
             <div class="burger burger-slip ml-4" id="nav-toggle">
                 <div class="burger-lines"></div>
             </div>

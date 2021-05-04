@@ -8,6 +8,8 @@
     z-index: 999;
 }
 
+#btnShippingInfos::after,
+#btnCustomerInfos::after,
 #tabLinks::after,
 #header-icons div a span::after,
 .brand-logo::after,
@@ -36,6 +38,14 @@
     bottom: -6px;
 }
 
+.active #btnShippingInfos::after,
+.active #btnCustomerInfos::after,
+#btnShippingInfos.active::after,
+#btnCustomerInfos.active::after,
+#btnShippingInfos:hover::after,
+#btnCustomerInfos:hover::after,
+#btnShippingInfos:focus::after,
+#btnCustomerInfos:focus::after,
 #tabLinks:hover::after,
 #tabLinks:focus::after,
 #header-icons div a:hover span::after,
@@ -54,9 +64,9 @@
 
 .nav-open #nav-mobile-list a {
     animation: navLinkFade 0.5s ease forwards;
-  -webkit-text-fill-color: white;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: var(--primary-dark);
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: var(--primary-dark);
 }
 
 .burger {
@@ -181,12 +191,12 @@
 }
 
 @keyframes navLinkFade {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0px);
-  }
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }

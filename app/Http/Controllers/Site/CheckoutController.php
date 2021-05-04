@@ -3,30 +3,18 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class CheckoutController extends Controller
 {
-    /**
-     * @var \App\Repositories\UserRepository
-     */
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-
-        $this->userRepository = $userRepository;
-    }
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        return view('site.checkout.index');
     }
 
     /**
@@ -54,14 +42,11 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
-        $user = $this->userRepository->find($id);
-        return view('site.user.show')
-            ->with(['user' => $user]);
+        //
     }
 
     /**
@@ -70,11 +55,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id)
+    public function edit($id)
     {
-        $user = $this->userRepository->find($id);
-        return view('site.user.edit')
-            ->with(['user' => $user]);
+        //
     }
 
     /**

@@ -6,25 +6,25 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 
 // Site Controllers
-use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\CameraController;
+use App\Http\Controllers\Site\CartController;
+use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\GalleryPostController;
 use App\Http\Controllers\Site\LenseController;
 use App\Http\Controllers\Site\ProductController;
-use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\UserController;
 
 // Import Admin Controllers
-use \App\Http\Controllers\Admin\ProductController as AdminProductController;
-use \App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
+use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\BrandController as AdminBrandController;
-use \App\Http\Controllers\Admin\ProductImageController as AdminProductImageController;
-use \App\Http\Controllers\Admin\GalleryPostController as AdminGalleryPostController;
-use \App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use \App\Http\Controllers\Admin\ChangePassword as AdminChangePasswordController;
+use \App\Http\Controllers\Admin\GalleryPostController as AdminGalleryPostController;
+use \App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
+use \App\Http\Controllers\Admin\ProductController as AdminProductController;
+use \App\Http\Controllers\Admin\ProductImageController as AdminProductImageController;
 
 // Import Route
-use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
