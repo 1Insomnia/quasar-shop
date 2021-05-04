@@ -4,13 +4,15 @@
 @section('content')
     <section class="min-h-screen text-neutral-dark">
         <div class="container px-5 h-full">
-            <div class="h-full md:flex md:items-center md:justify-center">
-                <form class="w-full overflow-hidden space-y-8 max-w-2xl md:px-12 md:py-8 md:shadow-xl md:space-y-12"
+            <div class="h-full">
+                <form class="h-full w-full overflow-hidden space-y-8 max-w-2xl md:px-12 md:py-8 md:shadow-xl md:space-y-12"
                     method="POST" action="{{ route('user.update_password.update', auth()->user()->id) }}">
                     @method('PATCH')
                     @csrf
-                    <div class="text-center pt-4">
-                        <h1 class="mt-2 text-xl font-medium md:mt-4">Update Password</h1>
+                    <div class="">
+                        <h1 class="text-primary-dark mt-2 text-xl font-medium md:mt-4">
+                            Update Password
+                        </h1>
                     </div>
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
