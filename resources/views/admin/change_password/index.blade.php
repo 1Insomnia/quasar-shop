@@ -7,7 +7,6 @@
                     <div class="card-header">
                         Change Password
                     </div>
-
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.password.update', $user_id) }}">
                             @csrf
@@ -36,7 +35,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">New Confirm
+                                <label for="new_confirm_password" class="col-md-4 col-form-label text-md-right">New Confirm
                                     Password</label>
 
                                 <div class="col-md-6">

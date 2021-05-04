@@ -1,30 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Site;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 
-class ChangePassword extends Controller
+class UpdatePasswordController extends Controller
 {
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return view
      */
-    public function index()
+    public function edit(int $id)
     {
-        $user_id = auth()->user()->id;
-        // User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-        return view('admin.change_password.index')
-            ->with(['user_id' => $user_id]);
+        return view('site.update_password.edit');
     }
 
-    /**
+       /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,11 +40,11 @@ class ChangePassword extends Controller
             'new_confirm_password' => ['same:new_password'],
         ]);
 
-        $user = User::findOrFail($id);
+        $user = $this->userRepository->find($id);
         $user->update([
             'password' => Hash::make($request->new_password),
         ]);
 
-        return redirect()->route('admin.profile.index')->with('message', 'Password updated');
+        return redirect()->route('user.profile.show', $user->id)->with('message', 'Password updated');
     }
 }

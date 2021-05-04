@@ -13,6 +13,8 @@ use App\Http\Controllers\Site\GalleryPostController;
 use App\Http\Controllers\Site\LenseController;
 use App\Http\Controllers\Site\ProductController;
 use App\Http\Controllers\Site\UserController;
+use App\Http\Controllers\Site\UpdatePasswordController;
+
 
 // Import Admin Controllers
 use Illuminate\Support\Facades\Route;
@@ -67,7 +69,6 @@ Route::resource('cart', CartController::class)->middleware('auth')->only(['index
 // Checkout Controller
 Route::resource('checkout', CheckoutController::class)->middleware('auth');
 // User Controller
-Route::resource('profile', UserController::class)->middleware('auth');
 
 // Admin
 Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function () {
@@ -83,4 +84,9 @@ Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function (
     Route::resource('password', AdminChangePasswordController::class)->only([
         'index', 'update'
     ]);
+});
+
+Route::prefix('user')->middleware('auth')->name('user.')->group(function () {
+    Route::resource('profile', UserController::class);
+    Route::resource('update_password', UpdatePasswordController::class)->only(['edit', 'update']);
 });

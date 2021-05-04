@@ -5,10 +5,9 @@
 @section('content')
     <section class="h-screen text-neutral-dark">
         <div class="container px-5 h-full">
-
             <div class="h-full flex items-center justify-center">
                 <form class="w-full overflow-hidden space-y-8 max-w-xl md:px-12 md:py-8 md:shadow-xl md:space-y-12"
-                      method="post" action="{{ route('login') }}">
+                    method="post" action="{{ route('login') }}">
                     @csrf
                     <div class="text-center pt-4">
                         <h2 class="font-alt text-3xl text-primary-dark">Quasar Optic</h2>
@@ -21,16 +20,16 @@
                     </div>
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="email" name="email" placeholder=" " autofocus="email" autocomplete="email" id="email"
-                                   value="{{ old('email') }}"
-                                   class="block p-4 w-full text-lg appearance-none focus:outline-none bg-transparent
-                                                                        @error('email') border border-error-default @enderror"/>
+                            <input type="email" name="email" placeholder=" " autofocus="email" autocomplete="email"
+                                id="email" value="{{ old('email') }}"
+                                class="block p-4 w-full text-lg appearance-none focus:outline-none bg-transparent
+                                                                            @error('email') border border-error-default @enderror" />
                             <label for="email" class="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0">
                                 Email
                             </label>
                         </div>
                         @error('email')
-                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
                                 {{ $message }}*
                             </span>
                         @enderror
@@ -38,15 +37,14 @@
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
                             <input type="password" name="password" placeholder=" " id="password"
-                                   class="block p-4 w-full text-lg appearance-none focus:outline-none bg-transparent
-                                                                        @error('password') border border-error-default @enderror"/>
-                            <label for="password"
-                                   class="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0">
+                                class="block p-4 w-full text-lg appearance-none focus:outline-none bg-transparent
+                                                                            @error('password') border border-error-default @enderror" />
+                            <label for="password" class="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0">
                                 Password
                             </label>
                         </div>
                         @error('password')
-                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
                                 {{ $message }}*
                             </span>
                         @enderror

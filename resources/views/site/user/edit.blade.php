@@ -7,7 +7,7 @@
         <div class="container px-5 h-screen">
             <div class="py-12 lg:py-24">
                 <form class="w-full overflow-hidden max-w-2xl md:px-12 md:py-8 md:shadow-xl mx-auto" method="POST"
-                    action="{{ route('profile.update', auth()->user()->id) }}">
+                    action="{{ route('user.profile.update', auth()->user()->id) }}">
                     @method('PATCH')
                     @csrf
                     <div class="text-left pt-4">
