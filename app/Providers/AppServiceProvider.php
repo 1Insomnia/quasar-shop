@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -32,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
                 'cartTotal' => Cart::total(),
             ]);
         });
+        Cashier::useSubscriptionModel(Subscription::class);
+        Cashier::useSubscriptionItemModel(SubscriptionItem::class);
     }
 }

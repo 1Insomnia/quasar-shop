@@ -70,6 +70,10 @@ Route::resource('cart', CartController::class)->middleware('auth')->only(['index
 Route::resource('checkout', CheckoutController::class)->middleware('auth');
 // User Controller
 
+Route::get('/billing-portal', function (Request $request) {
+    return auth()->user()->redirectToBillingPortal();
+});
+
 // Admin
 Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function () {
     Route::get(('dashboard'), function () {

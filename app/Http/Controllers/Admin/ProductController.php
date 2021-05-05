@@ -44,11 +44,12 @@ class ProductController extends Controller
         $products = Product::all();
         $categories = \App\Models\ProductCategory::all();
         $brands = \App\Models\Brand::all();
+
         return view('admin.products.create')->with([
             "products" => $products,
             "categories" => $categories,
             "brands" => $brands,
-            ]);
+        ]);
     }
 
     /*

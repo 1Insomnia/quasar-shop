@@ -2,163 +2,176 @@
 @section('title', 'User - Personnal Information')
 
 @section('content')
+    <div class="container px-5 mt-12 mb-6">
+        <h1 class="font-bold text-3xl md:text-4xl lg:text-6xl">
+            <a href="{{ route('user.profile.show', auth()->user()->id) }}">
+                My Profile
+            </a>
+        </h1>
+        <div class="mt-8 flex items-center space-x-4">
+            <img class="w-16 h-16 rounded-full" src="{{ asset('assets/img/user.png') }}" alt="" id="profileImage">
+            <div>
+                <p class="font-semibold">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</p>
+                <p class="text-neutral-light">{{ auth()->user()->email }}</p>
+            </div>
+        </div>
+    </div>
     <section>
-        <div class="container px-5 h-screen">
-            <div class="py-12 lg:py-24">
-                <form class="w-full overflow-hidden max-w-2xl md:px-12 md:py-8 md:shadow-xl mx-auto lg:mx-0" method="POST"
-                      action="{{ route('user.profile.update', auth()->user()->id) }}">
-                    @method('PATCH')
-                    @csrf
-                    <div class="text-left pt-4">
-                        <h2 class="text-3xl text-primary-dark">Personal Informations</h2>
-                        <h1 class="mt-2 font-medium md:mt-6">Edit - Your Informations</h1>
-                    </div>
-                    <div class="flex items-center space-x-4 mt-2 py-6">
-                        <button
-                            class="relative text-sm inline-block text-primary-dark outline-none focus:outline-none active"
-                            type="button" role="button" id="btnCustomerInfos">
-                            Customer Informations
-                        </button>
-                        <button class="relative text-sm inline-block text-primary-dark outline-none focus:outline-none"
-                                type="button" role="button" id="btnShippingInfos">
-                            Shipping Address
-                        </button>
-                    </div>
-                    <div class="space-y-8 py-4" id="customerInfos">
-                        <div>
-                            <div class="outline relative border-2 focus-within:border-primary-dark">
-                                <input type="email" name="email" placeholder=" " id="email"
-                                       class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('email') border border-error-default @enderror"
-                                       value="{{ $user->email }}"/>
-                                <label for="email" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
-                                    Email
-                                </label>
-                            </div>
-                            @error('email')
-                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+        <div class="container px-5 min-h-screen py-12">
+            <form class="w-full overflow-hidden space-y-8 max-w-2xl md:px-12 md:py-8 md:shadow-xl md:space-y-12"
+                  method="POST"
+                  action="{{ route('user.profile.update', auth()->user()->id) }}">
+                @method('PATCH')
+                @csrf
+                <div class="text-left pt-4">
+                    <h2 class="text-3xl text-primary-dark">Personal Informations</h2>
+                    <h1 class="mt-2 font-medium md:mt-6">Edit - Your Informations</h1>
+                </div>
+                <div class="flex items-center space-x-4 mt-2 py-6">
+                    <button
+                        class="relative text-sm inline-block text-primary-dark outline-none focus:outline-none active"
+                        type="button" role="button" id="btnCustomerInfos">
+                        Customer Informations
+                    </button>
+                    <button class="relative text-sm inline-block text-primary-dark outline-none focus:outline-none"
+                            type="button" role="button" id="btnShippingInfos">
+                        Shipping Address
+                    </button>
+                </div>
+                <div class="space-y-8 py-4" id="customerInfos">
+                    <div>
+                        <div class="outline relative border-2 focus-within:border-primary-dark">
+                            <input type="email" name="email" placeholder=" " id="email"
+                                   class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('email') border border-error-default @enderror"
+                                   value="{{ $user->email }}"/>
+                            <label for="email" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
+                                Email
+                            </label>
+                        </div>
+                        @error('email')
+                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
                                     {{ $message }}*
                                 </span>
-                            @enderror
-                        </div>
-                        <div>
-                            <div class="outline relative border-2 focus-within:border-primary-dark">
-                                <input type="text" name="first_name" placeholder=" " id="first_name"
-                                       class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('first_name') border border-error-default @enderror"
-                                       value="{{ $user->first_name }}"/>
-                                <label for="first_name" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
-                                    First Name
-                                </label>
-                            </div>
-                            @error('first_name')
-                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
-                                    {{ $message }}*
-                                </span>
-                            @enderror
-                        </div>
-                        <div>
-                            <div class="outline relative border-2 focus-within:border-primary-dark">
-                                <input type="text" name="last_name" placeholder=" " id="last_name"
-                                       class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('last_name') border border-error-default @enderror"
-                                       value="{{ $user->last_name }}"/>
-                                <label for="last_name" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
-                                    Last Name
-                                </label>
-                            </div>
-                            @error('last_name')
-                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
-                                    {{ $message }}*
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="hidden space-y-8 py-4" id="shippingInfos">
-                        <div>
-                            <div class="outline relative border-2 focus-within:border-primary-dark">
-                                <input type="text" name="address" placeholder=" " id="address"
-                                       class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('address') border border-error-default @enderror"
-                                       value="{{ $user->address }}"/>
-                                <label for="address" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
-                                    Address
-                                </label>
-                            </div>
-                            @error('address')
-                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
-                                    {{ $message }}*
-                                </span>
-                            @enderror
-                        </div>
-                        <div>
-                            <div class="outline relative border-2 focus-within:border-primary-dark">
-                                <input type="text" name="zipcode" placeholder=" " id="zipcode"
-                                       class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('zipcode') border border-error-default @enderror"
-                                       value="{{ $user->zipcode }}"/>
-                                <label for="zipcode" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
-                                    Zipcode
-                                </label>
-                            </div>
-                            @error('zipcode')
-                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
-                                    {{ $message }}*
-                                </span>
-                            @enderror
-                        </div>
-                        <div>
-                            <div class="outline relative border-2 focus-within:border-primary-dark">
-                                <input type="text" name="city" placeholder=" " id="city"
-                                       class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('city') border border-error-default @enderror"
-                                       value="{{ $user->city }}"/>
-                                <label for="city" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
-                                    City
-                                </label>
-                            </div>
-                            @error('city')
-                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
-                                    {{ $message }}*
-                                </span>
-                            @enderror
-                        </div>
-                        <div>
-                            <div class="outline relative border-2 focus-within:border-primary-dark">
-                                <input type="text" name="country" placeholder=" " id="country"
-                                       class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('country') border border-error-default @enderror"
-                                       value="{{ $user->country }}"/>
-                                <label for="country" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
-                                    Country
-                                </label>
-                            </div>
-                            @error('country')
-                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
-                                    {{ $message }}*
-                                </span>
-                            @enderror
-                        </div>
-                        <div>
-                            <div class="outline relative border-2 focus-within:border-primary-dark">
-                                <input type="text" name="phone" placeholder=" " id="phone"
-                                       class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('phone') border border-error-default @enderror"
-                                       value="{{ $user->phone }}"/>
-                                <label for="phone" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
-                                    Phone
-                                </label>
-                            </div>
-                            @error('phone')
-                            <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
-                                    {{ $message }}*
-                                </span>
-                            @enderror
-                        </div>
+                        @enderror
                     </div>
                     <div>
-                        <div>
-                            <button
-                                class="uppercase w-full inline-block px-4 py-4 mt-8 font-semibold text-white transition duration-500 ease-in-out transform border border-neutral-dark bg-neutral-dark hover:bg-white hover:text-neutral-dark  focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2"
-                                type="submit">
-                                Update Infos
-                            </button>
+                        <div class="outline relative border-2 focus-within:border-primary-dark">
+                            <input type="text" name="first_name" placeholder=" " id="first_name"
+                                   class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('first_name') border border-error-default @enderror"
+                                   value="{{ $user->first_name }}"/>
+                            <label for="first_name" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
+                                First Name
+                            </label>
                         </div>
+                        @error('first_name')
+                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                                    {{ $message }}*
+                                </span>
+                        @enderror
                     </div>
-                </form>
-            </div>
+                    <div>
+                        <div class="outline relative border-2 focus-within:border-primary-dark">
+                            <input type="text" name="last_name" placeholder=" " id="last_name"
+                                   class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('last_name') border border-error-default @enderror"
+                                   value="{{ $user->last_name }}"/>
+                            <label for="last_name" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
+                                Last Name
+                            </label>
+                        </div>
+                        @error('last_name')
+                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                            {{ $message }}*
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="hidden space-y-8 py-4" id="shippingInfos">
+                    <div>
+                        <div class="outline relative border-2 focus-within:border-primary-dark">
+                            <input type="text" name="address" placeholder=" " id="address"
+                                   class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('address') border border-error-default @enderror"
+                                   value="{{ $user->address }}"/>
+                            <label for="address" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
+                                Address
+                            </label>
+                        </div>
+                        @error('address')
+                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                            {{ $message }}*
+                        </span>
+                        @enderror
+                    </div>
+                    <div>
+                        <div class="outline relative border-2 focus-within:border-primary-dark">
+                            <input type="text" name="zipcode" placeholder=" " id="zipcode"
+                                   class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('zipcode') border border-error-default @enderror"
+                                   value="{{ $user->zipcode }}"/>
+                            <label for="zipcode" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
+                                Zipcode
+                            </label>
+                        </div>
+                        @error('zipcode')
+                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                                    {{ $message }}*
+                                </span>
+                        @enderror
+                    </div>
+                    <div>
+                        <div class="outline relative border-2 focus-within:border-primary-dark">
+                            <input type="text" name="city" placeholder=" " id="city"
+                                   class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('city') border border-error-default @enderror"
+                                   value="{{ $user->city }}"/>
+                            <label for="city" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
+                                City
+                            </label>
+                        </div>
+                        @error('city')
+                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                                    {{ $message }}*
+                                </span>
+                        @enderror
+                    </div>
+                    <div>
+                        <div class="outline relative border-2 focus-within:border-primary-dark">
+                            <input type="text" name="country" placeholder=" " id="country"
+                                   class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('country') border border-error-default @enderror"
+                                   value="{{ $user->country }}"/>
+                            <label for="country" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
+                                Country
+                            </label>
+                        </div>
+                        @error('country')
+                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                                    {{ $message }}*
+                                </span>
+                        @enderror
+                    </div>
+                    <div>
+                        <div class="outline relative border-2 focus-within:border-primary-dark">
+                            <input type="text" name="phone" placeholder=" " id="phone"
+                                   class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('phone') border border-error-default @enderror"
+                                   value="{{ $user->phone }}"/>
+                            <label for="phone" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
+                                Phone
+                            </label>
+                        </div>
+                        @error('phone')
+                        <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
+                            {{ $message }}*
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <button
+                            class="uppercase w-full inline-block px-4 py-4 mt-8 font-semibold text-white transition duration-500 ease-in-out transform border border-neutral-dark bg-neutral-dark hover:bg-white hover:text-neutral-dark  focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2"
+                            type="submit">
+                            Update Infos
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
 

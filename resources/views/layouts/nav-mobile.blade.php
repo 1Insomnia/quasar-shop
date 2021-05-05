@@ -28,8 +28,7 @@
             </a>
         </li>
         <li>
-            <a class="text-4xl text-primary-dark hover:underline md:text-6xl"
-               href="{{ route('user.profile.show', auth()->user()->id) }}">
+            <a class="text-4xl text-primary-dark hover:underline md:text-6xl">
                 Account
             </a>
         </li>

@@ -3,7 +3,7 @@
 @section('title', 'Cameras')
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <section class="">
+    <section>
         <div class="container px-5 py-12 flex flex-col items-center md:flex-row lg:py-24">
             <div
                 class="mb-12 pl-8 flex flex-col items-center text-center md:items-start md:text-left md:mb-0 md:w-1/2 lg:flex-grow">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </section>
-    <section class="" id="products_cameras">
+    <section id="products_cameras">
         <div class="container px-5 py-12 md:py-24 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3">
             @foreach ($cameras as $camera)
                 <article class="p-8 transform hover:scale-105 hover:shadow-xl  transition duration-500 ease-in-out">
@@ -37,7 +37,7 @@
                             <a class="btn-dark mt-2" id="orderNow" data-id="{{ $camera->id }}">
                                 Order Now
                             </a>
-                            <a class="btn-dark mt-2" href="products/{{ $camera->id }}">
+                            <a class="btn-dark mt-2" href="{{ route('products.show', $camera->id) }}">
                                 Learn More
                             </a>
                         </div>
@@ -123,7 +123,7 @@
 
         function dispatchContinue() {
             modalCheckout.classList.add('hidden');
-            // location.reload();
+            window.location.reload();
         }
 
         function dispatchCheckout() {

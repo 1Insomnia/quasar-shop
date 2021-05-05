@@ -51,7 +51,11 @@ class CartController extends Controller
                 'price' => $product->price,
                 'qty' => $request->quantity,
                 'weight' => 500,
-                'attributes' => [],
+                'attributes' => [
+                ],
+                'options' => [
+                    'image_path' => $product->image_path,
+                ],
                 'associatedModel' => $product,
             ]
         );
