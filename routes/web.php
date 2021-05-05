@@ -67,7 +67,7 @@ Route::resource('products', ProductController::class);
 // Cart Controller
 Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'show', 'store', 'update', 'destroy']);
 // Checkout Controller
-Route::resource('checkout', CheckoutController::class)->middleware('auth');
+Route::get('checkout', [CheckoutController::class, 'sessionPayment'])->middleware('auth');
 // User Controller
 
 Route::get('/billing-portal', function (Request $request) {

@@ -153,8 +153,8 @@
         let checkoutButton = document.getElementById("checkout-button");
             checkoutButton.addEventListener("click", function (e) {
             e.preventDefault();
-            fetch("{{ action('App\Http\Controllers\Site\CheckoutController@store') }}", {
-                method: "POST",
+            fetch("{{ action('App\Http\Controllers\Site\CheckoutController@sessionPayment') }}", {
+                method: "GET",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
