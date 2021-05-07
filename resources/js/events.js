@@ -3,7 +3,6 @@ export function navOpen() {
     const navToggle = document.querySelector("#nav-toggle");
     const header = document.querySelector("#header");
     const burger = document.querySelector(".burger");
-    const navMobileList = document.querySelector('#nav-mobile-list');
     const navMobileLinks = document.querySelectorAll('#nav-mobile-list a');
 
     // Nav button action

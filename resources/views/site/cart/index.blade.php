@@ -100,9 +100,8 @@
                                         {{ $cart_total }}
                                     </div>
                                 </div>
-                                <a href="">
+                                <a href="{{ route('checkout.index') }}">
                                     <button
-                                        id="checkout-button"
                                         class="flex items-center justify-center space-x-4 uppercase w-full px-4 py-4 mt-6 font-semibold text-white transition duration-500 ease-in-out transform border border-neutral-dark bg-neutral-dark hover:bg-white hover:text-neutral-dark  focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">
                                         <svg aria-hidden="true" data-prefix="far" data-icon="credit-card" class="w-8"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">

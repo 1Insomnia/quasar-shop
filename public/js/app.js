@@ -2009,7 +2009,6 @@ function navOpen() {
   var navToggle = document.querySelector("#nav-toggle");
   var header = document.querySelector("#header");
   var burger = document.querySelector(".burger");
-  var navMobileList = document.querySelector('#nav-mobile-list');
   var navMobileLinks = document.querySelectorAll('#nav-mobile-list a'); // Nav button action
 
   navToggle.addEventListener("click", function (e) {

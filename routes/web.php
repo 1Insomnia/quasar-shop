@@ -66,13 +66,13 @@ Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
 Route::resource('products', ProductController::class);
 // Cart Controller
 Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'show', 'store', 'update', 'destroy']);
+
 // Checkout Controller
-Route::get('checkout', [CheckoutController::class, 'sessionPayment'])->middleware('auth');
+Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');
+Route::post('/checkout/order', [CheckoutController::class, 'placeOrder'])->name('checkout.place.order');
+Route::get('payment', [CheckoutController::class, 'sessionPayment'])->middleware('auth');
 // User Controller
 
-Route::get('/billing-portal', function (Request $request) {
-    return auth()->user()->redirectToBillingPortal();
-});
 
 // Admin
 Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function () {
