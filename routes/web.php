@@ -24,6 +24,7 @@ use \App\Http\Controllers\Admin\GalleryPostController as AdminGalleryPostControl
 use \App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategoryController;
 use \App\Http\Controllers\Admin\ProductController as AdminProductController;
 use \App\Http\Controllers\Admin\ProductImageController as AdminProductImageController;
+use \App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 // Import Route
 use \App\Http\Controllers\Admin\ProfileController as AdminProfileController;
@@ -68,11 +69,18 @@ Route::resource('products', ProductController::class);
 Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'show', 'store', 'update', 'destroy']);
 
 // Checkout Controller
-Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');
-Route::post('/checkout/order', [CheckoutController::class, 'placeOrder'])->name('checkout.place.order');
-Route::get('payment', [CheckoutController::class, 'sessionPayment'])->middleware('auth');
-// User Controller
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');
+    Route::post('/checkout/order', [CheckoutController::class, 'placeOrder'])->name('checkout.place.order');
+    Route::get('/checkout/payment', [CheckoutController::class, 'sessionPayment'])->name('checkout.payment');
+});
 
+// User Controller
+Route::prefix('user')->middleware('auth')->name('user.')->group(function () {
+    Route::get('orders', [UserController::class, 'listOrders'])->name('list_orders');
+    Route::resource('profile', UserController::class)->only(['show', 'edit', 'update', 'destroy']);
+    Route::resource('update_password', UpdatePasswordController::class)->only(['edit', 'update']);
+});
 
 // Admin
 Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function () {
@@ -85,12 +93,9 @@ Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function (
     Route::resource('product_images', AdminProductImageController::class);
     Route::resource('gallery_posts', AdminGalleryPostController::class);
     Route::resource('profile', AdminProfileController::class);
+    Route::resource('orders', AdminOrderController::class);
     Route::resource('password', AdminChangePasswordController::class)->only([
         'index', 'update'
     ]);
 });
 
-Route::prefix('user')->middleware('auth')->name('user.')->group(function () {
-    Route::resource('profile', UserController::class);
-    Route::resource('update_password', UpdatePasswordController::class)->only(['edit', 'update']);
-});

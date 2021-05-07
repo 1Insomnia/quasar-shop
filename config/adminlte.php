@@ -259,6 +259,10 @@ return [
                     'text' => 'gallery posts',
                     'url' => 'admin/gallery_posts',
                 ],
+                [
+                    'text' => 'orders',
+                    'url' => 'admin/orders',
+                ],
             ],
         ],
         ['header' => 'Main Site Nav'],

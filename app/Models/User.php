@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
@@ -47,5 +48,13 @@ class User extends Authenticatable
 
     public function isAdmin()    {
         return $this->role === self::ADMIN_ROLE;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function orders (): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

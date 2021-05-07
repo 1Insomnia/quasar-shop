@@ -22,11 +22,17 @@ class CheckoutController extends Controller
     }
 
 
-    public function getCheckout()
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+     */
+    public function getCheckout(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('site.checkout.index');
     }
 
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function placeOrder(Request $request)
     {
         $rules = [
@@ -41,12 +47,10 @@ class CheckoutController extends Controller
 
         $this->validate($request, $rules);
         $order = $this->orderRepository->storeOrderDetails($request->all());
-        dd($order);
+
+        return redirect()->route('checkout.payment');
     }
 
-    /**
-     * @throws \Stripe\Exception\ApiErrorException
-     */
     public function sessionPayment(Request $request)
     {
         Stripe::setApiKey('sk_test_51InfIODgJ03o6hxSJ7S7kd0Vc6iJaueAymW4o3tRdFEBPDnYmDHTlIRwyDQQ56hhQxpiFfQMnAOwnkAiGJfiNw11006wWM8Wn9');
