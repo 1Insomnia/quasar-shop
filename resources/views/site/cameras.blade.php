@@ -54,7 +54,7 @@
         </div>
     </section>
     <div class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true"
-         id="modalCheckout">
+        id="modalCheckout">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
@@ -63,10 +63,9 @@
                 <div class="relative sm:p-8 md:p-12 ">
                     <button id="btnClose">
                         <svg class="absolute top-2 right-2 h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg"
-                             fill="none" viewBox="0 0 24 24"
-                             stroke="currentColor">
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12"/>
+                                d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                     <div class="py-4">
@@ -90,20 +89,20 @@
                     <div class="">
                         @auth
                             <button type="button"
-                                    class="text-sm bg-neutral-dark hover:text-opacity-90 text-white py-3 px-5 uppercase"
-                                    id="btnContinue">
+                                class="text-sm bg-neutral-dark hover:text-opacity-90 text-white py-3 px-5 uppercase"
+                                id="btnContinue">
                                 Continue Shopping
                             </button>
                             <button type="button"
-                                    class="text-sm bg-neutral-dark hover:text-opacity-90 text-white py-3 px-5 uppercase"
-                                    id="btnCheckout">
+                                class="text-sm bg-neutral-dark hover:text-opacity-90 text-white py-3 px-5 uppercase"
+                                id="btnCheckout">
                                 Order Now
                             </button>
                         @endauth
                         @guest
                             <button type="button"
-                                    class="text-sm bg-neutral-dark hover:text-opacity-90 text-white py-3 px-5 uppercase"
-                                    id="btnContinue">
+                                class="text-sm bg-neutral-dark hover:text-opacity-90 text-white py-3 px-5 uppercase"
+                                id="btnContinue">
                                 Continue Shopping
                             </button>
                         @endguest
@@ -160,7 +159,7 @@
 
         function dispatchCheckout() {
             modalCheckout.classList.add('hidden');
-            window.location = "cart";
+            window.location = "{{ route('cart.index') }}";
         }
 
         function dispatchClose() {

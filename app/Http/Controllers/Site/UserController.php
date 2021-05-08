@@ -67,12 +67,18 @@ class UserController extends Controller
 
             // Shipping Infos
             'address' => 'nullable|min:6|max:100',
-            'zip_code' => ['nullable', 'regex:/^[0-9]{5}(?:-[0-9]{4})?$/'],
+            'zip_code' => [
+                'nullable',
+                'regex:/^[0-9]{5}(?:-[0-9]{4})?$/'
+            ],
             'city' => 'nullable|min:1|max:85',
             'country' => 'nullable|min:4|max:56',
-            'phone' => ['nullable', 'regex:/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$
-/'],
+            'phone' => [
+                'nullable',
+                'regex:/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/'
+            ],
         ];
+
         $this->validate($request, $rules);
 
         $user->update([

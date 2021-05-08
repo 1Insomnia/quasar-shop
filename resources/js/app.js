@@ -7,7 +7,6 @@ function main() {
     navOpen();
     carousel();
     animateOnScroll();
-    productDataToggle();
 }
 
 window.onload = main;

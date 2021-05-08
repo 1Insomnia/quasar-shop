@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 
+use App\Traits\ImageUpload;
+
 class ProductController extends Controller
 {
+    use ImageUpload;
+
     private string $cameras_folder = "assets/img/cameras/";
     private string $lenses_folder = "assets/img/lenses/";
-    private $productRepository;
+    private ProductRepository $productRepository;
 
     public function __construct(ProductRepository $productRepository)
     {
@@ -19,49 +22,30 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-
     public function index()
     {
-        $products = $this->productRepository->paginate(10);
+        $products = $this->productRepository->paginateProducts(10);
         return view('admin.products.index')
             ->with([
                 'products' => $products
             ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
     public function create()
     {
-        $products = Product::all();
         $categories = \App\Models\ProductCategory::all();
         $brands = \App\Models\Brand::all();
 
         return view('admin.products.create')->with([
-            "products" => $products,
             "categories" => $categories,
             "brands" => $brands,
         ]);
     }
 
-    /*
-     * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|max:255',
+            'name' => 'required|min:5|max:80',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'category' => 'required|integer',
@@ -71,23 +55,19 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:10240'
         ];
 
-        if ($this->validate($request, $rules)) {
+        $this->validate($request, $rules);
 
-            // Check if cameras or lenses and assign according path
-            if ($request->category = 1) {
-                $image_folder = $this->cameras_folder;
-            } else {
-                $image_folder = $this->lenses_folder;
-            }
+        // Check if cameras or lenses and assign according path
+        if ($request->category === 1) {
+            $image_folder = $this->cameras_folder;
+        } else {
+            $image_folder = $this->lenses_folder;
+        }
 
-            // // Get Image Name
-            $image_name = time() . $request->image->getClientOriginalName();
-            // // Add timestamp
-            $image_full_path = $image_folder . $image_name;
-            // Move image to the according folder
-            $request->image->move(public_path($image_folder), $image_name);
+        $this->upload($request, $image_folder);
+        $image_full_path = $this->getImageFullPath();
 
-            Product::create([
+        $this->productRepository->createProduct([
                 'name' => $request->name,
                 'price' => $request->price,
                 'stock' => $request->stock,
@@ -96,57 +76,35 @@ class ProductController extends Controller
                 'status' => $request->status,
                 'description' => $request->description,
                 'image_path' => $image_full_path
-            ]);
-        };
-        return redirect()->route('admin.products.index')->with('message', "Product : {$request->name} added");
+            ]
+        );
+
+        return redirect()->route('admin.products.index')->with('message', "Product created");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function show(int $id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function show(int $id)
     {
-        $product = Product::findOrFail($id);
+        $product = $this->productRepository->findOneOrFail($id);
         return view('admin.products.show')
             ->with(['product' => $product]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function edit(int $id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+
+    public function edit(int $id)
     {
-        $product = Product::findOrFail($id);
+        $product = $this->productRepository->findOneOrFail($id);
         $categories = \App\Models\ProductCategory::all();
         $brands = \App\Models\Brand::all();
         return view('admin.products.edit')->with([
             'product' => $product,
             "categories" => $categories,
             "brands" => $brands,
-            ]);
+        ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     */
 
     public function update(Request $request, int $id)
     {
-        $product = Product::findOrfail($id);
+        $product = $this->productRepository->findOneOrFail($id);
 
         $rules = [
             'name' => 'required|max:255',
@@ -156,56 +114,40 @@ class ProductController extends Controller
             'brand' => 'required|integer',
             'status' => 'required|boolean',
             'description' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,svg|max:10240'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:10240'
         ];
 
-        if ($this->validate($request, $rules)) {
+        $this->validate($request, $rules);
 
-            if (!empty($request->image)) {
-                // Check if cameras or lenses and assign according path
-                if ($request->category = 1) {
-                    $image_folder = $this->cameras_folder;
-                } else {
-                    $image_folder = $this->lenses_folder;
-                }
+        if (!empty($request->image)) {
 
-                // // Get Image Name
-                $image_name = time() . "_" . $request->image->getClientOriginalName();
-                // // Add timestamp
-                $image_full_path = $image_folder . $image_name;
-                // Move image to the according folder
-                $request->image->move(public_path($image_folder), $image_name);
-            } else {
-                $image_full_path = $product->image_path;
-            }
+            $request->category === 1 ? $image_folder = $this->cameras_folder : $image_folder = $this->lenses_folder;
 
-            $product->update([
-                'name' => $request->name,
-                'price' => $request->price,
-                'stock' => $request->stock,
-                'category_id' => $request->category,
-                'brand_id' => $request->brand,
-                'status' => $request->status,
-                'description' => $request->description,
-                'image_path' => $image_full_path ? $image_full_path : $request->image,
-            ]);
+            $this->upload($request, $image_folder);
+            $image_full_path = $this->getImageFullPath();
+
+        } else {
+            $image_full_path = $product->image_path;
         }
 
-        return redirect()->route('admin.products.index')->with('message', "Product : {$request->name} updated");
+        $this->productRepository->updateProduct([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'category_id' => $request->category,
+            'brand_id' => $request->brand,
+            'status' => $request->status,
+            'description' => $request->description,
+            'image_path' => $image_full_path,
+        ], $id);
+
+        return redirect()->route('admin.products.index')->with('message', "Product updated successfully");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(int $id): \Illuminate\Http\RedirectResponse
+    public function destroy(int $id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        $this->productRepository->deleteProduct($id);
 
-        return redirect()->route('admin.products.index')->with('message', "Product : {$product->name} Deleted");
+        return redirect()->route('admin.products.index')->with('message', "Product deleted successfully");
     }
 }

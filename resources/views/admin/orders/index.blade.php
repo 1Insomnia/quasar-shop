@@ -4,14 +4,6 @@
 @section('content')
     <section>
         <x-admin-title-block title="Product Images"></x-admin-title-block>
-        <div class="mb-4">
-            <a href="{{ route('admin.gallery_posts.create') }}">
-                <button type="button" class="btn btn-success btn-lg">
-                    <i class="fas fa-plus-square pr-2"></i>
-                    Add Order
-                </button>
-            </a>
-        </div>
         <x-admin-big-feed-back></x-admin-big-feed-back>
         <div>
             <table class="table table-bordered">
@@ -20,10 +12,10 @@
                     <th>Order Number</th>
                     <th>Place By</th>
                     <th>Total Amount</th>
+                    <th>Item Quantity</th>
                     <th>Payment Status</th>
                     <th>Status</th>
                     <th>Details</th>
-                    <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
@@ -39,24 +31,26 @@
                             {{ $order->grand_total }}
                         </td>
                         <td>
-                            {{ $order->payment_status }}
+                            {{ $order->item_count }}
                         </td>
                         <td>
-                            {{ $order->status }}
+                            @if ($order->payment_status === 1)
+                                <span class="badge badge-success">Completed</span>
+                            @else
+                                <span class="badge badge-danger">Not Completed</span>
+                            @endif
+                        </td>                        <td>
+                            @if ($order->status === 1)
+                                <span class="badge badge-success">Completed</span>
+                            @else
+                                <span class="badge badge-danger">Not Completed</span>
+                            @endif
                         </td>
                         <td>
                             <a href="{{ route('admin.orders.show', $order->id) }}">
                                 <button type="button" class="btn btn-block btn-primary">
                                     <i class="fas fa-info-circle pr-2"></i>
                                     Details
-                                </button>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.orders.edit', $order->id) }}">
-                                <button type="button" class="btn btn-block btn-warning">
-                                    <i class="fas fa-edit pr-2"></i>
-                                    Edit
                                 </button>
                             </a>
                         </td>

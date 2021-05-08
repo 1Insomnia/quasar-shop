@@ -1954,7 +1954,6 @@ function main() {
   (0,_events__WEBPACK_IMPORTED_MODULE_1__.navOpen)();
   (0,_animations__WEBPACK_IMPORTED_MODULE_0__.carousel)();
   (0,_animations__WEBPACK_IMPORTED_MODULE_0__.animateOnScroll)();
-  (0,_events__WEBPACK_IMPORTED_MODULE_1__.productDataToggle)();
 }
 
 window.onload = main;
@@ -2009,30 +2008,18 @@ function navOpen() {
   var navToggle = document.querySelector("#nav-toggle");
   var header = document.querySelector("#header");
   var burger = document.querySelector(".burger");
-  var navMobileLinks = document.querySelectorAll('#nav-mobile-list a'); // Nav button action
+  var navMobileLinks = document.querySelectorAll("#nav-mobile-list a"); // Nav button action
 
   navToggle.addEventListener("click", function (e) {
     e.preventDefault();
     header.classList.toggle("nav-open");
     burger.classList.toggle("open");
     navMobileLinks.forEach(function (link, index) {
-      return link.style.animationDelay = "".concat(index / navMobileLinks.length + .3, "s");
+      return link.style.animationDelay = "".concat(index / navMobileLinks.length + 0.3, "s");
     });
   });
 }
-function productDataToggle() {
-  var productDataBtn = document.querySelectorAll("#productDataBtn");
-  productDataBtn.forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      var currentProductDisplay = e.currentTarget.parentNode;
-      var productData = currentProductDisplay.childNodes[3];
-      var currentProductDataBtn = currentProductDisplay.childNodes[1];
-      var currentSvg = currentProductDataBtn.childNodes[3];
-      currentSvg.classList.toggle("rotate-inverse-z");
-      productData.classList.toggle("hidden");
-    });
-  });
-}
+function productDataToggle() {}
 
 /***/ }),
 

@@ -10,6 +10,10 @@ module.exports = {
         container: {
             center: true,
         },
+        listStyleType: {
+            none: "none",
+            disc: "disc",
+        },
         fontFamily: {
             sans: [
                 '"Inter"',

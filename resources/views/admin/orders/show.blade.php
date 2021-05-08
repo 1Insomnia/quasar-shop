@@ -1,41 +1,61 @@
 @extends("admin.layouts.master")
 
 @section('content')
-    <section class="container">
-        <div class="card mx-auto" style="max-width: 560px;">
-            <div class="card-body">
-                <h3 class="card-title font-weight-bold"> Order : n°-{{ $order->order_number }}</h3>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    {{ $order->first_name }} - {{ $order->last_name }}
-                </li>
-                <li class="list-group-item">
-                    {{ $order->grand_total }}
-                </li>
-                <li class="list-group-item">
-                    {{ $order->payment_status }}
-                </li>
-                <li class="list-group-item">
-                    {{ $order->status }}
-                </li>
-            </ul>
-            <div class="card-footer">
-                <div class="my-2">
-                    <a href="">
-                        <button type="button" class="btn btn-block btn-warning">
-                            Edit
-                        </button>
-                    </a>
-                </div>
-                <div class="my-2">
-                    <form method="POST" action="{{ route('admin.order.destroy', $gallery_post->id) }}">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-block">Delete</button>
-                    </form>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="p-4">
+                <section class="invoice">
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <h2 class="page-header">
+                                <i class="fa fa-globe"></i> {{ $order->order_number }}
+                            </h2>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-right">Date: {{ $order->created_at->toFormattedDateString() }}</h5>
+                        </div>
+                    </div>
+                    <div class="row invoice-info">
+                        <div class="col-4">Placed By
+                            <address><strong>{{ $order->user->first_name }}</strong><br>Email: {{ $order->user->email }}</address>
+                        </div>
+                        <div class="col-4">Ship To
+                            <address><strong>{{ $order->first_name }} {{ $order->last_name }}</strong><br>{{ $order->address }}<br>{{ $order->city }}, {{ $order->country }} {{ $order->zipcode }}<br>{{ $order->phone }}<br></address>
+                        </div>
+                        <div class="col-4">
+                            <b>Order ID:</b> {{ $order->order_number }}<br>
+                            <b>Amount:</b> {{ config('settings.currency_symbol') }}{{ round($order->grand_total, 2) }}<br>
+                            <b>Payment Method:</b> {{ $order->payment_method }}<br>
+                            <b>Payment Status:</b> {{ $order->payment_status == 1 ? 'Completed' : 'Not Completed' }}<br>
+                            <b>Order Status:</b> {{ $order->status }}<br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Qty</th>
+                                    <th>Product</th>
+                                    <th>Qty</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($order->items as $item)
+                                        <tr>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->product->name }}</td>
+                                            <td>{{ $item->quantity }}</td>
+                                            <td>{{ config('settings.currency_symbol') }}{{ round($item->price, 2) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </section>
+    </div>
 @endsection

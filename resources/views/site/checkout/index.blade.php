@@ -5,7 +5,7 @@
 @section('content')
     <section>
         <div class="container px-5 min-h-screen py-12">
-            <form class="w-full overflow-hidden space-y-8 max-w-2xl md:px-12 md:py-8 md:shadow-xl md:space-y-12"
+            <form class="w-full overflow-hidden space-y-8 max-w-2xl md:px-12 md:py-8 md:shadow-xl md:space-y-12 mx-auto"
                   method="POST"
                   action="{{ route('checkout.place.order') }}">
                 @csrf

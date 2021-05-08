@@ -1,23 +1,49 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Models\Product;
+use App\Traits\ImageUpload;
 
-class ProductRepository {
+class ProductRepository extends BaseRepository
 
-    public function all()
+{
+    use ImageUpload;
+
+    public function __construct(Product $model)
     {
-        return Product::all();
+        parent::__construct($model);
+        $this->model = $model;
     }
 
-    public function paginate(int $chunk)
+    public function listProducts(string $order = 'id', string $sort = 'desc')
     {
-        // Return all products ordered by id
-        return Product::orderBy('id', 'desc')->simplePaginate($chunk);
+        return $this->all($order, $sort);
     }
 
-    public function find(int $id)
+    public function paginateProducts(int $chunk)
     {
-        return Product::findOrFail($id);
+       return $this->paginate($chunk);
+    }
+
+    public function createProduct(array $params)
+    {
+        return $this->create($params);
+    }
+
+    public function updateProduct(array $attributes, int $id)
+    {
+        return $this->update($attributes, $id);
+    }
+
+    public function deleteProduct(int $id)
+    {
+        $product = $this->find($id);
+
+        if ($product) {
+            $this->deleteImage($product->image_path);
+        }
+
+        return $product->delete();
     }
 }

@@ -10,7 +10,7 @@ use App\Http\Controllers\Site\CameraController;
 use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\CheckoutController;
 use App\Http\Controllers\Site\GalleryPostController;
-use App\Http\Controllers\Site\LenseController;
+use App\Http\Controllers\Site\LensController;
 use App\Http\Controllers\Site\ProductController;
 use App\Http\Controllers\Site\UserController;
 use App\Http\Controllers\Site\UpdatePasswordController;
@@ -60,11 +60,11 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
 // Cameras Controller
-Route::get('/cameras', [CameraController::class, 'index'])->name('cameras');
+Route::get('/cameras', CameraController::class)->name('cameras');
 // Lenses Controller
-Route::get('/lenses', [LenseController::class, 'index'])->name('lenses');
+Route::get('/lenses', LensController::class)->name('lenses');
 // Product Details Page
-Route::resource('products', ProductController::class);
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 // Cart Controller
 Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'show', 'store', 'update', 'destroy']);
 
@@ -72,6 +72,7 @@ Route::resource('cart', CartController::class)->middleware('auth')->only(['index
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');
     Route::post('/checkout/order', [CheckoutController::class, 'placeOrder'])->name('checkout.place.order');
+    Route::get('/checkout/confirm/{id}', [CheckoutController::class, 'showPayment'])->name('checkout.confirm');
     Route::get('/checkout/payment', [CheckoutController::class, 'sessionPayment'])->name('checkout.payment');
 });
 
@@ -93,9 +94,8 @@ Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function (
     Route::resource('product_images', AdminProductImageController::class);
     Route::resource('gallery_posts', AdminGalleryPostController::class);
     Route::resource('profile', AdminProfileController::class);
-    Route::resource('orders', AdminOrderController::class);
+    Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'destroy']);
     Route::resource('password', AdminChangePasswordController::class)->only([
         'index', 'update'
     ]);
 });
-

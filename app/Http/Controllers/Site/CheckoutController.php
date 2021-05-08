@@ -7,6 +7,7 @@ use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\Order;
 
 class CheckoutController extends Controller
 {
@@ -47,8 +48,16 @@ class CheckoutController extends Controller
 
         $this->validate($request, $rules);
         $order = $this->orderRepository->storeOrderDetails($request->all());
+        $id = $order->order_number;
 
-        return redirect()->route('checkout.payment');
+        return redirect()->route('checkout.confirm', $id);
+    }
+
+    public function showPayment(string $id)
+    {
+        $order = Order::where('order_number', $id)->first();
+        return view('site.checkout.payment')
+            ->with(['order' => $order]);
     }
 
     public function sessionPayment(Request $request)
@@ -58,22 +67,25 @@ class CheckoutController extends Controller
         $content = Cart::content();
         $context = [];
 
-        foreach ($content as $row) {
-            array_push($context,
-                [
-                    'price_data' => [
-                        'currency' => 'usd',
-                        // In cents
-                        'unit_amount' => floatval($row->price) * 100,
-                        'product_data' => [
-                            'name' => $row->name,
-                            'images' => [$row->options->image_path]
-                        ]
-                    ],
-                    'quantity' => $row->qty,
-                 ]
-            );
+        if (Cart::count() > 0 ) {
+            foreach ($content as $row) {
+                array_push($context,
+                    [
+                        'price_data' => [
+                            'currency' => 'usd',
+                            // In cents
+                            'unit_amount' => floatval($row->price) * 100,
+                            'product_data' => [
+                                'name' => $row->name,
+                                'images' => [$row->options->image_path]
+                            ]
+                        ],
+                        'quantity' => $row->qty,
+                     ]
+                );
+            }
         }
+
 
         $checkout_session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
@@ -84,6 +96,6 @@ class CheckoutController extends Controller
 
         ]);
 
-        return response()->json(['id' => $checkout_session->id]);
+        return response()->json(["id" => $checkout_session->id]);
     }
 }
