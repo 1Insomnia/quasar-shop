@@ -10,8 +10,8 @@
                         <div class="card-body text-center">
                             <div>
                                 <img src="https://img.icons8.com/bubbles/100/000000/administrator-male.png"
-                                     class="card-img-top rounded-circle mb-4" alt="profile image"
-                                     style="height: 128px; width: 128px;">
+                                    class="card-img-top rounded-circle mb-4" alt="profile image"
+                                    style="height: 128px; width: 128px;">
                                 <h4>{{ $user->first_name }} {{ $user->last_name }}</h4>
                                 <p class="text-muted mb-0">{{ $user->role }}</p>
                             </div>

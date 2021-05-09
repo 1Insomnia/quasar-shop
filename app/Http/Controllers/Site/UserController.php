@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Models\User;
+use App\Models\Order;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Http\Request;
-
-use App\Models\User;
 
 class UserController extends Controller
 {
@@ -111,7 +112,7 @@ class UserController extends Controller
     public function listOrders()
     {
         $id = auth()->user()->id;
-        $user = User::find($id);
-        return view('site.user.list-orders')->with(['user' => $user]);
+        $orders = Order::where('user_id', $id)->get();
+        return view('site.user.list-orders')->with(['orders' => $orders]);
     }
 }
