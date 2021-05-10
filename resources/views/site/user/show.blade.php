@@ -25,7 +25,7 @@
                                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
                         <h4 class="text-sm font-semibold mb-1 md:text-lg md:mb-2 lg:text-xl">Cart</h4>
-                        <p class="text-sm md:text-base lg:text-lg">Items : {{Cart::count() }}</p>
+                        <p class="text-sm md:text-base lg:text-lg">Items : {{ $user_cart_items }}</p>
                     </div>
                 </a>
             </div>
@@ -41,7 +41,7 @@
                                   d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
                         </svg>
                         <h4 class="text-sm font-semibold mb-1 md:text-lg md:mb-2 lg:text-xl">Orders</h4>
-                        <p class="text-sm md:text-base lg:text-lg">Order : 3</p>
+                        <p class="text-sm md:text-base lg:text-lg">Order : {{ $user_orders_count }}</p>
                     </div>
                 </a>
             </div>

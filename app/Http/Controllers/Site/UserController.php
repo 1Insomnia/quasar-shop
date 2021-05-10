@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Rules\MatchEmail;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -33,8 +35,15 @@ class UserController extends Controller
     public function show(int $id)
     {
         $user = $this->userRepository->find($id);
+        $user_cart_items = Cart::count();
+        $user_orders_count = $user->orders->count();
+
         return view('site.user.show')
-            ->with(['user' => $user]);
+            ->with([
+                'user' => $user,
+                'user_cart_items' => $user_cart_items,
+                'user_orders_count' => $user_orders_count,
+            ]);
     }
 
     /**
@@ -62,7 +71,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $rules = [
             // Customer Infos
-            'email' => 'required|email',
+            'email' => ['required', 'email', new MatchEmail],
             'first_name' => 'required|min:2|max:80',
             'last_name' => 'required|min:2|max:80',
 
