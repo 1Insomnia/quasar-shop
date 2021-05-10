@@ -13,13 +13,17 @@ class OrderRepository
 {
     public function storeOrderDetails(array $params)
     {
+        $total = floatval(Cart::total());
+        $item_count = Cart::count();
+        $user_id = auth()->user()->id;
+
         $order = Order::create([
-            'order_number' => 'ORD-' . strtoupper(uniqid()),
-            'user_id' => auth()->user()->id,
+            'order_number' => 'ORD' . strtoupper(uniqid()),
+            'user_id' => $user_id,
             'status' => 'pending',
-            'grand_total' => floatval(Cart::priceTotal())*100,
+            'grand_total' => $total,
             // TODO : Fix ORDER PRICE
-            'item_count' => Cart::count(),
+            'item_count' => $item_count,
             'payment_status' => 0,
             'payment_method' => null,
             'payment_id' => 'payment_id' . strtoupper(uniqid()),
@@ -39,7 +43,7 @@ class OrderRepository
             foreach( $items as $item){
                 $product = Product::find($item->id);
 
-                $orderItem = new \App\Models\OrderItem([
+                $orderItem = new OrderItem([
                     'product_id' => $product->id,
                     'order_id' => $order->id,
                     'quantity' => $item->qty,
@@ -50,5 +54,11 @@ class OrderRepository
             }
         }
         return $order;
+    }
+
+    public function deleteOrder ($id)
+    {
+        $order = Order::find($id);
+        return $order->delete();
     }
 }

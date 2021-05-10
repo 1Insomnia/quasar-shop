@@ -2,22 +2,9 @@
 @section('title', 'User - Personnal Information')
 
 @section('content')
-    <div class="container px-5 mt-12 mb-6">
-        <h1 class="font-bold text-3xl md:text-4xl lg:text-6xl">
-            <a href="{{ route('user.profile.show', auth()->user()->id) }}">
-                My Profile
-            </a>
-        </h1>
-        <div class="mt-8 flex items-center space-x-4">
-            <img class="w-16 h-16 rounded-full" src="{{ asset('assets/img/user.png') }}" alt="" id="profileImage">
-            <div>
-                <p class="font-semibold">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</p>
-                <p class="text-neutral-light">{{ auth()->user()->email }}</p>
-            </div>
-        </div>
-    </div>
     <section>
         <div class="container px-5 min-h-screen py-12">
+            <x-user-profile-header></x-user-profile-header>
             <form class="w-full overflow-hidden space-y-8 max-w-2xl md:px-12 md:py-8 md:shadow-xl md:space-y-12"
                   method="POST"
                   action="{{ route('user.profile.update', auth()->user()->id) }}">

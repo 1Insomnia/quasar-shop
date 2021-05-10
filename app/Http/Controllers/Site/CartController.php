@@ -26,11 +26,14 @@ class CartController extends Controller
         $cart_content = Cart::content();
         $cart_subtotal = Cart::subTotal();
         $cart_total = Cart::total();
+        $cart_count = Cart::count();
+
         return view('site.cart.index')
             ->with([
                 'cart_content' => $cart_content,
                 'cart_subtotal' => $cart_subtotal,
                 'cart_total' => $cart_total,
+                'cart_count' => $cart_count,
             ]);
     }
 

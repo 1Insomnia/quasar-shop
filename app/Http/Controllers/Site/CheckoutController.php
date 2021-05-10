@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Order;
+use App\Models\User;
 
 class CheckoutController extends Controller
 {
@@ -28,7 +29,9 @@ class CheckoutController extends Controller
      */
     public function getCheckout(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('site.checkout.index');
+        $user = User::find(auth()->user()->id);
+        return view('site.checkout.index')
+            ->with(['user' => $user]);
     }
 
     /**
@@ -36,6 +39,8 @@ class CheckoutController extends Controller
      */
     public function placeOrder(Request $request)
     {
+        if (Cart::count() <= 0) return;
+
         $rules = [
             'email' => 'required|email',
             'first_name' => 'required',
@@ -53,38 +58,40 @@ class CheckoutController extends Controller
         return redirect()->route('checkout.confirm', $id);
     }
 
-    public function showPayment(string $id)
+    public function checkoutConfirm(string $id)
     {
         $order = Order::where('order_number', $id)->first();
         return view('site.checkout.payment')
             ->with(['order' => $order]);
     }
 
-    public function sessionPayment(Request $request)
+    public function checkoutPayment(Request $request)
     {
         Stripe::setApiKey('sk_test_51InfIODgJ03o6hxSJ7S7kd0Vc6iJaueAymW4o3tRdFEBPDnYmDHTlIRwyDQQ56hhQxpiFfQMnAOwnkAiGJfiNw11006wWM8Wn9');
 
-        $content = Cart::content();
+//        $content = Cart::content();
         $context = [];
+        $order = Order::where('order_number', $request->order_number)->first();
+        dd($order);
 
-        if (Cart::count() > 0 ) {
-            foreach ($content as $row) {
-                array_push($context,
-                    [
-                        'price_data' => [
-                            'currency' => 'usd',
-                            // In cents
-                            'unit_amount' => floatval($row->price) * 100,
-                            'product_data' => [
-                                'name' => $row->name,
-                                'images' => [$row->options->image_path]
-                            ]
-                        ],
-                        'quantity' => $row->qty,
-                     ]
-                );
-            }
-        }
+//        if (Cart::count() > 0 ) {
+//            foreach ($content as $row) {
+//                array_push($context,
+//                    [
+//                        'price_data' => [
+//                            'currency' => 'usd',
+//                            // In cents
+//                            'unit_amount' => floatval($row->price) * 100,
+//                            'product_data' => [
+//                                'name' => $row->name,
+//                                'images' => [$row->options->image_path]
+//                            ]
+//                        ],
+//                        'quantity' => $row->qty,
+//                     ]
+//                );
+//            }
+//        }
 
 
         $checkout_session = \Stripe\Checkout\Session::create([
@@ -97,5 +104,12 @@ class CheckoutController extends Controller
         ]);
 
         return response()->json(["id" => $checkout_session->id]);
+    }
+
+    public function deleteOrder($id)
+    {
+        $order = Order::find($id);
+        $order->delete();
+        return redirect()->route('cart.index')->with('message', "Order Canceled");
     }
 }

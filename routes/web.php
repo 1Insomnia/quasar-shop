@@ -72,8 +72,9 @@ Route::resource('cart', CartController::class)->middleware('auth')->only(['index
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');
     Route::post('/checkout/order', [CheckoutController::class, 'placeOrder'])->name('checkout.place.order');
-    Route::get('/checkout/confirm/{id}', [CheckoutController::class, 'showPayment'])->name('checkout.confirm');
-    Route::get('/checkout/payment', [CheckoutController::class, 'sessionPayment'])->name('checkout.payment');
+    Route::get('/checkout/confirm/{id}', [CheckoutController::class, 'checkoutConfirm'])->name('checkout.confirm');
+    Route::post('/checkout/payment', [CheckoutController::class, 'checkoutPayment'])->name('checkout.payment');
+    Route::delete('/checkout/delete/{id}', [CheckoutController::class, 'deleteOrder'])->name('checkout.delete');
 });
 
 // User Controller

@@ -26,7 +26,7 @@
                 <div class="space-y-8 py-4" id="customerInfos">
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="email" name="email" placeholder=" " id="email"
+                            <input type="email" name="email" placeholder=" " id="email" value="{{ $user->email }}"
                                    class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('email') border border-error-default @enderror"
                             />
                             <label for="email" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
@@ -35,13 +35,13 @@
                         </div>
                         @error('email')
                         <span class="p-2 mt-2 block text-sm text-error-default bg-red-100">
-                                    {{ $message }}*
-                                </span>
+                            {{ $message }}*
+                        </span>
                         @enderror
                     </div>
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="text" name="first_name" placeholder=" " id="first_name"
+                            <input type="text" name="first_name" placeholder=" " id="first_name" value="{{ $user->first_name }}"
                                    class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('first_name') border border-error-default @enderror"
                             />
                             <label for="first_name" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
@@ -56,7 +56,7 @@
                     </div>
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="text" name="last_name" placeholder=" " id="last_name"
+                            <input type="text" name="last_name" placeholder=" " id="last_name" value="{{ $user->last_name }}"
                                    class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('last_name') border border-error-default @enderror"
                             />
                             <label for="last_name" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
@@ -73,7 +73,7 @@
                 <div class="hidden space-y-8 py-4" id="shippingInfos">
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="text" name="address" placeholder=" " id="address"
+                            <input type="text" name="address" placeholder=" " id="address" @if ($user->address) value="{{ $user->address }}" @endif
                                    class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('address') border border-error-default @enderror"
                             />
                             <label for="address" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
@@ -88,7 +88,7 @@
                     </div>
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="text" name="zipcode" placeholder=" " id="zipcode"
+                            <input type="text" name="zipcode" placeholder=" " id="zipcode" @if ($user->zipcode) value="{{ $user->zipcode }}" @endif
                                    class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('zipcode') border border-error-default @enderror"
                             />
                             <label for="zipcode" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
@@ -103,7 +103,7 @@
                     </div>
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="text" name="city" placeholder=" " id="city"
+                            <input type="text" name="city" placeholder=" " id="city" @if ($user->city) value="{{ $user->city }}" @endif
                                    class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('city') border border-error-default @enderror"
                             />
                             <label for="city" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
@@ -118,7 +118,7 @@
                     </div>
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="text" name="country" placeholder=" " id="country"
+                            <input type="text" name="country" placeholder=" " id="country" @if ($user->country) value="{{ $user->country }}" @endif
                                    class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('country') border border-error-default @enderror"
                             />
                             <label for="country" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
@@ -133,7 +133,7 @@
                     </div>
                     <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
-                            <input type="text" name="phone" placeholder=" " id="phone"
+                            <input type="text" name="phone" placeholder=" " id="phone" @if ($user->phone) value="{{ $user->phone }}" @endif
                                    class="block p-4 w-full appearance-none focus:outline-none bg-transparent @error('phone') border border-error-default @enderror"
                             />
                             <label for="phone" class="absolute top-0 bg-white p-4 -z-1 duration-300 origin-0">
@@ -149,7 +149,7 @@
                 </div>
                 <div class="py-4">
                     <h3 class="font-semibold text-lg mb-2">Order Total</h3>
-                    $ {{ \Cart::total() }}
+                    $ {{ number_format(\Cart::total(), 2) }}
                 </div>
                 <div>
                     <div>
