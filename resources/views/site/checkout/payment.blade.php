@@ -98,9 +98,9 @@
                     'X-CSRF-TOKEN': token,
                     credentials: 'same-origin',
                 },
-                data: {
-                    id: {{ $order->order_number }}
-                }
+                body: JSON.stringify({
+                    id: "{{ $order->order_number }}"
+                })
             })
                 .then(function (response) {
                     return response.json();

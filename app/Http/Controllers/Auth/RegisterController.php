@@ -43,7 +43,7 @@ class RegisterController extends Controller
             ],
         ];
         // Validation
-        $this->validate($request, $rules);
+        $request->validate($rules);
 
         User::create([
             'first_name' => $request->first_name,

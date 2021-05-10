@@ -22,7 +22,6 @@ class OrderRepository
             'user_id' => $user_id,
             'status' => 'pending',
             'grand_total' => $total,
-            // TODO : Fix ORDER PRICE
             'item_count' => $item_count,
             'payment_status' => 0,
             'payment_method' => null,
@@ -46,8 +45,8 @@ class OrderRepository
                 $orderItem = new OrderItem([
                     'product_id' => $product->id,
                     'order_id' => $order->id,
-                    'quantity' => $item->qty,
-                    'price' => $item->price,
+                    'quantity' => intval($item->qty),
+                    'price' => floatval($item->price),
                 ]);
 
                 $order->items()->save($orderItem);

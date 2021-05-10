@@ -68,7 +68,7 @@ class GalleryPostController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->validate($this->rules);
 
         $this->upload($request, $this->product_image_directory);
         $image_full_path = $this->getImageFullPath();
@@ -133,7 +133,7 @@ class GalleryPostController extends Controller
 
         $this->rules['image'] = 'image|mimes:jpeg,png,jpg,svg|max:10240';
 
-        $this->validate($request, $this->rules);
+        $request->validate($this->rules);
 
         if (!empty($request->image)) {
             $this->upload($request, $this->product_image_directory);

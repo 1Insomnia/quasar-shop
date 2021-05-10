@@ -51,7 +51,8 @@ class CheckoutController extends Controller
             'phone' => 'required',
         ];
 
-        $this->validate($request, $rules);
+        $request->validate($rules);
+
         $order = $this->orderRepository->storeOrderDetails($request->all());
         $id = $order->order_number;
 
@@ -69,30 +70,22 @@ class CheckoutController extends Controller
     {
         Stripe::setApiKey('sk_test_51InfIODgJ03o6hxSJ7S7kd0Vc6iJaueAymW4o3tRdFEBPDnYmDHTlIRwyDQQ56hhQxpiFfQMnAOwnkAiGJfiNw11006wWM8Wn9');
 
-//        $content = Cart::content();
         $context = [];
-        $order = Order::where('order_number', $request->order_number)->first();
-        dd($order);
+        $order = Order::where('order_number', $request->id)->first();
 
-//        if (Cart::count() > 0 ) {
-//            foreach ($content as $row) {
-//                array_push($context,
-//                    [
-//                        'price_data' => [
-//                            'currency' => 'usd',
-//                            // In cents
-//                            'unit_amount' => floatval($row->price) * 100,
-//                            'product_data' => [
-//                                'name' => $row->name,
-//                                'images' => [$row->options->image_path]
-//                            ]
-//                        ],
-//                        'quantity' => $row->qty,
-//                     ]
-//                );
-//            }
-//        }
-
+        foreach ($order->items as $item) {
+            array_push($context,
+                [
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'unit_amount' => $item->price * 100,
+                        'product_data' => [
+                            'name' => $item->product->name,
+                        ]
+                    ],
+                    'quantity' => $item->quantity,
+                ]);
+        }
 
         $checkout_session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],

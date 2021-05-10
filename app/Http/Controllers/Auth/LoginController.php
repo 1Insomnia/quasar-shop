@@ -38,7 +38,7 @@ class LoginController extends Controller
             ]
         ];
         // Form validation
-        $this->validate($request, $rules);
+        $request->validate($rules);
         $request->remember === 'on' ? $remember = true : $remember = false;
 
         if (!auth()->attempt($request->only('email', 'password'), $remember)) {

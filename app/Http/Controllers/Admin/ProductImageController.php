@@ -60,17 +60,15 @@ class ProductImageController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:10240',
         ];
 
-        if ($this->validate($request, $rules)) {
+        $request->validate($rules);
 
-            $this->upload($request, $this->product_image_directory);
-            $image_full_path = $this->getImageFullPath();
+        $this->upload($request, $this->product_image_directory);
+        $image_full_path = $this->getImageFullPath();
 
-            $this->productImageRepository->create([
-                'product_id' => $request->product_id,
-                'image_path' => $image_full_path,
-            ]);
-        }
-
+        $this->productImageRepository->create([
+            'product_id' => $request->product_id,
+            'image_path' => $image_full_path,
+        ]);
         return redirect()->route('admin.product_images.index')->with('message', "Product Image added.");
     }
 
@@ -108,7 +106,7 @@ class ProductImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -122,19 +120,19 @@ class ProductImageController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,svg|max:10240',
         ];
 
-        if ($this->validate($request, $rules)) {
-            if (!empty($request->image)) {
-                $this->upload($request, $this->product_image_directory);
-                $image_full_path = $this->getImageFullPath();
-            } else {
-                $image_full_path = $product_image->image_path;
-            }
+        $request->validate($rules);
 
-            $product_image->update([
-                'product_id' => $request->product_id,
-                'image_path' => $image_full_path,
-            ]);
+        if (!empty($request->image)) {
+            $this->upload($request, $this->product_image_directory);
+            $image_full_path = $this->getImageFullPath();
+        } else {
+            $image_full_path = $product_image->image_path;
         }
+
+        $product_image->update([
+            'product_id' => $request->product_id,
+            'image_path' => $image_full_path,
+        ]);
 
         return redirect()->route('admin.product_images.index')->with('message', "Product Image of {$product_image->product->name} updated");
     }

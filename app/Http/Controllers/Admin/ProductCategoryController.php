@@ -55,9 +55,8 @@ class ProductCategoryController extends Controller
             'status' => 'boolean',
         ];
 
-        if ($this->validate($request, $rules)) {
-            ProductCategory::create($request->all());
-        }
+        $request->validate($rules);
+        ProductCategory::create($request->all());
 
         return redirect()->route('admin.categories.index')->with('message', "Category : {$request->name} added");
     }
@@ -92,7 +91,7 @@ class ProductCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -106,12 +105,12 @@ class ProductCategoryController extends Controller
             'status' => 'required|boolean',
         ];
 
-        if ($this->validate($request, $rules)) {
-            $category->update([
-                'name' => $request->name,
-                'status' => $request->status,
-            ]);
-        }
+        $request->validate($rules);
+
+        $category->update([
+            'name' => $request->name,
+            'status' => $request->status,
+        ]);
 
         return redirect()->route('admin.categories.index')->with('message', "Category : {$request->name} updated.");
     }

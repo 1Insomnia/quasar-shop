@@ -89,7 +89,7 @@ class UserController extends Controller
             ],
         ];
 
-        $this->validate($request, $rules);
+        $request->validate($rules);
 
         $user->update([
             // Customer Infos

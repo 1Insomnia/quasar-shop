@@ -55,9 +55,8 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:10240'
         ];
 
-        $this->validate($request, $rules);
+        $request->validate($rules);
 
-        // Check if cameras or lenses and assign according path
         if ($request->category === 1) {
             $image_folder = $this->cameras_folder;
         } else {
@@ -117,7 +116,7 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:10240'
         ];
 
-        $this->validate($request, $rules);
+        $request->validate($rules);
 
         if (!empty($request->image)) {
 

@@ -47,9 +47,9 @@ class BrandController extends Controller
             'status' => 'required|boolean',
         ];
 
-        if ($this->validate($request, $rules)) {
-            Brand::create($request->all());
-        }
+        $request->validate($rules);
+        Brand::create($request->all());
+
         return redirect()->route('admin.brands.index')->with('message', "Brand : {$request->name} added.");
     }
 
@@ -83,7 +83,7 @@ class BrandController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -93,13 +93,13 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($id);
 
         $rules = [
-            'name' => 'required|max:255',
+            'name' => 'required|min:2|max:255',
             'status' => 'required|boolean',
         ];
 
-        if ($this->validate($request, $rules)) {
-            $brand->update($request->all());
-        }
+        $request->validate($rules);
+        $brand->update($request->all());
+
         return redirect()->route('admin.brands.index')->with('message', "Brand : {$brand->name} updated.");
     }
 
