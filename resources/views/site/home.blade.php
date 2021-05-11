@@ -6,8 +6,8 @@
         <div
             class="relative h-screen-3/4 bg-hero-pattern bg-cover bg-center flex flex-col items-center justify-center bg-fixed">
             <div class="text-purple-50 text-center" data-aos="fade-down" data-aos-duration="1000"
-                data-aos-easing="ease-in-out-cubic" data-aos-mirror="true" data-aos-once="false" data-aos-delay="50"
-                id="hero-home">
+                 data-aos-easing="ease-in-out-cubic" data-aos-mirror="true" data-aos-once="false" data-aos-delay="50"
+                 id="hero-home">
                 <h1 class="font-alt text-5xl py-4 md:text-6xl md:font-light lg:text-8xl">
                     Quasar Optic
                 </h1>
@@ -27,7 +27,7 @@
     <!-- Cameras Section -->
     <section id="home-cameras">
         <div class="container px-5 py-24 lg:flex lg:items-center lg:justify-between lg:py-32">
-            <img class="lg:w-1/2" src="{{ asset("assets/img/home/camera.jpg") }}" alt="camera picture" />
+            <img class="lg:w-1/2" src="{{ asset("assets/img/home/camera.jpg") }}" alt="camera picture"/>
             <div class="flex flex-col items-center justify-center lg:w-1/2">
                 <h2 class="mt-8 font-bold text-3xl md:text-4xl lg:text-6xl">
                     Cameras
@@ -37,8 +37,8 @@
                     sensor and dynamic range.
                 </p>
                 <div class="mt-2 flex items-center space-x-6 md:mt-6">
-                    <img class="w-16" src="{{ asset("assets/img/brands/Nikon.png") }}" alt="Nikon Brand Logo" />
-                    <img class="w-16" src="{{ asset("assets/img/brands/Canon.png") }}" alt="Canon Brand Logo" />
+                    <img class="w-16" src="{{ asset("assets/img/brands/Nikon.png") }}" alt="Nikon Brand Logo"/>
+                    <img class="w-16" src="{{ asset("assets/img/brands/Canon.png") }}" alt="Canon Brand Logo"/>
                 </div>
                 <a class="mt-6 btn-dark-xl" href="{{ route('cameras') }}">Our Selection</a>
             </div>
@@ -47,7 +47,7 @@
     <!-- Lenses Section -->
     <section id="home-lenses">
         <div class="container px-5 py-24 lg:flex lg:flex-row-reverse lg:items-center lg:justify-between lg:py-32">
-            <img class="lg:w-1/2" src="{{ asset("assets/img/home/lens.png") }}" alt="lense picture" />
+            <img class="lg:w-1/2" src="{{ asset("assets/img/home/lens.png") }}" alt="lense picture"/>
             <div class="flex flex-col items-center justify-center lg:w-1/2">
                 <h2 class="mt-8 font-bold text-3xl md:text-4xl lg:text-6xl">
                     Lenses
@@ -57,7 +57,8 @@
                     vignetting.
                 </p>
                 <div class="mt-2 flex items-center space-x-6 md:mt-6">
-                    <img class="w-16" style="filter: invert(1);" src="{{ asset("assets/img/brands/Irix.png") }}" alt="Irix Brand Logo" />
+                    <img class="w-16" style="filter: invert(1);" src="{{ asset("assets/img/brands/Irix.png") }}"
+                         alt="Irix Brand Logo"/>
                 </div>
                 <a class="mt-6 btn-dark-xl" href="{{ route('lenses') }}">Our Selection</a>
             </div>
@@ -68,7 +69,7 @@
         <div
             class="container px-5 py-24 flex flex-col-reverse md:flex md:flex-row md:items-center md:justify-between lg:py-32">
             <img class="w-full h-auto md:w-1/2" src="{{ asset('assets/img/home/night-sky.jpg') }}"
-                alt="person in night sky background" />
+                 alt="person in night sky background"/>
             <div class="md:p-8 xl:p-16">
                 <h3 class="text-primary-dark text-2xl md:text-3xl lg:text-4xl">
                     Perfect for night photography

@@ -23,7 +23,7 @@ class ProductRepository extends BaseRepository
 
     public function paginateProducts(int $chunk)
     {
-       return $this->paginate($chunk);
+       return $this->model->simplePaginate($chunk);
     }
 
     public function createProduct(array $params)

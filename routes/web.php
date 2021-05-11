@@ -25,6 +25,8 @@ use \App\Http\Controllers\Admin\ProductCategoryController as AdminProductCategor
 use \App\Http\Controllers\Admin\ProductController as AdminProductController;
 use \App\Http\Controllers\Admin\ProductImageController as AdminProductImageController;
 use \App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use \App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 // Import Route
 use \App\Http\Controllers\Admin\ProfileController as AdminProfileController;
@@ -88,15 +90,14 @@ Route::prefix('user')->middleware('auth')->name('user.')->group(function () {
 
 // Admin
 Route::prefix('admin')->middleware("is_admin")->name('admin.')->group(function () {
-    Route::get(('dashboard'), function () {
-        return view('admin.index');
-    })->name('dashboard');
+    Route::get('dashboard', AdminDashboardController::class)->name('dashboard');
     Route::resource('products', AdminProductController::class);
     Route::resource('categories', AdminProductCategoryController::class);
     Route::resource('brands', AdminBrandController::class);
     Route::resource('product_images', AdminProductImageController::class);
     Route::resource('gallery_posts', AdminGalleryPostController::class);
     Route::resource('profile', AdminProfileController::class);
+    Route::resource('users', AdminUserController::class);
     Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'destroy']);
     Route::resource('password', AdminChangePasswordController::class)->only([
         'index', 'update'

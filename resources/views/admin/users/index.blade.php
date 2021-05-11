@@ -1,12 +1,14 @@
-@extends("admin.layouts.master")
+@extends('admin.layouts.master')
+@section('title', 'Admin - Users')
+
 @section('content')
     <section>
-        <x-admin-title-block title="Products"></x-admin-title-block>
+        <x-admin-title-block title="Users"></x-admin-title-block>
         <div class="mb-4">
-            <a href="{{ route('admin.products.create') }}">
+            <a href="{{ route('admin.users.create') }}">
                 <button type="button" class="btn btn-success btn-lg">
                     <i class="fas fa-plus-square pr-2"></i>
-                    Add Product
+                    Add User
                 </button>
             </a>
         </div>
@@ -14,44 +16,32 @@
         <div>
             <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Product Price</th>
-                    <th>Product Stock</th>
-                    <th>Product Status</th>
-                    <th>Product Brand</th>
-                    <th>Product Category</th>
-                    <th>Details</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Created At</th>
+                        <th>Details</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
-                @foreach ($products as $product)
+                @foreach ($users as $user)
                     <tr>
                         <td>
-                            {{ $product->name }}
+                            {{ $user->first_name }}
                         </td>
                         <td>
-                            $ {{ number_format($product->price) }}
+                            {{ $user->last_name }}
                         </td>
                         <td>
-                            {{ $product->stock }}
+                            {{ $user->email }}
                         </td>
                         <td>
-                            @if ($product->status === 1)
-                                <span class="text-success">Available</span>
-                            @else
-                                <span class="text-danger">Unavailable</span>
-                            @endif
+                            {{ $user->created_at }}
                         </td>
                         <td>
-                            {{ $product->brand->name }}
-                        </td>
-                        <td>
-                            {{ $product->category->name }}
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.products.show', $product->id) }}">
+                            <a href="{{ route('admin.users.show', $user->id) }}">
                                 <button type="button" class="btn btn-block btn-primary">
                                     <i class="fas fa-info-circle pr-2"></i>
                                     Details
@@ -59,7 +49,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('admin.products.edit', $product->id) }}">
+                            <a href="{{ route('admin.users.edit', $user->id) }}">
                                 <button type="button" class="btn btn-block btn-warning">
                                     <i class="fas fa-edit pr-2"></i>
                                     Edit
@@ -68,8 +58,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    data-id="{{ $product->id }}" id="btnDelete">
+                                data-target="#exampleModal" data-id="{{ $user->id }}" id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
@@ -80,7 +69,7 @@
         </div>
     </section>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,7 +79,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    If you want to delete this product click delete.
+                    If you want to delete this user click delete.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -104,7 +93,7 @@
         </div>
     </div>
     <div>
-        {{ $products->links() }}
+        {{ $users->links() }}
     </div>
 @endsection
 @section('js')
@@ -114,7 +103,8 @@
 
         btnDelete.forEach(value => value.addEventListener("click", (e) => {
             const id = e.target.dataset.id;
-            formDelete.action = `products/${id}`;
+            formDelete.action = `users/${id}`;
         }));
+
     </script>
 @endsection

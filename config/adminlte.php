@@ -231,7 +231,7 @@ return [
             'icon' => 'fas fa-sign-out-alt',
         ],
         [
-            'text' => 'Dashboard',
+            'text' => 'DashboardController',
             'url' => 'admin/dashboard',
             'icon' => 'fas fa-tachometer-alt',
         ],
@@ -262,6 +262,10 @@ return [
                 [
                     'text' => 'orders',
                     'url' => 'admin/orders',
+                ],
+                [
+                    'text' => 'users',
+                    'url' => 'admin/users',
                 ],
             ],
         ],

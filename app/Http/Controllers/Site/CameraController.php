@@ -10,7 +10,7 @@ class CameraController extends Controller
 
     public function __invoke()
     {
-        $cameras = Product::where('category_id', 1)->get();
+        $cameras = Product::where(['category_id' => 1, 'status' => 1])->get();
         return view('site.cameras')->with('cameras', $cameras);
     }
 }

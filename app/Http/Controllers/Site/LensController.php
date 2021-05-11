@@ -10,7 +10,7 @@ class LensController extends Controller
 
     public function __invoke()
     {
-        $lenses = Product::where('category_id', 2)->get();
+        $lenses = Product::where(['category_id' => 2, 'status' => 1])->get();
         return view('site.lenses')->with('lenses', $lenses);
     }
 }

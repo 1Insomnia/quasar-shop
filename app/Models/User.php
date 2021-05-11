@@ -50,6 +50,10 @@ class User extends Authenticatable
         return $this->role === self::ADMIN_ROLE;
     }
 
+    public function getRole () {
+        return $this->role;
+    }
+
     /**
      * @return HasMany
      */

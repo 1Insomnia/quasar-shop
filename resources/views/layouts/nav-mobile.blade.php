@@ -27,11 +27,14 @@
                 Contact
             </a>
         </li>
-        <li>
-            <a class="text-4xl text-primary-dark hover:underline md:text-6xl" href="{{ route('user.profile.show', auth()->user()->id) }}">
-                Account
-            </a>
-        </li>
+        @auth
+            <li>
+                <a class="text-4xl text-primary-dark hover:underline md:text-6xl"
+                   href="{{ route('user.profile.show', auth()->user()->id) }}">
+                    Account
+                </a>
+            </li>
+        @endauth
     </ul>
     @guest
         <div class="mt-2 text-center">
