@@ -39,7 +39,6 @@
                         </ul>
                     </div>
                     <div class="py-4">
-
                         <ul class="space-y-2">
                             <li class="flex items-center space-x-2">
                                 <span class="block font-semibold">Total :</span>
@@ -57,7 +56,7 @@
                 <h2>Confirm - Shipping infos and Proceed to payment</h2>
                 <div class="">
                     <form>
-                        <input id="card-holder-name" type="text">
+                        <input id="card-holder-name" type="text" aria-label="card holder name">
                         <div id="card-element"></div>
                         <button class="btn-dark-xl" id="checkout-button">
                             Process Payment

@@ -75,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout/confirm/{id}', [CheckoutController::class, 'checkoutConfirm'])->name('checkout.confirm');
     Route::post('/checkout/payment', [CheckoutController::class, 'checkoutPayment'])->name('checkout.payment');
     Route::delete('/checkout/delete/{id}', [CheckoutController::class, 'deleteOrder'])->name('checkout.delete');
+    Route::get('/checkout/payment/success/{id}', [CheckoutController::class, 'paymentSuccess'])->name('checkout.payment.success');
+    Route::get('/checkout/payment/fail/{id}', [CheckoutController::class, 'paymentFail'])->name('checkout.payment.fail');
 });
 
 // User Controller

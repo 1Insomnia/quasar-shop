@@ -14,19 +14,11 @@ class CheckoutController extends Controller
 {
     private OrderRepository $orderRepository;
 
-    /**
-     * CheckoutController constructor.
-     * @param OrderRepository $orderRepository
-     */
     public function __construct(OrderRepository $orderRepository)
     {
         $this->orderRepository = $orderRepository;
     }
 
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
-     */
     public function getCheckout(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $user = User::find(auth()->user()->id);
@@ -34,9 +26,6 @@ class CheckoutController extends Controller
             ->with(['user' => $user]);
     }
 
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function placeOrder(Request $request)
     {
         if (Cart::count() <= 0) return;
@@ -91,12 +80,44 @@ class CheckoutController extends Controller
             'payment_method_types' => ['card'],
             'line_items' => $context,
             'mode' => 'payment',
-            'success_url' => route('cart.index'),
-            'cancel_url' => route('cart.index'),
+            'success_url' => route('checkout.payment.success', $request->id),
+            'cancel_url' => route('checkout.payment.fail', $request->id),
 
         ]);
 
+        $order->update([
+            'payment_id' => $checkout_session->id,
+            'payment_method' => 'card',
+        ]);
+
         return response()->json(["id" => $checkout_session->id]);
+    }
+
+    public function paymentSuccess(string $id)
+    {
+        $order = Order::where('order_number', $id)->first();
+
+        Cart::destroy();
+
+        $order->update([
+            'status' => 'completed',
+            'payment_status' => 1,
+        ]);
+
+        return view('site.checkout.payment-success');
+    }
+
+    public function paymentFail(string $id)
+    {
+        $order = Order::where('order_number', $id)->first();
+
+        Cart::destroy();
+
+        $order->update([
+            'status' => 'declined',
+        ]);
+
+        return view('site.checkout.payment-fail');
     }
 
     public function deleteOrder($id)
