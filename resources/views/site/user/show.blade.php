@@ -72,6 +72,22 @@
                     </div>
                 </a>
             </div>
+            @if ($user->role === 'admin')
+                <div class="navCard">
+                    <a href="{{ route('admin.dashboard') }}">
+                        <div
+                            class="flex flex-col items-center justify-center max-w-sm shadow-lg p-4 md:p-8 transform hover:scale-105 hover:text-primary-dark transition duration-300 ease-in-out">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mb-2 md:w-12 md:h-12 md:mb-4" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                            </svg>
+                            <h4 class="text-sm font-semibold mb-1 md:text-lg md:mb-2 lg:text-xl">Manage Shop</h4>
+                            <p class="text-sm md:text-base lg:text-lg">Dashboard</p>
+                        </div>
+                    </a>
+                </div>
+            @endif
         </nav>
     </section>
 @endsection
@@ -82,9 +98,7 @@
 
         navCard.forEach(
             (link, index) =>
-            (link.style.animationDelay = `${
-                        index / navCard.length + 0.2
-                    }s`)
+            (link.style.animationDelay = `${index / navCard.length + 0.2}s`)
         );
 
     </script>

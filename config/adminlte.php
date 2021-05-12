@@ -226,12 +226,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'logout',
-            'url' => 'logout',
-            'icon' => 'fas fa-sign-out-alt',
-        ],
-        [
-            'text' => 'DashboardController',
+            'text' => 'Dashboard',
             'url' => 'admin/dashboard',
             'icon' => 'fas fa-tachometer-alt',
         ],

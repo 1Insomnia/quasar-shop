@@ -22,7 +22,6 @@ class AddColumnUsers extends Migration
             $table->string('zipcode')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
-            $table->string('cc_number')->nullable();
             $table->enum('role', ['user', 'admin'])->default('user');
         });
     }
@@ -42,7 +41,6 @@ class AddColumnUsers extends Migration
             $table->dropColumn('zipcode');
             $table->dropColumn('country');
             $table->dropColumn('city');
-            $table->dropColumn('cc_number');
             $table->dropColumn('role');
         });
     }

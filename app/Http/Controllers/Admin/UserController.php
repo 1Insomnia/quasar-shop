@@ -24,10 +24,10 @@ class UserController extends Controller
         'address' => 'nullable',
         'zipcode' => 'nullable',
         'city' => 'nullable',
-        'country' => 'nullable'
+        'country' => 'nullable',
     ];
 
-    private $index = "admin.users.index";
+    private $index_url = "admin.users.index";
 
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::simplePaginate(10);
+        $users = User::orderBy('id', 'desc')->simplePaginate(10);
 
         return view('admin.users.index')
             ->with(['users' => $users]);
@@ -75,7 +75,7 @@ class UserController extends Controller
                 'country' => $request->country,
         ]);
 
-        return redirect()->route($this->index)->with('message', "User {$request->first_name} {$request->last_name} created");
+        return redirect()->route($this->index_url)->with('message', "User {$request->first_name} {$request->last_name} created");
     }
 
     /**
@@ -122,7 +122,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route($this->index)->with('message', 'User profile updated.');
+        return redirect()->route($this->index_url)->with('message', 'User profile updated.');
     }
 
     /**
@@ -131,12 +131,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $user->delete();
-
-        return view($this->index)
-            ->with('message', "User {$user->first_name} {$user->last_name} deleted");
+        return redirect()->route($this->index_url)
+            ->with('message', "User {$user->first_name} {$user->last_name} deleted.");
     }
 }

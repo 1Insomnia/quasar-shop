@@ -17,18 +17,23 @@
                                 <p class="text-muted mb-0">{{ $user->role }}</p>
                             </div>
                             <div class="border-top mt-3">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a href="{{ route('admin.password.index') }}">
-                                            <button class="btn btn-info btn-sm mt-3 mb-4">Change Password</button>
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <button class="btn btn-info btn-sm mt-3 mb-4">Edit Profile</button>
-                                    </div>
-                                    <div class="col-4">
-                                        <button class="btn btn-info btn-sm mt-3 mb-4">Delete Profile</button>
-                                    </div>
+                                <div class="">
+                                    <a href="{{ route('admin.password.index') }}">
+                                        <button class="btn btn-info btn-sm mt-3 mb-4">Change Password</button>
+                                    </a>
+                                </div>
+                                <div class="">
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        @method('POST')
+                                        <button class="btn btn-info btn-sm mt-3 mb-4">Logout</button>
+                                    </form>
+                                </div>
+                                <div class="">
+                                    <button class="btn btn-info btn-sm mt-3 mb-4">Edit Profile</button>
+                                </div>
+                                <div class="">
+                                    <button class="btn btn-info btn-sm mt-3 mb-4">Delete Profile</button>
                                 </div>
                             </div>
                         </div>
