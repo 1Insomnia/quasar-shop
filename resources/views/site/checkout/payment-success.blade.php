@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Payment Success')
+@section('title', 'Quasar Optic - Payment Success')
 
 @section('content')
     <section class="container min-h-screen px-5 py-12 lg:py-24">

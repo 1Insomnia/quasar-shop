@@ -1,4 +1,5 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Gallery Post Show')
 
 @section('content')
     <section class="container">

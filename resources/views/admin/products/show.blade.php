@@ -1,4 +1,5 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Product Show')
 
 @section('content')
     <section class="container">
@@ -12,16 +13,16 @@
                 <li class="list-group-item">
                     @switch($product->brand_id)
                         @case(1)
-                        <span>Canon</span>
+                            <span>Canon</span>
                         @break
                         @case(2)
-                        <span>Nikon</span>
+                            <span>Nikon</span>
                         @break
                         @case(3)
-                        <span>Pentax</span>
+                            <span>Pentax</span>
                         @break
                         @case(4)
-                        <span>Irix</span>
+                            <span>Irix</span>
                         @break
                     @endswitch
                 </li>
@@ -29,10 +30,10 @@
                 <li class="list-group-item">
                     @switch($product->status)
                         @case (0)
-                        <span class="text-danger">Unavailable</span>
+                            <span class="text-danger">Unavailable</span>
                         @break
                         @case (1)
-                        <span class="text-success">Available</span>
+                            <span class="text-success">Available</span>
                         @break
                     @endswitch
                 </li>

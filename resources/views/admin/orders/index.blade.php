@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Admin - Orders')
+@section('title', 'Quasar Optic - Admin - Orders Index')
 
 @section('content')
     <section>
@@ -8,16 +8,16 @@
         <div>
             <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th>Order Number</th>
-                    <th>Place By</th>
-                    <th>Total Amount</th>
-                    <th>Item Quantity</th>
-                    <th>Payment Status</th>
-                    <th>Status</th>
-                    <th>Details</th>
-                    <th>Delete</th>
-                </tr>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Place By</th>
+                        <th>Total Amount</th>
+                        <th>Item Quantity</th>
+                        <th>Payment Status</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 @foreach ($orders as $order)
                     <tr>
@@ -39,7 +39,8 @@
                             @else
                                 <span class="badge badge-danger">Not Completed</span>
                             @endif
-                        </td>                        <td>
+                        </td>
+                        <td>
                             @if ($order->status === 1)
                                 <span class="badge badge-success">Completed</span>
                             @else
@@ -56,9 +57,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    data-id="{{ $order->id }}"
-                                    id="btnDelete">
+                                data-target="#exampleModal" data-id="{{ $order->id }}" id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
@@ -71,7 +70,7 @@
     </section>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -107,5 +106,6 @@
         }));
 
         const successModal = document.querySelector("#success-modal");
+
     </script>
 @endsection

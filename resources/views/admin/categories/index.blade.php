@@ -1,4 +1,6 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Categories Index')
+
 @section('content')
     <section>
         <x-admin-title-block title="Category"></x-admin-title-block>
@@ -14,13 +16,13 @@
         <div>
             <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th>Category Name</th>
-                    <th>Category Status</th>
-                    <th>Detail</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Category Status</th>
+                        <th>Detail</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 @foreach ($categories as $category)
                     <tr>
@@ -52,8 +54,8 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    data-id="{{ $category->id }}" data-name={{ $category->name }} id="btnDelete">
+                                data-target="#exampleModal" data-id="{{ $category->id }}"
+                                data-name={{ $category->name }} id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
@@ -65,7 +67,7 @@
     </section>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,11 +100,13 @@
             const formDelete = document.querySelector("#formDelete");
             const modalBody = document.querySelector('.modal-body');
 
-            modalBody.innerHTML = `If you want to delete category : <span class="text-danger">${categoryName}</span> click delete`;
+            modalBody.innerHTML =
+                `If you want to delete category : <span class="text-danger">${categoryName}</span> click delete`;
 
             formDelete.action = `categories/${id}`;
         }));
 
         const successModal = document.querySelector("#success-modal");
+
     </script>
 @endsection

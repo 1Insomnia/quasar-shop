@@ -1,6 +1,5 @@
 @extends("admin.layouts.master")
-
-@section('title', 'Admin - Category Show')
+@section('title', 'Quasar Optic - Admin - Category Show')
 
 @section('content')
     <section class="container">
@@ -27,9 +26,8 @@
                     </a>
                 </div>
                 <div class="my-2">
-                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                            data-target="#exampleModal"
-                            data-id="{{ $category->id }}" data-name={{ $category->name }} id="btnDelete">
+                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#exampleModal"
+                        data-id="{{ $category->id }}" data-name={{ $category->name }} id="btnDelete">
                         <i class="fas fa-trash-alt pr-2"></i>
                         Delete
                     </button>
@@ -39,7 +37,7 @@
     </section>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -70,9 +68,11 @@
             const formDelete = document.querySelector("#formDelete");
             const modalBody = document.querySelector('.modal-body');
 
-            modalBody.innerHTML = `If you want to delete category : <span class="text-danger">${categoryName}</span> click delete`;
+            modalBody.innerHTML =
+                `If you want to delete category : <span class="text-danger">${categoryName}</span> click delete`;
 
             formDelete.action = `{{ url('admin/categories') }}/${id}`;
         }));
+
     </script>
 @endsection

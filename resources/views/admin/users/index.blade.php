@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Admin - Users')
+@section('title', 'Quasar Optic - Admin - Users Index')
 
 @section('content')
     <section>

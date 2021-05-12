@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'DashboardController')
+@section('title', 'Quasar Optic - Admin Dashboard')
 
 @section('content_header')
 @endsection

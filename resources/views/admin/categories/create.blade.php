@@ -1,4 +1,5 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Category Create')
 
 @section('content')
     <div class="mt-5 text-center">

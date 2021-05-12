@@ -1,4 +1,6 @@
 @extends('admin.layouts.master')
+@section('title', 'Quasar Optic - Admin - Update Password')
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

@@ -1,6 +1,5 @@
 @extends('layouts.master')
-
-@section('title', 'Product')
+@section('title', 'Quasar Optic - Product Details')
 
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">

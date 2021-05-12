@@ -1,5 +1,6 @@
 @extends('admin.layouts.master')
-@section('title', 'Admin - User Create')
+@section('title', 'Quasar Optic - Admin - User Create')
+
 @section('content')
     <div class="mt-5 text-center">
         <h1>Add a new <span class="text-info">user</span></h1>
@@ -38,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-label">Email :</label>
-                        <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}">
+                        <input type="email" class="form-control" name="email" id="email">
                         @error('email')
                             <div class="text-warning mt-2" role="alert">
                                 {{ $message }}*
@@ -47,8 +48,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password" class="form-label">Password :</label>
-                        <input type="password" class="form-control" name="password" id="password"
-                            value="{{ old('password') }}">
+                        <input type="password" class="form-control" name="password" id="password">
                         @error('password')
                             <div class="text-warning mt-2" role="alert">
                                 {{ $message }}*
@@ -57,8 +57,8 @@
                     </div>
                     <div class="form-group">
                         <label for="password_confirmation" class="form-label">Password Confirmation :</label>
-                        <input type="password_confirmation" class="form-control" name="password_confirmation"
-                            id="password_confirmation" value="{{ old('password_confirmation') }}">
+                        <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
+                            value="{{ old('password_confirmation') }}">
                         @error('password_confirmation')
                             <div class="text-warning mt-2" role="alert">
                                 {{ $message }}*
@@ -66,7 +66,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="role" class="form-label">Password Confirmation :</label>
+                        <label for="role" class="form-label">Role :</label>
                         <select class="custom-select" name="role" id="role">
                             <option value="user" selected>User</option>
                             <option value="admin">Admin</option>
@@ -131,7 +131,7 @@
                     </div>
                     <div class="card-footer bg-white pl-0 ">
                         <button class="btn btn-primary btn-lg" type="submit">
-                            Add Product
+                            Add User
                         </button>
                     </div>
                 </div>

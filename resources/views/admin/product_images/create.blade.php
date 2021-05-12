@@ -1,4 +1,6 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Product Image Create')
+
 @section('content')
     <div class="mt-5 text-center">
         <h1>Add a new <span class="text-info">product image</span></h1>
@@ -14,23 +16,23 @@
                     <div class="form-group">
                         <label for="productId" class="form-label">Product Name :</label>
                         <select class="custom-select" name="product_id" id="productId">
-                            @foreach($products as $product)
+                            @foreach ($products as $product)
                                 <option value="{{ $product->id }}"> {{ $product->name }}</option>
                             @endforeach
                         </select>
                         @error('product_id')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="image" class="form-label">Product Image :</label>
                         <input type="file" class="form-control-file" name="image" id="image">
                         @error('image')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="card-footer bg-white pl-0">

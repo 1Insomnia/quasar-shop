@@ -1,4 +1,6 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Brands Index')
+
 @section('content')
     <section>
         <x-admin-title-block title="Brands"></x-admin-title-block>
@@ -14,13 +16,13 @@
         <div>
             <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th>Brand Name</th>
-                    <th>Brand Status</th>
-                    <th>Detail</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                    <tr>
+                        <th>Brand Name</th>
+                        <th>Brand Status</th>
+                        <th>Detail</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 @foreach ($brands as $brand)
                     <tr>
@@ -52,8 +54,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    data-id="{{ $brand->id }}" id="btnDelete">
+                                data-target="#exampleModal" data-id="{{ $brand->id }}" id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
@@ -64,7 +65,7 @@
         </div>
     </section>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,5 +98,6 @@
             const id = e.target.dataset.id;
             formDelete.action = `brands/${id}`;
         }));
+
     </script>
 @endsection

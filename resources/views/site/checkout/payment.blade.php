@@ -1,6 +1,5 @@
 @extends('layouts.master')
-
-@section('title', 'Checkout')
+@section('title', 'Quasar Optic - Checkout Payment')
 
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -86,37 +85,38 @@
 
         let checkoutButton = document.getElementById("checkout-button");
 
-        checkoutButton.addEventListener("click", function (e) {
+        checkoutButton.addEventListener("click", function(e) {
             e.preventDefault();
             fetch("{{ action('App\Http\Controllers\Site\CheckoutController@checkoutPayment') }}", {
-                method: "POST",
-                headers: {
-                    'method': 'POST',
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': token,
-                    credentials: 'same-origin',
-                },
-                body: JSON.stringify({
-                    id: "{{ $order->order_number }}"
+                    method: "POST",
+                    headers: {
+                        'method': 'POST',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': token,
+                        credentials: 'same-origin',
+                    },
+                    body: JSON.stringify({
+                        id: "{{ $order->order_number }}"
+                    })
                 })
-            })
-                .then(function (response) {
+                .then(function(response) {
                     return response.json();
                 })
-                .then(function (session) {
+                .then(function(session) {
                     return stripe.redirectToCheckout({
                         sessionId: session.id
                     });
                 })
-                .then(function (result) {
+                .then(function(result) {
                     if (result.error) {
                         alert(result.error.message);
                     }
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.error("Error:", error);
                 });
         });
+
     </script>
 @endpush

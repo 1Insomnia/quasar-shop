@@ -1,4 +1,5 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Brand Edit')
 
 @section('content')
     <div class="container mt-5" style="max-width: 790px;">

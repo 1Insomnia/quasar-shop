@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Contact')
+@section('title', 'Quasar Optic - Contact')
 
 @section('content')
     <section class="h-screen-full text-gray-600 body-font relative">

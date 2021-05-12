@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Gallery')
+@section('title', 'Quasar Optic - Gallery')
 
 @section('content')
     <section class="bg-neutral-dark overflow-x-hidden" id="gallery">

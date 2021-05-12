@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Admin - Product Images')
+@section('title', 'Quasar Optic - Admin - Product Images Index')
 
 @section('content')
     <section>
@@ -16,20 +16,20 @@
         <div>
             <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th>Product Image Preview</th>
-                    <th>Product Name</th>
-                    <th>Product Image Path</th>
-                    <th>Detail</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                    <tr>
+                        <th>Product Image Preview</th>
+                        <th>Product Name</th>
+                        <th>Product Image Path</th>
+                        <th>Detail</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 @foreach ($product_images as $product_image)
                     <tr>
                         <td>
                             <img class="img-fluid img-thumbnail" src="{{ asset($product_image->image_path) }}" alt=""
-                                 style="height: 200px; width: 200px; object-fit: cover;">
+                                style="height: 200px; width: 200px; object-fit: cover;">
                         </td>
                         <td>
                             Product Name : {{ $product_image->product->name }}
@@ -55,9 +55,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    data-id="{{ $product_image->id }}"
-                                    id="btnDelete">
+                                data-target="#exampleModal" data-id="{{ $product_image->id }}" id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
@@ -66,11 +64,13 @@
                 @endforeach
             </table>
         </div>
-        {{ $product_images->links() }}
+        <div class="py-4">
+            {{ $product_images->links() }}
+        </div>
     </section>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -106,5 +106,6 @@
         }));
 
         const successModal = document.querySelector("#success-modal");
+
     </script>
 @endsection

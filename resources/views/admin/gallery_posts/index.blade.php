@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Admin - Gallery Posts')
+@section('title', 'Quasar Optic - Admin - Gallery Posts Index')
 
 @section('content')
     <section>
@@ -16,23 +16,23 @@
         <div>
             <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th>Image Preview</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Gear</th>
-                    <th>Author</th>
-                    <th>Location</th>
-                    <th>Detail</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                    <tr>
+                        <th>Image Preview</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Gear</th>
+                        <th>Author</th>
+                        <th>Location</th>
+                        <th>Detail</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 @foreach ($gallery_posts as $gallery_post)
                     <tr>
                         <td>
                             <img class="img-fluid img-thumbnail" src="{{ asset($gallery_post->image_path) }}" alt=""
-                                 style="height: 200px; width: 200px; object-fit: cover;">
+                                style="height: 200px; width: 200px; object-fit: cover;">
                         </td>
                         <td>
                             {{ $gallery_post->title }}
@@ -67,9 +67,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    data-id="{{ $gallery_post->id }}"
-                                    id="btnDelete">
+                                data-target="#exampleModal" data-id="{{ $gallery_post->id }}" id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
@@ -78,11 +76,13 @@
                 @endforeach
             </table>
         </div>
-        {{ $gallery_posts->links() }}
+        <div class="py-4">
+            {{ $gallery_posts->links() }}
+        </div>
     </section>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -118,5 +118,6 @@
         }));
 
         const successModal = document.querySelector("#success-modal");
+
     </script>
 @endsection

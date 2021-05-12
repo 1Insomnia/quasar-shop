@@ -5,9 +5,30 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    private $rules = [
+        'first_name' => 'required|max:255',
+        'last_name' => 'required|max:255',
+        'email' => 'required|email|max:255',
+        'role' => 'required',
+        'password' => [
+            'required',
+            'min:6',
+//                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'confirmed'
+        ],
+        'phone' => 'nullable',
+        'address' => 'nullable',
+        'zipcode' => 'nullable',
+        'city' => 'nullable',
+        'country' => 'nullable'
+    ];
+
+    private $index = "admin.users.index";
+
     /**
      * Display a listing of the resource.
      *
@@ -39,25 +60,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'role' => 'required',
-            'password' => [
-                'required',
-                'min:6',
-//                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
-                'confirmed',
-            ],
-            'phone' => 'nullable',
-            'address' => 'nullable',
-            'zipcode' => 'nullable',
-            'city' => 'nullable',
-            'country' => 'nullable',
-        ];
+        $request->validate($this->rules);
 
-        $request->validate($rules);
+        User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'role' => $request->role,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'zipcode' => $request->zipcode,
+                'city' => $request->city,
+                'country' => $request->country,
+        ]);
+
+        return redirect()->route($this->index)->with('message', "User {$request->first_name} {$request->last_name} created");
     }
 
     /**
@@ -97,7 +115,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $this->rules['password'] = "nullable";
+        $request->validate($this->rules);
+
+        $user->update($request->all());
+
+        return redirect()->route($this->index)->with('message', 'User profile updated.');
     }
 
     /**
@@ -108,10 +133,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->delete();
 
-        return view('admin.users.index')
+        return view($this->index)
             ->with('message', "User {$user->first_name} {$user->last_name} deleted");
     }
 }

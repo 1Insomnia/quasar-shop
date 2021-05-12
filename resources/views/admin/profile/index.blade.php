@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Quasar Optic - Admin - User Profile')
 
 @section('content')
     <x-admin-big-feed-back></x-admin-big-feed-back>

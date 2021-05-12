@@ -1,4 +1,5 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Gallery Post Show')
 
 @section('content')
     <div class="mt-5 text-center">
@@ -32,7 +33,8 @@
                     </div>
                     <div class="form-group">
                         <label for="location" class="form-label">Gallery Post Location :</label>
-                        <input type="text" class="form-control" name="location" id="location" value="{{ old('location') }}">
+                        <input type="text" class="form-control" name="location" id="location"
+                            value="{{ old('location') }}">
                         @error('location')
                             <div class="text-warning mt-2" role="alert">
                                 {{ $message }}*

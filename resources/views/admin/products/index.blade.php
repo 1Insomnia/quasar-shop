@@ -1,4 +1,6 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Products Index')
+
 @section('content')
     <section>
         <x-admin-title-block title="Products"></x-admin-title-block>
@@ -14,17 +16,17 @@
         <div>
             <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Product Price</th>
-                    <th>Product Stock</th>
-                    <th>Product Status</th>
-                    <th>Product Brand</th>
-                    <th>Product Category</th>
-                    <th>Details</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Product Stock</th>
+                        <th>Product Status</th>
+                        <th>Product Brand</th>
+                        <th>Product Category</th>
+                        <th>Details</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                 </thead>
                 @foreach ($products as $product)
                     <tr>
@@ -32,7 +34,7 @@
                             {{ $product->name }}
                         </td>
                         <td>
-                            $ {{ number_format($product->price) }}
+                            $ {{ number_format($product->price, 2) }}
                         </td>
                         <td>
                             {{ $product->stock }}
@@ -68,8 +70,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal"
-                                    data-target="#exampleModal"
-                                    data-id="{{ $product->id }}" id="btnDelete">
+                                data-target="#exampleModal" data-id="{{ $product->id }}" id="btnDelete">
                                 <i class="fas fa-trash-alt pr-2"></i>
                                 Delete
                             </button>
@@ -80,7 +81,7 @@
         </div>
     </section>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -116,5 +117,6 @@
             const id = e.target.dataset.id;
             formDelete.action = `products/${id}`;
         }));
+
     </script>
 @endsection

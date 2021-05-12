@@ -1,4 +1,5 @@
 @extends("admin.layouts.master")
+@section('title', 'Quasar Optic - Admin - Product Edit')
 
 @section('content')
     <div class="container mt-5" style="max-width: 790px;">
@@ -13,8 +14,7 @@
             <div class="card-header">
                 <h2 class="card-title">Edit Product : {{ ucfirst($product->name) }}</h2>
             </div>
-            <form action="{{ route('admin.products.update', $product->id) }}" method="post"
-                  enctype="multipart/form-data">
+            <form action="{{ route('admin.products.update', $product->id) }}" method="post" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="card-body">
@@ -22,53 +22,52 @@
                         <label for="name" class="form-label">Product : Name</label>
                         <input type="text" class="form-control" name="name" id="name" value="{{ $product->name }}">
                         @error('name')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="price" class="form-label">Product : Price</label>
                         <input type="text" class="form-control" name="price" id="price" value="{{ $product->price }}">
                         @error('price')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="stock" class="form-label">Product : Stock</label>
                         <input type="text" class="form-control" name="stock" id="stock" value="{{ $product->stock }}">
                         @error('stock')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="category" class="form-label">Product : Category</label>
                         <select class="custom-select" name="category" id="category">
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}"
-                                        @if ($product->category->id === $category->id) selected @endif>
+                                <option value="{{ $category->id }}" @if ($product->category->id === $category->id) selected @endif>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
                         </select>
                         @error('category')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="image" class="form-label">Product Image : </label>
                         <input type="file" class="form-control-file" name="image" id="image"
-                               value="{{ $product->image_path }}">
+                            value="{{ $product->image_path }}">
                         @error('image')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -76,16 +75,15 @@
                         <div>
                             <select class="custom-select" name="brand" id="brand">
                                 @foreach ($brands as $brand)
-                                    <option
-                                        value={{ $brand->id }} @if ($product->brand->id === $brand->id) selected @endif>
+                                    <option value={{ $brand->id }} @if ($product->brand->id === $brand->id) selected @endif>
                                         {{ $brand->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         @error('brand')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -95,22 +93,22 @@
                             <option value="0" @if ($product->status === 0) selected @endif>Unavailable</option>
                         </select>
                         @error('status')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="description" class="form-label">Product : Description</label>
                         <div>
                             <textarea class="form-control" name="description" id="description" cols="30" rows="10">
-                                {{ $product->description }}
-                            </textarea>
+                                        {{ $product->description }}
+                                    </textarea>
                         </div>
                         @error('description')
-                        <div class="text-warning mt-2" role="alert">
-                            {{ $message }}*
-                        </div>
+                            <div class="text-warning mt-2" role="alert">
+                                {{ $message }}*
+                            </div>
                         @enderror
                     </div>
                     <div class="card-footer bg-white pl-0">
