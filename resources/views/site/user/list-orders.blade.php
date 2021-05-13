@@ -52,6 +52,12 @@
                                     <span class="text-primary-dark font-semibold text-lg">Total :</span>
                                     <span>$ {{ number_format($order->grand_total, 2) }}</span>
                                 </div>
+                                <div>
+                                    <span class="text-primary-dark font-semibold text-lg">Status :</span>
+                                    @if($order->status === "completed")
+                                    <span class="text-success-dark">{{ $order->status }}</span>
+                                    @endif
+                                </div>
                             </div>
                         </li>
                     @endforeach

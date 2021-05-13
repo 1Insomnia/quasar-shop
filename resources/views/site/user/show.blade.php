@@ -11,7 +11,7 @@
 </style>
 @section('title', 'Quasar Optic - User Profile')
 @section('content')
-    <section class="px-5 container pt-6 min-h-screen">
+    <section class="container px-5 py-12 lg:py-24 min-h-screen">
         <x-user-profile-header></x-user-profile-header>
         <nav class="py-6 md:py-12 grid grid-cols-2 gap-4 mg:gap-8 lg:grid-cols-4 lg:gap-12" role="navigation"
             aria-label="User navigation">

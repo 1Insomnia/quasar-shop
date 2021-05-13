@@ -76,7 +76,7 @@ class CartController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string                   $id
+     * @param string $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -89,7 +89,7 @@ class CartController extends Controller
             'quantity' => 'numeric|required|between:1,5',
         ]);
 
-        if($validates->fails()){
+        if ($validates->fails()) {
             Session::flash('error', 'Product quantity must be between 1 and 5');
             return response()->json([
                 'error' => 'Cart quantity has not been updated'
@@ -121,8 +121,13 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        Cart::remove($id);
-        return redirect()->route('cart.index')->with('message', 'Product deleted');
+        if ($id === "all") {
+            Cart::destroy();
+            return redirect()->route('cart.index')->with('message', 'Cart emptied');
+        } else {
+            Cart::remove($id);
+            return redirect()->route('cart.index')->with('message', 'Product Deleted');
+        }
     }
 
 }

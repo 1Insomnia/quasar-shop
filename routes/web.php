@@ -70,6 +70,12 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('products
 // Cart Controller
 Route::resource('cart', CartController::class)->middleware('auth')->only(['index', 'show', 'store', 'update', 'destroy']);
 
+// Privacy route
+
+Route::get('/privacy', function () {
+    return view('site.privacy.index');
+});
+
 // Checkout Controller
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');

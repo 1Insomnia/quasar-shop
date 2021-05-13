@@ -13,22 +13,22 @@
                 <h2 class="uppercase font-medium text-neutral-dark tracking-widest text-sm mb-3">Explore</h2>
                 <nav class="list-none mb-10">
                     <li>
-                        <a class="text-gray-600 hover:text-primary-dark" href="{{-- route('cameras') --}}">
+                        <a class="text-gray-600 hover:text-primary-dark" href="{{ route('cameras') }}">
                             Cameras
                         </a>
                     </li>
                     <li>
-                        <a class="text-gray-600 hover:text-primary-dark" href="{{-- route('lenses') --}}">
+                        <a class="text-gray-600 hover:text-primary-dark" href="{{ route('lenses') }}">
                             Lenses
                         </a>
                     </li>
                     <li>
-                        <a class="text-gray-600 hover:text-primary-dark" href="{{-- route('gallery') --}}">
+                        <a class="text-gray-600 hover:text-primary-dark" href="{{ route('gallery') }}">
                             Gallery
                         </a>
                     </li>
                     <li>
-                        <a class="text-gray-600 hover:text-primary-dark" href="{{-- route('contact') --}}">
+                        <a class="text-gray-600 hover:text-primary-dark" href="{{ route('contact') }}">
                             Contact
                         </a>
                     </li>
