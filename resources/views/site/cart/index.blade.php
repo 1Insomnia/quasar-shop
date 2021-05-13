@@ -16,6 +16,12 @@
                 </div>
             @endif
         </div>
+        @if (session('error'))
+            <div>
+                <h2 class="text-center font-bold text-error-default text-xl py-4">{{ session('error') }}</h2>
+            </div>
+        @endif
+        </div>
     </section>
     @if ($cart_count >= 1)
         <section class="container px-5 min-h-screen">
@@ -52,11 +58,16 @@
                                             <div class="w-20 h-10">
                                                 <div class="relative flex flex-row w-full h-8">
                                                     <input id="inputQty" type="number" value="{{ $row->qty }}"
-                                                        aria-label="inputQt" data-id="{{ $row->rowId }}" minlength="1"
-                                                        maxlength="100"
+                                                        aria-label="inputQt" data-id="{{ $row->rowId }}"
+                                                        data-stock="{{ $row->model->stock }}" name="input_quantity"
                                                         class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
                                                 </div>
                                             </div>
+                                            @error('input_quantity')
+                                                <span class="py-2 text-error-default">
+                                                    Quantity must be between 1 and 5.
+                                                </span>
+                                            @enderror
                                         </td>
                                         <td class="hidden text-right md:table-cell">
                                             <span class="text-sm lg:text-base font-medium">
@@ -146,18 +157,24 @@
         inputQty.forEach(item => item.addEventListener("change", async (e) => {
             const rowId = e.target.dataset.id
             const qty = parseInt(e.target.value)
-            const res = await fetch(`cart/${rowId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': token,
-                    credentials: 'same-origin',
-                },
-                body: JSON.stringify({
-                    quantity: qty,
-                })
-            });
+            const productStock = e.target.dataset.stock;
+            try {
+                const res = await fetch(`cart/${rowId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': token,
+                        credentials: 'same-origin',
+                    },
+                    body: JSON.stringify({
+                        quantity: qty,
+                        stock: productStock,
+                    })
+                });
+                const data = await res.json();
+                console.log(data);
+            } catch (err) {}
             window.location.reload()
         }))
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 
 class CartController extends Controller
@@ -61,7 +63,7 @@ class CartController extends Controller
                 ],
                 'associatedModel' => $product,
             ]
-        );
+        )->associate(Product::class);
         return response()->json(['ok' => Cart::content()]);
     }
 
@@ -80,6 +82,32 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $data = $request->json()->all();
+
+        $validates = Validator::make($request->all(), [
+            'quantity' => 'numeric|required|between:1,5',
+        ]);
+
+        if($validates->fails()){
+            Session::flash('error', 'Product quantity must be between 1 and 5');
+            return response()->json([
+                'error' => 'Cart quantity has not been updated'
+            ]);
+        }
+
+        if ($data['quantity'] > $data['stock']) {
+            Session::flash('error', 'Product not available for the desired quantity');
+            return response()->json([
+                'error' => 'Cart quantity has not been updated'
+            ]);
+        }
+
+        // if ($request->quantity > $stock) {
+        //     $request->session()->flash('status', 'Not enough product in stock');
+        //     return response()->json(['status', 'Not enough product in stock']);
+        // }
+
         Cart::update($id, $request->quantity);
         return response()->json(['response' => 'Product updated']);
     }
@@ -96,4 +124,5 @@ class CartController extends Controller
         Cart::remove($id);
         return redirect()->route('cart.index')->with('message', 'Product deleted');
     }
+
 }

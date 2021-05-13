@@ -31,19 +31,32 @@
                             {{ $camera->name }}
                         </h3>
                         <div class="text-neutral-medium">
-                            <p class="mb-2 font-medium text-lg">$ {{ number_format($camera->price) }}</p>
+                            <p class="mb-2 font-medium text-lg">$ {{ $camera->price }}
+                            </p>
                             <p class="mb-2 truncate">
                                 {{ $camera->description }}
                             </p>
                             @guest
-                                <a class="btn-dark mt-2" id="orderNow" data-id="0">
-                                    Order Now
-                                </a>
+                                @if ($camera->stock !== 0)
+                                    <a class="btn-dark mt-2" id="orderNow" data-id="0">
+                                        Add to Cart
+                                    </a>
+                                @else
+                                    <span class="py-1 text-sm block text-error-default">
+                                        Out of stock
+                                    </span>
+                                @endif
                             @endguest
                             @auth
-                                <a class="btn-dark mt-2" id="orderNow" data-id="{{ $camera->id }}">
-                                    Order Now
-                                </a>
+                                @if ($camera->stock !== 0)
+                                    <a class="btn-dark mt-2" id="orderNow" data-id="{{ $camera->id }}">
+                                        Add to Cart
+                                    </a>
+                                @else
+                                    <span class="py-1 text-sm block text-error-default">
+                                        Out of stock
+                                    </span>
+                                @endif
                             @endauth
                             <a class="btn-dark mt-2" href="{{ route('products.show', $camera->id) }}">
                                 Learn More

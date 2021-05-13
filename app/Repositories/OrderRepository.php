@@ -25,7 +25,7 @@ class OrderRepository
             'item_count' => $item_count,
             'payment_status' => 0,
             'payment_method' => null,
-            'payment_id' => 'payment_id' . strtoupper(uniqid()),
+            'payment_id' => 'tempid' . strtoupper(uniqid()),
             'first_name' => $params['first_name'],
             'last_name' => $params['last_name'],
             'address' => $params['address'],
@@ -41,6 +41,15 @@ class OrderRepository
 
             foreach( $items as $item){
                 $product = Product::find($item->id);
+                $product_stock = $product->stock;
+
+                if($product_stock < intval($item->qty)) {
+                    return false;
+                }
+
+                $product->update([
+                    'stock' => $product_stock - intval($item->qty),
+                ]);
 
                 $orderItem = new OrderItem([
                     'product_id' => $product->id,

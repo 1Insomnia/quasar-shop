@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Site;
 
+use Stripe\Stripe;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\OrderRepository;
-use Illuminate\Http\Request;
-use Stripe\Stripe;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use App\Models\Order;
-use App\Models\User;
+use Illuminate\Support\Facades\Session;
+
 
 class CheckoutController extends Controller
 {
@@ -57,10 +60,18 @@ class CheckoutController extends Controller
 
     public function checkoutPayment(Request $request)
     {
+
         Stripe::setApiKey('sk_test_51InfIODgJ03o6hxSJ7S7kd0Vc6iJaueAymW4o3tRdFEBPDnYmDHTlIRwyDQQ56hhQxpiFfQMnAOwnkAiGJfiNw11006wWM8Wn9');
 
         $context = [];
         $order = Order::where('order_number', $request->id)->first();
+
+        foreach( $order->items as $item) {
+            if ($item->quantity > $item->product->stock) {
+                Session::flash('error', 'A product in your order is not available anymore');
+                return response()->json(['success' => false], 400);
+            }
+        }
 
         foreach ($order->items as $item) {
             array_push($context,
@@ -126,4 +137,5 @@ class CheckoutController extends Controller
         $order->delete();
         return redirect()->route('cart.index')->with('message', "Order Canceled");
     }
+
 }

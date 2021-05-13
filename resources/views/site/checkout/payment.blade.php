@@ -5,6 +5,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <section class="container px-5 py-12 md:py-24 min-h-screen">
         <div class="max-w-xl p-8 shadow-lg mx-auto">
+            @if (session('error'))
+                <div>
+                    <h2 class="text-center font-bold text-error-default text-xl py-4">{{ session('error') }}</h2>
+                </div>
+            @endif
             <div>
                 <div>
                     <div>

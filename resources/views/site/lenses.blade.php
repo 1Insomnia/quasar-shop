@@ -35,14 +35,26 @@
                                 {{ $lens->description }}
                             </p>
                             @guest
-                                <a class="btn-dark mt-2" id="orderNow" data-id="0">
-                                    Order Now
-                                </a>
+                                @if ($lens->stock !== 0)
+                                    <a class="btn-dark mt-2" id="orderNow" data-id="0">
+                                        Add to Cart
+                                    </a>
+                                @else
+                                    <span class="py-1 text-sm block text-error-default">
+                                        Out of stock
+                                    </span>
+                                @endif
                             @endguest
                             @auth
-                                <a class="btn-dark mt-2" id="orderNow" data-id="{{ $lens->id }}">
-                                    Order Now
-                                </a>
+                                @if ($lens->stock !== 0)
+                                    <a class="btn-dark mt-2" id="orderNow" data-id="{{ $lens->id }}">
+                                        Add to Cart
+                                    </a>
+                                @else
+                                    <span class="py-1 text-sm block text-error-default">
+                                        Out of stock
+                                    </span>
+                                @endif
                             @endauth
                             <a class="btn-dark mt-2" href="{{ route('products.show', $lens->id) }}">
                                 Learn More
