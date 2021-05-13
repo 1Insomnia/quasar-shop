@@ -3,7 +3,7 @@
         class="container px-5 py-24 mx-auto flex md:items-center md:flex-row md:flex-nowrap flex-wrap flex-col lg:items-start">
         <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left lg:flex-grow">
             <a class="flex title-font font-medium items-center md:justify-start justify-center text-neutral-dark">
-                <span class="block font-bold text-2xl">QO</span>
+                <span class="block font-bold text-2xl text-primary-dark">QO</span>
                 <span class="ml-3 text-xl">Quasar Optic</span>
             </a>
             <p class="mt-2 text-sm text-neutral-light">Cameras and Lenses for astrophotography</p>
@@ -38,7 +38,7 @@
                 <h2 class="uppercase font-medium text-neutral-dark tracking-widest text-sm mb-3">Legal</h2>
                 <nav class="list-none mb-10">
                     <li>
-                        <a href="#" class=" text-gray-600 hover:text-primary-dark">Privacy</a>
+                        <a href="{{ route("privacy.index") }}" class=" text-gray-600 hover:text-primary-dark">Privacy</a>
                     </li>
                     <li>
                         <a href="#" class="text-gray-600 hover:text-primary-dark">Cookies</a>

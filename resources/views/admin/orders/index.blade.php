@@ -41,11 +41,7 @@
                             @endif
                         </td>
                         <td>
-                            @if ($order->status === 1)
-                                <span class="badge badge-success">Completed</span>
-                            @else
-                                <span class="badge badge-danger">Not Completed</span>
-                            @endif
+                            {{ $order->status }}
                         </td>
                         <td>
                             <a href="{{ route('admin.orders.show', $order->id) }}">

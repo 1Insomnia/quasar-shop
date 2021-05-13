@@ -74,7 +74,7 @@ Route::resource('cart', CartController::class)->middleware('auth')->only(['index
 
 Route::get('/privacy', function () {
     return view('site.privacy.index');
-});
+})->name('privacy.index');
 
 // Checkout Controller
 Route::middleware(['auth'])->group(function () {
