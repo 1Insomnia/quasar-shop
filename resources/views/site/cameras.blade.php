@@ -23,7 +23,7 @@
     <section id="products_cameras">
         <div class="container px-5 py-12 md:py-24 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3">
             @foreach ($cameras as $camera)
-                <article class="p-8 transform hover:scale-105 hover:shadow-xl  transition duration-500 ease-in-out"
+                <article class="p-8 transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-xl"
                     id="cameraCard">
                     <img alt="" class="mb-4" src="{{ asset($camera->image_path) }}">
                     <div>
@@ -31,7 +31,7 @@
                             {{ $camera->name }}
                         </h3>
                         <div class="text-neutral-medium">
-                            <p class="mb-2 font-medium text-lg">$ {{ $camera->price }}
+                            <p class="mb-2 font-medium text-lg">$ {{ $camera->getFormatedPrice() }}
                             </p>
                             <p class="mb-2 truncate">
                                 {{ $camera->description }}
@@ -128,19 +128,21 @@
 @endsection
 @push('javascript')
     <script defer>
-        const orderNow = document.querySelectorAll("#orderNow");
+        // CSRF protection
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         // Modal
         const modalCheckout = document.querySelector('#modalCheckout');
 
         // Btn
+        const orderNow = document.querySelectorAll("#orderNow");
         const btnContinue = document.querySelector('#btnContinue');
         const btnCheckout = document.querySelector('#btnCheckout');
         const btnClose = document.querySelectorAll('#btnClose');
 
-        orderNow.forEach(btn => btn.addEventListener('click', dispatchOrder));
         btnClose.forEach(btn => btn.addEventListener('click', dispatchClose));
+
+        orderNow.forEach(btn => btn.addEventListener('click', dispatchOrder));
 
         async function dispatchOrder(e) {
             e.preventDefault();

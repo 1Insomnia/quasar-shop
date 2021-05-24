@@ -23,11 +23,10 @@ class CreateProductsTable extends Migration
                 ->constrained('brands')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');;
-            $table->string('slug')->unique()->nullable();
             $table->string('name');
             $table->float('price');
-            $table->string('image_path');
             $table->unsignedInteger('stock');
+            $table->string('image_path');
             $table->text('description');
             $table->text('features')->nullable();
             $table->boolean('status');

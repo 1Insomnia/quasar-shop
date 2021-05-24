@@ -78,6 +78,7 @@
             </svg>
         </a>
     </div>
+    @auth
     <div class="mt-4">
         <a class="ml-3 block text-primary-dark"
            href="{{ route('cart.index') }}">
@@ -89,4 +90,5 @@
             <x-card-quantity></x-card-quantity>
         </a>
     </div>
+    @endauth
 </div>

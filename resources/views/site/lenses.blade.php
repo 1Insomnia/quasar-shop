@@ -30,7 +30,7 @@
                             {{ $lens->name }}
                         </h3>
                         <div class="text-neutral-medium">
-                            <p class="mb-2 font-medium text-lg">$ {{ number_format($lens->price) }}</p>
+                            <p class="mb-2 font-medium text-lg">$ {{ $lens->getFormatedPrice() }}</p>
                             <p class="mb-2 truncate">
                                 {{ $lens->description }}
                             </p>

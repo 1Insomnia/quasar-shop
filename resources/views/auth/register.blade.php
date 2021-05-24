@@ -14,9 +14,6 @@
                         <h1 class="mt-2 font-medium md:mt-4 ">Create an account</h1>
                     </div>
                     <div>
-                        About you
-                    </div>
-                    <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
                             <input type="text" name="first_name" placeholder=" " id="first_name"
                                 class="block p-4 w-full text-lg appearance-none focus:outline-none bg-transparent @error('first_name') border border-error-default @enderror"
@@ -62,9 +59,6 @@
                         @enderror
                     </div>
                     <div>
-                        Security
-                    </div>
-                    <div>
                         <div class="outline relative border-2 focus-within:border-primary-dark">
                             <input type="password" name="password" placeholder=" " id="password"
                                 class="block p-4 w-full text-lg appearance-none focus:outline-none bg-transparent @error('password') border border-error-default @enderror" />
@@ -97,7 +91,7 @@
                         </div>
                         <div class="text-center">
                             <p class="mt-4 text-neutral-light">Already have an account ?</p>
-                            <a class="mt-2 text-primary-dark md:mt-4" href='{{ route('login') }}'>Login</a>
+                            <a class="mt-2 text-primary-dark md:mt-4" href='{{ route('login') }}'>Register</a>
                         </div>
                     </div>
                 </form>

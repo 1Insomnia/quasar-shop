@@ -89,4 +89,57 @@
             </div>
         </div>
     </section>
+    <div class="fixed bottom-4 left-4 py-4 bg-white flex rounded-md shadow-xl border border-primary-dark"
+        style="width: 100%; max-width: 600px;" id="cookiePolicy">
+        <svg class="p-4 block flex-grow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.93 97.93" style="width: 175px;">
+            <g data-name="Layer 2">
+                <g data-name="Layer 1">
+                    <path
+                        d="M44 23.76a2.47 2.47 0 10.91 3.37 2.47 2.47 0 00-.91-3.37zM25.9 40.32a2.47 2.47 0 000 4.93 2.47 2.47 0 100-4.93z" />
+                    <circle cx="32.08" cy="65.86" r="2.47" />
+                    <path
+                        d="M56.38 69.91a2.47 2.47 0 101.14 1.49 2.47 2.47 0 00-1.14-1.49zM72 52.68a2.47 2.47 0 00-2.38 1.83 2.44 2.44 0 00.25 1.87 2.47 2.47 0 004.52-.59 2.44 2.44 0 00-.25-1.87A2.47 2.47 0 0072 52.68z" />
+                    <path
+                        d="M89.51 52.86A14 14 0 0181 47.2a14.09 14.09 0 01-20-11.52 14.09 14.09 0 01-11.51-19.95 14 14 0 01-5.66-8.55 44 44 0 00-21.09 6.15 44.26 44.26 0 0048.72 73.75 44.24 44.24 0 0018.05-34.22zm-61.23-9.44a2.47 2.47 0 01-2.38 1.83 2.47 2.47 0 112.38-1.83zm3.8 24.9a2.47 2.47 0 112.47-2.47 2.47 2.47 0 01-2.47 2.47zm12.84-41.19a2.47 2.47 0 11-.92-3.37 2.47 2.47 0 01.92 3.37zm12.36 46.14a2.47 2.47 0 11-.9-3.36 2.47 2.47 0 01.9 3.36zm17.14-17.48a2.47 2.47 0 11-.25-1.87 2.45 2.45 0 01.25 1.87z"
+                        fill="#139af1" />
+                    <path
+                        d="M97.93 48.52v-.2A2.35 2.35 0 0095.7 46a9.37 9.37 0 01-8-5.45 2.35 2.35 0 00-3.49-.93 9.51 9.51 0 01-5.44 1.72 9.4 9.4 0 01-9.38-10.24 2.35 2.35 0 00-2.55-2.55h-.85a9.39 9.39 0 01-7.68-14.81 2.35 2.35 0 00-.93-3.49 9.37 9.37 0 01-5.45-8A2.35 2.35 0 0049.61 0H49a49 49 0 1049 49c-.07-.18-.07-.33-.07-.48zM71.46 87.08a44.26 44.26 0 01-48.72-73.75 44 44 0 0124.79-8.61 14 14 0 005.66 8.55 14.09 14.09 0 0011.52 19.95 14.09 14.09 0 0019.95 11.53 14 14 0 008.56 5.66 44.3 44.3 0 01-21.76 36.67z" />
+                </g>
+            </g>
+        </svg>
+        <div class="p-4">
+            <p class="mb-4">
+                <span>We use cookies to personalize your experience. By continuing to visit this website you agree to our
+                    use of
+                    cookies.
+            </p>
+            <div>
+                <button class="mr-4 py-2 px-4 bg-primary-dark text-white rounded-xl outline-none focus:outline-none"
+                    id="btnAccept">
+                    Got It
+                </button>
+                <a href={{ route('privacy.index') }} id="linkAccept">Read our policy</a></span>
+            </div>
+        </div>
+    </div>
 @endsection
+@push('javascript')
+    <script defer>
+        // Content
+        const cookiePolicy = document.querySelector('#cookiePolicy')
+        const btnAccept = document.querySelector('#btnAccept')
+        const linkAccept = document.querySelector('#linkAccept')
+
+        sessionStorage.getItem('cookieconsent') ? cookiePolicy.classList.add('hidden') : cookiePolicy.classList.remove(
+            'hidden')
+
+        btnAccept.addEventListener('click', accept)
+        linkAccept.addEventListener('click', accept)
+
+        function accept(e) {
+            sessionStorage.setItem('cookieconsent', true)
+            cookiePolicy.classList.add('hidden')
+        }
+
+    </script>
+@endpush

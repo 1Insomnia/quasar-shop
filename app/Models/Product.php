@@ -17,7 +17,7 @@ class Product extends Model
         'brand_id',
         'status',
         'description',
-        'image_path',
+        'image_path'
     ];
 
     public function brand()
@@ -33,5 +33,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class);
+    }
+
+    public function getFormatedPrice()
+    {
+        return number_format($this->price, 2);
     }
 }
