@@ -1,7 +1,10 @@
 const { colors } = require("tailwindcss/defaultTheme");
 
 module.exports = {
-    purge: ["./src/templates/**/*.php"],
+    purge: {
+        enabled: true,
+        content: ["./resources/views/**/*.blade.php"],
+    },
     corePlugins: {
         float: false,
     },

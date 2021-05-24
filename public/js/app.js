@@ -2000,8 +2000,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "navOpen": () => (/* binding */ navOpen),
-/* harmony export */   "productDataToggle": () => (/* binding */ productDataToggle)
+/* harmony export */   "navOpen": () => (/* binding */ navOpen)
 /* harmony export */ });
 function navOpen() {
   // Nav button action
@@ -2019,7 +2018,6 @@ function navOpen() {
     });
   });
 }
-function productDataToggle() {}
 
 /***/ }),
 
