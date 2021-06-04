@@ -14,7 +14,7 @@
             <div class="card-header">
                 <h2 class="card-title">Edit Brand : {{ ucfirst($brand->name) }}</h2>
             </div>
-            <form action="{{ route('admin.categories.update', $brand->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.brands.update', $brand->id) }}" method="post" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="card-body">

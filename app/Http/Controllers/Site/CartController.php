@@ -64,7 +64,7 @@ class CartController extends Controller
                 'associatedModel' => $product,
             ]
         )->associate(Product::class);
-        return response()->json(['ok' => Cart::content()]);
+        return response()->json(['success' => Cart::content()]);
     }
 
     public function show(Request $request, int $id)

@@ -130,54 +130,68 @@
     <script defer>
         // CSRF protection
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-        // Modal
+        // Modal Window
         const modalCheckout = document.querySelector('#modalCheckout');
-
-        // Btn
+        // Buttons elements
+        // Add to cart button
         const orderNow = document.querySelectorAll("#orderNow");
         const btnContinue = document.querySelector('#btnContinue');
         const btnCheckout = document.querySelector('#btnCheckout');
         const btnClose = document.querySelectorAll('#btnClose');
 
+        // Loop over each close and order buttons and listen for click events
         btnClose.forEach(btn => btn.addEventListener('click', dispatchClose));
-
         orderNow.forEach(btn => btn.addEventListener('click', dispatchOrder));
 
         async function dispatchOrder(e) {
             e.preventDefault();
+            // Get the product id from data-id
             const product_id = e.target.dataset.id;
+            // Show the modal by removing hidden class
             modalCheckout.classList.remove('hidden');
             if (product_id === "0") return;
 
+            // Fetch the url pointing to CartController@store method
             const res = await fetch("{{ action('App\Http\Controllers\Site\CartController@store') }}", {
+                // Set method to POST
                 method: 'POST',
+                // Add correct headers to avoid rejection
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    // Add protection token and set credentials to same origin
                     'X-CSRF-TOKEN': token,
                     credentials: 'same-origin',
                 },
+                // Payload
                 body: JSON.stringify({
                     id: product_id,
                     quantity: 1,
                 })
             });
-
+            // Handle continue shopping case
             btnContinue.addEventListener('click', dispatchContinue);
+            // Handle continue Order Now case
             btnCheckout.addEventListener('click', dispatchCheckout);
         }
 
+        // Handle continue shopping case
         function dispatchContinue() {
+            // Close Modal
             modalCheckout.classList.add('hidden');
+            // Reload page to show the updated Cart
             window.location.reload();
         }
 
+        // Handle continue Order Now case
         function dispatchCheckout() {
+            // Close Modal
             modalCheckout.classList.add('hidden');
+            // Redirect user to his shopping Cart
             window.location = "{{ route('cart.index') }}";
         }
 
+        // Handle Modal Close when user click on the close icon
         function dispatchClose() {
             modalCheckout.classList.add('hidden');
         }

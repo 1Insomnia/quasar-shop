@@ -1,16 +1,21 @@
+// Burger Menu Toggle
 export function navOpen() {
-    // Nav button action
+    // Button Element
     const navToggle = document.querySelector("#nav-toggle");
-    const header = document.querySelector("#header");
+    // Lines inside Button Element
     const burger = document.querySelector(".burger");
+    // Navigation Links
     const navMobileLinks = document.querySelectorAll("#nav-mobile-list a");
+    // Wrapper around previous elements
+    const header = document.querySelector("#header");
 
-    // Nav button action
     navToggle.addEventListener("click", (e) => {
         e.preventDefault();
+        // Toggle nav-open class on click
         header.classList.toggle("nav-open");
+        // Toggle open class on click
         burger.classList.toggle("open");
-
+        // For each navigation links add a different animation delay
         navMobileLinks.forEach(
             (link, index) =>
                 (link.style.animationDelay = `${

@@ -6,14 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProductsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    // Run migration
     public function up()
     {
+        // Create table products
         Schema::create('products', function (Blueprint $table) {
+            // Add columns with $table property
             $table->id();
             $table->foreignId('category_id')
                 ->constrained('product_categories')
@@ -34,13 +32,10 @@ class CreateProductsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    // Reverse Migration
     public function down()
     {
+        // Drop table products if exists
         Schema::dropIfExists('products');
     }
 }

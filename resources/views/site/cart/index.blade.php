@@ -142,7 +142,7 @@
         </section>
     @else
         <section class="container px-5 min-h-screen">
-            <h2 class="text-center text-5xl text-primary-dark">Cart Empty</h2>
+            <h2 class="text-center text-5xl text-primary-dark">Empty Cart</h2>
             <div class="text-center py-8">
                 <h3 class="text-2xl mb-4">Start Shopping</h3>
                 <nav class="space-x-4" role="navigation">

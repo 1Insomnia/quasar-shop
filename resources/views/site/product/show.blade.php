@@ -47,7 +47,7 @@
                         </svg>
                     </button>
                     <p class="hidden">
-                        ok
+                        {{ json_decode($product->features, true) }}
                     </p>
                 </div>
                 <div class="mt-4 border-b border-gray-300" id="productDisplay">

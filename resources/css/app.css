@@ -23,3 +23,15 @@
         @apply text-base uppercase inline-block py-3 px-8 text-white transition duration-500 ease-in-out transform border border-neutral-dark bg-neutral-dark hover:bg-white hover:text-neutral-dark focus:outline-none focus:ring-2 ring-offset-current ring-offset-2;
     }
 }
+
+flex {
+    display: flex;
+}
+
+flex-col {
+    flex-direction: flex;
+}
+
+text-yellow-700 {
+    color: rgba(180, 83, 9, 1);
+}

@@ -90,7 +90,7 @@ class BrandController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $brand = Brand::findOrFail($id);
+
 
         $rules = [
             'name' => 'required|min:2|max:255',
@@ -98,7 +98,14 @@ class BrandController extends Controller
         ];
 
         $request->validate($rules);
-        $brand->update($request->all());
+
+        // Get brand by ID
+        $brand = Brand::findOrFail($id);
+        // Update brand with datas from form
+        $brand->update([
+            'name' => $request->name,
+            'status' => $request->status
+        ]);
 
         return redirect()->route('admin.brands.index')->with('message', "Brand : {$brand->name} updated.");
     }
